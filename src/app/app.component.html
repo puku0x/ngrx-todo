@@ -1,1 +1,12 @@
-<div *ngFor="let todo of todos$ | async">{{todo.content}}</div>
+<h2>rxjs-todo</h2>
+
+<ul>
+  <li *ngFor="let todo of todos$ | async">
+    <input type="text" [(ngModel)]="todo.content">
+    <button (click)="update(todo)">更新</button>
+    <button (click)="delete(todo)">削除</button>
+  </li>
+</ul>
+
+<input type="text" #content>
+<button (click)="create(content.value); content.value = null;">追加</button>

@@ -20,12 +20,24 @@ export class AppComponent implements OnInit, OnDestroy {
     this.storeInfo.subscribe();
   }
 
+  create(text: string) {
+    const todo = new Todo(null, text);
+    this.store.dispatch(new TodoAction.Create(todo));
+  }
+
+  update(todo: Todo) {
+    this.store.dispatch(new TodoAction.Update(todo));
+  }
+
+  delete(todo: Todo) {
+    this.store.dispatch(new TodoAction.Delete(todo));
+  }
+
   ngOnInit() {
     this.store.dispatch(new TodoAction.FindAll());
     this.todos$ = this.storeInfo
-      .filter(payload => payload.page)
-      .map(payload => payload.page)
-      .switchMap(page  => Observable.of(page.content));
+      .map(data => data.todos)
+      .switchMap(todos => Observable.of(todos));
   }
 
   ngOnDestroy() {
