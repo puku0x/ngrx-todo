@@ -51,6 +51,9 @@ export class TodoEffects {
         .map(data => new TodoAction.CreateSuccess(data))
     );
 
+  /**
+   * 更新
+   */
   @Effect() update$: Observable<Action> = this.actions$
     .ofType(TodoAction.UPDATE)
     .map(toPayload)
@@ -60,6 +63,9 @@ export class TodoEffects {
         .map(data => new TodoAction.UpdateSuccess(data))
     );
 
+  /**
+   * 削除
+   */
   @Effect() delete$: Observable<Action> = this.actions$
     .ofType(TodoAction.DELETE)
     .map(toPayload)
