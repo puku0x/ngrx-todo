@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
 import * as TodoAction from './core/actions/todo.action';
@@ -10,38 +10,44 @@ import { Page, Todo } from './interfaces';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
 
-  todos$: Observable<Todo>;
-  storeInfo: any;
+  todos$: Observable<Todo[]>;
 
+  /**
+   * コンストラクタ
+   */
   constructor(private store: Store<TodoReducer.State>) {
-    this.storeInfo = store.select<any>('todo');
-    this.storeInfo.subscribe();
+    this.todos$ = store.select(TodoReducer.getTodos);
   }
 
+  /**
+   * 登録
+   */
   create(text: string) {
     const todo = new Todo(null, text);
     this.store.dispatch(new TodoAction.Create(todo));
   }
 
+  /**
+   * 更新
+   */
   update(todo: Todo) {
     this.store.dispatch(new TodoAction.Update(todo));
   }
 
+  /**
+   * 削除
+   */
   delete(todo: Todo) {
     this.store.dispatch(new TodoAction.Delete(todo));
   }
 
+  /**
+   * 初期化
+   */
   ngOnInit() {
     this.store.dispatch(new TodoAction.FindAll());
-    this.todos$ = this.storeInfo
-      .map(data => data.todos)
-      .switchMap(todos => Observable.of(todos));
-  }
-
-  ngOnDestroy() {
-    this.storeInfo.complete();
   }
 
 }

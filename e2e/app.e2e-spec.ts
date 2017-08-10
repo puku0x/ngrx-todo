@@ -1,10 +1,10 @@
-import { NgrxTestPage } from './app.po';
+import { AppPage } from './app.po';
 
-describe('ngrx-test App', () => {
-  let page: NgrxTestPage;
+describe('ngrx-todo App', () => {
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new NgrxTestPage();
+    page = new AppPage();
   });
 
   it('should display welcome message', () => {

@@ -1,2 +1,2 @@
-export * from './page';
-export * from './todo';
+export { Page } from './page';
+export { Todo } from './todo';
