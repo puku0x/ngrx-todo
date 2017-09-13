@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { TodoEffects } from './effects/todo.effect';
-import { todoReducer } from './reducers/todo.reducer';
+import { effects } from './effects';
+import { reducers } from './reducers';
 import { TodoService } from './services/todo.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forRoot({todo: todoReducer}),
-    EffectsModule.forRoot([TodoEffects])
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot(effects)
   ],
   declarations: []
 })
@@ -26,7 +26,7 @@ export class CoreModule {
   }
 
   /**
-   * コンストラクタ
+   * Constructor
    * @param parentModule
    */
   constructor( @Optional() @SkipSelf() parentModule: CoreModule) {

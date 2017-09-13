@@ -15,14 +15,14 @@ export class AppComponent implements OnInit {
   todos$: Observable<Todo[]>;
 
   /**
-   * コンストラクタ
+   * Constructor
    */
   constructor(private store: Store<TodoReducer.State>) {
     this.todos$ = store.select(TodoReducer.getTodos);
   }
 
   /**
-   * 登録
+   * Create
    */
   create(text: string) {
     const todo = new Todo(null, text);
@@ -30,21 +30,21 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * 更新
+   * Update
    */
   update(todo: Todo) {
     this.store.dispatch(new TodoAction.Update(todo));
   }
 
   /**
-   * 削除
+   * Delete
    */
   delete(todo: Todo) {
-    this.store.dispatch(new TodoAction.Delete(todo));
+    this.store.dispatch(new TodoAction.Delete(todo.id));
   }
 
   /**
-   * 初期化
+   * Initialize
    */
   ngOnInit() {
     this.store.dispatch(new TodoAction.FindAll());
