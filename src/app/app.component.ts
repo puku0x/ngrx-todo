@@ -17,9 +17,7 @@ export class AppComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(private store: Store<TodoReducer.State>) {
-    this.todos$ = store.select(TodoReducer.getTodos);
-  }
+  constructor(private store: Store<TodoReducer.State>) { }
 
   /**
    * Create
@@ -47,6 +45,7 @@ export class AppComponent implements OnInit {
    * Initialize
    */
   ngOnInit() {
+    this.todos$ = this.store.select(TodoReducer.getTodos);
     this.store.dispatch(new TodoAction.FindAll());
   }
 
