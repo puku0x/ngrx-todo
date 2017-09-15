@@ -1,6 +1,10 @@
+[![Build Status][travis-ci-image]][travis-ci-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+[![Dependency status][david-dm-image]][david-dm-url]
+[![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
 # ngrx-todo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.1.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
 
 ## Development server
 
@@ -26,3 +30,12 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+[travis-ci-url]: http://travis-ci.org/puku0x/ngrx-todo
+[travis-ci-image]: https://travis-ci.org/puku0x/ngrx-todo.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/puku0x/ngrx-todo?branch=master
+[coveralls-image]: https://coveralls.io/repos/github/puku0x/ngrx-todo/badge.svg?branch=master
+[david-dm-url]:https://david-dm.org/puku0x/ngrx-todo
+[david-dm-image]:https://david-dm.org/puku0x/ngrx-todo.svg
+[david-dm-dev-url]:https://david-dm.org/puku0x/ngrx-todo?type=dev
+[david-dm-dev-image]:https://david-dm.org/puku0x/ngrx-todo/dev-status.svg
