@@ -1,11 +1,11 @@
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Store } from '@ngrx/store';
-import { CoreModule } from './core/core.module';
+import { StoreModule, Store } from '@ngrx/store';
+
 import { AppComponent } from './app.component';
 import * as TodoAction from './core/actions/todo.action';
+import { reducers } from './core/reducers';
 import * as TodoReducer from './core/reducers/todo.reducer';
 import { Todo } from './interfaces';
 
@@ -18,8 +18,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
-        HttpClientModule,
-        CoreModule.forRoot(),
+        StoreModule.forRoot(reducers),
         RouterTestingModule
       ],
       declarations: [
@@ -54,7 +53,7 @@ describe('AppComponent', () => {
   });
 
   it('should dispatch an action to create data', () => {
-    const todo = new Todo(1, 'test');
+    const todo = new Todo(null, 'test');
     const action = new TodoAction.Create(todo);
     component.create(todo.content);
     expect(store.dispatch).toHaveBeenCalledWith(action);
@@ -69,7 +68,7 @@ describe('AppComponent', () => {
 
   it('should dispatch an action to delete data', () => {
     const todo = new Todo(1, 'test');
-    const action = new TodoAction.Create(todo);
+    const action = new TodoAction.Delete(todo.id);
     component.delete(todo);
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
