@@ -11,7 +11,7 @@ import { Page, Todo } from './interfaces';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
+  title = 'ngrx-todo';
   todos$: Observable<Todo[]>;
 
   /**

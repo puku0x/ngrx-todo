@@ -1,0 +1,41 @@
+sudo: false
+
+language: node_js
+
+node_js:
+  - stable
+
+dist: trusty
+
+cache:
+  directories:
+    - node_modules
+
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+
+before_install:
+  - npm install coveralls
+  - npm install -g @angular/cli
+
+script:
+  - ng test --single-run --code-coverage
+  - ng e2e
+
+after_success:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+
+before_deploy:
+  - npm run build:prod
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist
+  on:
+    branch: master
