@@ -1,6 +1,7 @@
 import { Action, createSelector, createFeatureSelector } from '@ngrx/store';
+
 import * as TodoAction from '../actions/todo.action';
-import { Page, Todo } from '../../interfaces';
+import { Page, Todo } from '../interfaces';
 
 /**
  * State
@@ -83,7 +84,9 @@ export function reducer(state = initialState, action: TodoAction.Actions): State
   }
 }
 
-// Selector
+/**
+ * Selectors
+ */
 export const getState = createFeatureSelector<State>('todo');
 export const getLoading = createSelector(getState, (state: State) => state.loading);
 export const getTodo = createSelector(getState, (state: State) => state.todo);

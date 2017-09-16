@@ -1,17 +1,13 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { FormsModule } from '@angular/forms';
 
-import { effects } from './effects';
-import { reducers } from './reducers';
 import { TodoService } from './services/todo.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot(effects)
+    FormsModule
   ],
   declarations: []
 })

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
-import * as TodoAction from './core/actions/todo.action';
-import * as TodoReducer from './core/reducers/todo.reducer';
+
+import * as TodoAction from './actions/todo.action';
+import * as fromTodo from './reducers/todo.reducer';
 import { Page, Todo } from './interfaces';
 
 @Component({
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(private store: Store<TodoReducer.State>) { }
+  constructor(private store: Store<fromTodo.State>) { }
 
   /**
    * Create
@@ -45,7 +46,7 @@ export class AppComponent implements OnInit {
    * Initialize
    */
   ngOnInit() {
-    this.todos$ = this.store.select(TodoReducer.getTodos);
+    this.todos$ = this.store.select(fromTodo.getTodos);
     this.store.dispatch(new TodoAction.FindAll());
   }
 

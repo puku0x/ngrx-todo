@@ -4,15 +4,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import * as TodoAction from './core/actions/todo.action';
-import { reducers } from './core/reducers';
-import * as TodoReducer from './core/reducers/todo.reducer';
+import * as TodoAction from './actions/todo.action';
+import * as fromTodo from './reducers/todo.reducer';
+import { reducers } from './reducers';
 import { Todo } from './interfaces';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
-  let store: Store<TodoReducer.State>;
+  let store: Store<fromTodo.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,10 +25,8 @@ describe('AppComponent', () => {
         AppComponent
       ]
     });
-
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
-
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -2,10 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs/Rx';
 import { hot, cold } from 'jasmine-marbles';
+
 import { TodoEffects } from './todo.effect';
-import { TodoService } from '../services/todo.service';
 import * as TodoAction from '../actions/todo.action';
-import { Page, Todo } from '../../interfaces';
+import { TodoService } from '../core/services/todo.service';
+import { Page, Todo } from '../interfaces';
 
 describe('TodoEffects', () => {
   let effects: TodoEffects;
