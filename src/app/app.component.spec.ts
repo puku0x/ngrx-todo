@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import * as TodoAction from './actions/todo.action';
 import * as fromTodo from './reducers/todo.reducer';
 import { reducers } from './reducers';
-import { Todo } from './interfaces';
+import { Todo } from './models';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -24,11 +24,11 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ]
-    });
+    }).compileComponents();
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
     fixture = TestBed.createComponent(AppComponent);
-    component = fixture.componentInstance;
+    component = fixture.debugElement.componentInstance;
     fixture.detectChanges();
   }));
 

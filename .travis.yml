@@ -23,7 +23,7 @@ before_install:
   - npm install -g @angular/cli
 
 script:
-  - ng test --single-run --code-coverage
+  - ng test --single-run --code-coverage --browser=ChromeHeadless
   - ng e2e
 
 after_success:

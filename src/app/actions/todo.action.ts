@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Todo } from '../interfaces';
+import { Todo } from '../models';
 
 /**
  * Action names

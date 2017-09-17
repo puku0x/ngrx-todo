@@ -6,7 +6,7 @@ import { hot, cold } from 'jasmine-marbles';
 import { TodoEffects } from './todo.effect';
 import * as TodoAction from '../actions/todo.action';
 import { TodoService } from '../core/services/todo.service';
-import { Page, Todo } from '../interfaces';
+import { Page, Todo } from '../models';
 
 describe('TodoEffects', () => {
   let effects: TodoEffects;

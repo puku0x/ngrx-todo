@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import * as TodoAction from './actions/todo.action';
 import * as fromTodo from './reducers/todo.reducer';
-import { Page, Todo } from './interfaces';
+import { Page, Todo } from './models';
 
 @Component({
   selector: 'app-root',

@@ -1,6 +1,6 @@
 import * as TodoAction from '../actions/todo.action';
 import * as fromTodo from './todo.reducer';
-import { Todo } from '../interfaces';
+import { Todo } from '../models';
 
 describe('fromTodos', () => {
   it('should return the initial state', () => {

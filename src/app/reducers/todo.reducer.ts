@@ -1,7 +1,7 @@
 import { Action, createSelector, createFeatureSelector } from '@ngrx/store';
 
 import * as TodoAction from '../actions/todo.action';
-import { Page, Todo } from '../interfaces';
+import { Page, Todo } from '../models';
 
 /**
  * State

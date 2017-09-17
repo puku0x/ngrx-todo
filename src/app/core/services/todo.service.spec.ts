@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 
 import { CoreModule } from '../core.module';
 import { TodoService } from './todo.service';
-import { Page, Todo } from '../../interfaces';
+import { Page, Todo } from '../../models';
 
 describe('TodoService', () => {
   const baseUrl = 'https://spring-boot-travis-heroku.herokuapp.com/api/v1';

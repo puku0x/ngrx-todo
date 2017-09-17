@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Rx';
 
-import { Page, Todo } from '../../interfaces';
+import { Page, Todo } from '../../models';
 
 /**
  * Service

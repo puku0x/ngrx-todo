@@ -1,5 +1,5 @@
 import * as TodoAction from './todo.action';
-import { Todo } from '../interfaces';
+import { Todo } from '../models';
 
 describe('TodoActions', () => {
   it('should create an action to find all todos', () => {
