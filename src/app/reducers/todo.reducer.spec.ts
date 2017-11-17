@@ -49,7 +49,7 @@ describe('fromTodos', () => {
       todo: null,
       todos: []
     };
-    const action = new TodoAction.FindAllFailed();
+    const action = new TodoAction.FindAllFailure();
     expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -96,7 +96,7 @@ describe('fromTodos', () => {
       todo: null,
       todos: [...initialState.todos]
     };
-    const action = new TodoAction.FindFailed();
+    const action = new TodoAction.FindFailure();
     expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -143,7 +143,7 @@ describe('fromTodos', () => {
       todo: null,
       todos: [...initialState.todos]
     };
-    const action = new TodoAction.CreateFailed();
+    const action = new TodoAction.CreateFailure();
     expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -156,7 +156,7 @@ describe('fromTodos', () => {
     const todo: Todo = {
       id: initialState.todos[0].id,
       content: 'test2',
-    }
+    };
     const expectedState: fromTodo.State = {
       loading: true,
       todo: null,
@@ -175,7 +175,7 @@ describe('fromTodos', () => {
     const todo: Todo = {
       id: initialState.todos[0].id,
       content: 'test2',
-    }
+    };
     const expectedState: fromTodo.State = {
       loading: false,
       todo: todo,
@@ -200,7 +200,7 @@ describe('fromTodos', () => {
       todo: null,
       todos: [...initialState.todos]
     };
-    const action = new TodoAction.UpdateFailed();
+    const action = new TodoAction.UpdateFailure();
     expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
   });
 
@@ -245,7 +245,7 @@ describe('fromTodos', () => {
       todo: null,
       todos: [...initialState.todos]
     };
-    const action = new TodoAction.DeleteFailed();
+    const action = new TodoAction.DeleteFailure();
     expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
   });
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import * as TodoAction from './actions/todo.action';
 import * as fromTodo from './reducers/todo.reducer';

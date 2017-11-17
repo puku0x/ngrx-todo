@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { _throw } from 'rxjs/observable/throw';
 import { hot, cold } from 'jasmine-marbles';
 
 import { TodoEffects } from './todo.effect';
@@ -39,94 +41,76 @@ describe('TodoEffects', () => {
       sort: null,
       totalElements: 3,
       totalPages: 1
-    }
-    service.findAll.and.returnValue(Observable.of(response));
+    };
+    service.findAll.and.returnValue(of(response));
     actions = hot('--a-', { a: new TodoAction.FindAll() });
     const expected = cold('--b', { b: new TodoAction.FindAllSuccess(response.content) });
     expect(effects.findAll$).toBeObservable(expected);
   });
 
-  it('should return a new TodoAction.FindAllFailed', () => {
-    service.findAll.and.returnValue(Observable.throw({}));
+  it('should return a new TodoAction.FindAllFailure', () => {
+    service.findAll.and.returnValue(_throw({}));
     actions = hot('--a-', { a: new TodoAction.FindAll() });
-    const expected = cold('--b', { b: new TodoAction.FindAllFailed({}) });
+    const expected = cold('--b', { b: new TodoAction.FindAllFailure({}) });
     expect(effects.findAll$).toBeObservable(expected);
   });
 
   it('should return a new TodoAction.FindSuccess', () => {
     const response = new Todo(1, 'test1');
-    service.find.and.returnValue(Observable.of(response));
+    service.find.and.returnValue(of(response));
     actions = hot('--a-', { a: new TodoAction.Find(1) });
     const expected = cold('--b', { b: new TodoAction.FindSuccess(response) });
     expect(effects.find$).toBeObservable(expected);
   });
 
-  it('should return a new TodoAction.FindFailed', () => {
-    service.find.and.returnValue(Observable.throw({}));
+  it('should return a new TodoAction.FindFailure', () => {
+    service.find.and.returnValue(_throw({}));
     actions = hot('--a-', { a: new TodoAction.Find(1) });
-    const expected = cold('--b', { b: new TodoAction.FindFailed({}) });
+    const expected = cold('--b', { b: new TodoAction.FindFailure({}) });
     expect(effects.find$).toBeObservable(expected);
   });
 
   it('should return a new TodoAction.CreateSuccess', () => {
     const response = new Todo(1, 'test1');
-    service.create.and.returnValue(Observable.of(response));
+    service.create.and.returnValue(of(response));
     actions = hot('--a-', { a: new TodoAction.Create(new Todo(null, 'test1')) });
     const expected = cold('--b', { b: new TodoAction.CreateSuccess(response) });
     expect(effects.create$).toBeObservable(expected);
   });
 
-  it('should return a new TodoAction.FindAll, on TodoAction.CreateSuccess', () => {
-    actions = hot('--a-', { a: new TodoAction.CreateSuccess({}) });
-    const expected = cold('--d', { d: new TodoAction.FindAll() });
-    expect(effects.createSuccess$).toBeObservable(expected);
-  });
-
-  it('should return a new TodoAction.CreateFailed', () => {
-    service.create.and.returnValue(Observable.throw({}));
+  it('should return a new TodoAction.CreateFailure', () => {
+    service.create.and.returnValue(_throw({}));
     actions = hot('--a-', { a: new TodoAction.Create(new Todo(null, 'test1')) });
-    const expected = cold('--b', { b: new TodoAction.CreateFailed({}) });
+    const expected = cold('--b', { b: new TodoAction.CreateFailure({}) });
     expect(effects.create$).toBeObservable(expected);
   });
 
   it('should return a new TodoAction.UpdateSuccess', () => {
     const response = new Todo(1, 'test1');
-    service.update.and.returnValue(Observable.of(response));
+    service.update.and.returnValue(of(response));
     actions = hot('--a-', { a: new TodoAction.Update(response) });
     const expected = cold('--b', { b: new TodoAction.UpdateSuccess(response) });
     expect(effects.update$).toBeObservable(expected);
   });
 
-  it('should return a new TodoAction.FindAll, on TodoAction.UpdateSuccess', () => {
-    actions = hot('--a-', { a: new TodoAction.UpdateSuccess({}) });
-    const expected = cold('--d', { d: new TodoAction.FindAll() });
-    expect(effects.updateSuccess$).toBeObservable(expected);
-  });
-
-  it('should return a new TodoAction.UpdateFailed', () => {
-    service.update.and.returnValue(Observable.throw({}));
+  it('should return a new TodoAction.UpdateFailure', () => {
+    service.update.and.returnValue(_throw({}));
     actions = hot('--a-', { a: new TodoAction.Update(new Todo(1, 'test1')) });
-    const expected = cold('--b', { b: new TodoAction.UpdateFailed({}) });
+    const expected = cold('--b', { b: new TodoAction.UpdateFailure({}) });
     expect(effects.update$).toBeObservable(expected);
   });
 
   it('should return a new TodoAction.DeleteSuccess', () => {
-    service.delete.and.returnValue(Observable.of({}));
+    service.delete.and.returnValue(of({}));
     actions = hot('--a-', { a: new TodoAction.Delete(1) });
     const expected = cold('--b', { b: new TodoAction.DeleteSuccess(1) });
     expect(effects.delete$).toBeObservable(expected);
   });
 
-  it('should return a new TodoAction.FindAll, on TodoAction.DeleteSuccess', () => {
-    actions = hot('--a-', { a: new TodoAction.DeleteSuccess({}) });
-    const expected = cold('--d', { d: new TodoAction.FindAll() });
-    expect(effects.deleteSuccess$).toBeObservable(expected);
-  });
-
-  it('should return a new TodoAction.DeleteFailed', () => {
-    service.delete.and.returnValue(Observable.throw({}));
+  it('should return a new TodoAction.DeleteFailure', () => {
+    service.delete.and.returnValue(_throw({}));
     actions = hot('--a-', { a: new TodoAction.Delete(1) });
-    const expected = cold('--b', { b: new TodoAction.DeleteFailed({}) });
+    const expected = cold('--b', { b: new TodoAction.DeleteFailure({}) });
     expect(effects.delete$).toBeObservable(expected);
   });
 });

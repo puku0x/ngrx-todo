@@ -6,7 +6,7 @@ describe('TodoActions', () => {
     const expectedAction = {
       type: TodoAction.FIND_ALL,
       payload: { offset: 0, limit: 100 }
-    }
+    };
     const action = new TodoAction.FindAll();
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
@@ -16,7 +16,7 @@ describe('TodoActions', () => {
     const expectedAction = {
       type: TodoAction.FIND,
       payload: 1
-    }
+    };
     const action = new TodoAction.Find(1);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
@@ -27,7 +27,7 @@ describe('TodoActions', () => {
     const expectedAction = {
       payload: todo,
       type: TodoAction.CREATE
-    }
+    };
     const action = new TodoAction.Create(todo);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
@@ -38,7 +38,7 @@ describe('TodoActions', () => {
     const expectedAction = {
       payload: todo,
       type: TodoAction.UPDATE
-    }
+    };
     const action = new TodoAction.Update(todo);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
@@ -48,7 +48,7 @@ describe('TodoActions', () => {
     const expectedAction = {
       type: TodoAction.DELETE,
       payload: 1
-    }
+    };
     const action = new TodoAction.Delete(1);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);

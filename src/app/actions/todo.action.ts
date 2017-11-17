@@ -7,19 +7,19 @@ import { Todo } from '../models';
  */
 export const FIND_ALL         = '[Todo] Find All';
 export const FIND_ALL_SUCCESS = '[Todo] Find All Success';
-export const FIND_ALL_FAILED  = '[Todo] Find All Failed';
+export const FIND_ALL_FAILURE = '[Todo] Find All Failure';
 export const FIND             = '[Todo] Find';
 export const FIND_SUCCESS     = '[Todo] Find Success';
-export const FIND_FAILED      = '[Todo] Find Failed';
+export const FIND_FAILURE     = '[Todo] Find Failure';
 export const CREATE           = '[Todo] Create';
 export const CREATE_SUCCESS   = '[Todo] Create Success';
-export const CREATE_FAILED    = '[Todo] Create Failed';
+export const CREATE_FAILURE   = '[Todo] Create Failure';
 export const UPDATE           = '[Todo] Update';
 export const UPDATE_SUCCESS   = '[Todo] Update Success';
-export const UPDATE_FAILED    = '[Todo] Update Failed';
+export const UPDATE_FAILURE   = '[Todo] Update Failure';
 export const DELETE           = '[Todo] Delete';
 export const DELETE_SUCCESS   = '[Todo] Delete Success';
-export const DELETE_FAILED    = '[Todo] Delete Failed';
+export const DELETE_FAILURE   = '[Todo] Delete Failure';
 
 /**
  * Find all
@@ -42,8 +42,8 @@ export class FindAllSuccess implements Action {
 /**
  * Find all failed
  */
-export class FindAllFailed implements Action {
-  readonly type = FIND_ALL_FAILED;
+export class FindAllFailure implements Action {
+  readonly type = FIND_ALL_FAILURE;
   constructor(public payload?: any) {}
 }
 
@@ -66,8 +66,8 @@ export class FindSuccess implements Action {
 /**
  * Find failed
  */
-export class FindFailed implements Action {
-  readonly type = FIND_FAILED;
+export class FindFailure implements Action {
+  readonly type = FIND_FAILURE;
   constructor(public payload?: any) {}
 }
 
@@ -90,8 +90,8 @@ export class CreateSuccess implements Action {
 /**
  * Create failed
  */
-export class CreateFailed implements Action {
-  readonly type = CREATE_FAILED;
+export class CreateFailure implements Action {
+  readonly type = CREATE_FAILURE;
   constructor(public payload?: any) {}
 }
 
@@ -114,8 +114,8 @@ export class UpdateSuccess implements Action {
 /**
  * Update failed
  */
-export class UpdateFailed implements Action {
-  readonly type = UPDATE_FAILED;
+export class UpdateFailure implements Action {
+  readonly type = UPDATE_FAILURE;
   constructor(public payload?: any) {}
 }
 
@@ -138,8 +138,8 @@ export class DeleteSuccess implements Action {
 /**
  * Delete failed
  */
-export class DeleteFailed implements Action {
-  readonly type = DELETE_FAILED;
+export class DeleteFailure implements Action {
+  readonly type = DELETE_FAILURE;
   constructor(public payload?: any) {}
 }
 
@@ -147,8 +147,8 @@ export class DeleteFailed implements Action {
  * Actions
  */
 export type Actions =
-  FindAll | FindAllSuccess | FindAllFailed |
-  Find    | FindSuccess    | FindFailed    |
-  Create  | CreateSuccess  | CreateFailed  |
-  Update  | UpdateSuccess  | UpdateFailed  |
-  Delete  | DeleteSuccess  | DeleteFailed;
+  FindAll | FindAllSuccess | FindAllFailure |
+  Find    | FindSuccess    | FindFailure    |
+  Create  | CreateSuccess  | CreateFailure  |
+  Update  | UpdateSuccess  | UpdateFailure  |
+  Delete  | DeleteSuccess  | DeleteFailure;

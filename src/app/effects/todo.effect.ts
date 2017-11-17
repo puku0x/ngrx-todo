@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { map, switchMap, catchError } from 'rxjs/operators';
 
 import * as TodoAction from '../actions/todo.action';
 import { TodoService } from '../core/services/';
@@ -21,12 +23,16 @@ export class TodoEffects {
    */
   @Effect() findAll$: Observable<Action> = this.actions$
     .ofType(TodoAction.FIND_ALL)
-    .map(toPayload)
-    .switchMap(payload =>
-      this.todoService
-        .findAll(payload.offset, payload.limit)
-        .map(data => new TodoAction.FindAllSuccess(data.content))
-        .catch(error => Observable.of(new TodoAction.FindAllFailed(error)))
+    .pipe(
+      map(toPayload),
+      switchMap(payload =>
+        this.todoService
+          .findAll(payload.offset, payload.limit)
+          .pipe(
+            map(data => new TodoAction.FindAllSuccess(data.content)),
+            catchError(error => of(new TodoAction.FindAllFailure(error)))
+          )
+      )
     );
 
   /**
@@ -34,12 +40,16 @@ export class TodoEffects {
    */
   @Effect() find$: Observable<Action> = this.actions$
     .ofType(TodoAction.FIND)
-    .map(toPayload)
-    .switchMap(payload =>
-      this.todoService
-        .find(payload)
-        .map(data => new TodoAction.FindSuccess(data))
-        .catch(error => Observable.of(new TodoAction.FindFailed(error)))
+    .pipe(
+      map(toPayload),
+      switchMap(payload =>
+        this.todoService
+          .find(payload)
+          .pipe(
+            map(data => new TodoAction.FindSuccess(data)),
+            catchError(error => of(new TodoAction.FindFailure(error)))
+          )
+      )
     );
 
   /**
@@ -47,22 +57,16 @@ export class TodoEffects {
    */
   @Effect() create$: Observable<Action> = this.actions$
     .ofType(TodoAction.CREATE)
-    .map(toPayload)
-    .switchMap(payload =>
-      this.todoService
-        .create(payload)
-        .map(data => new TodoAction.CreateSuccess(data))
-        .catch(error => Observable.of(new TodoAction.CreateFailed(error)))
-    );
-
-  /**
-   * Create success
-   */
-  @Effect({ dispatch: false }) createSuccess$: Observable<Action> = this.actions$
-    .ofType(TodoAction.CREATE_SUCCESS)
-    .map(toPayload)
-    .switchMap(payload =>
-      Observable.of(new TodoAction.FindAll())
+    .pipe(
+      map(toPayload),
+      switchMap(payload =>
+        this.todoService
+          .create(payload)
+          .pipe(
+            map(data => new TodoAction.CreateSuccess(data)),
+            catchError(error => of(new TodoAction.CreateFailure(error)))
+          )
+      )
     );
 
   /**
@@ -70,22 +74,16 @@ export class TodoEffects {
    */
   @Effect() update$: Observable<Action> = this.actions$
     .ofType(TodoAction.UPDATE)
-    .map(toPayload)
-    .switchMap(payload =>
-      this.todoService
-        .update(payload)
-        .map(data => new TodoAction.UpdateSuccess(data))
-        .catch(error => Observable.of(new TodoAction.UpdateFailed(error)))
-    );
-
-  /**
-   * Update success
-   */
-  @Effect({ dispatch: false }) updateSuccess$: Observable<Action> = this.actions$
-    .ofType(TodoAction.UPDATE_SUCCESS)
-    .map(toPayload)
-    .switchMap(payload =>
-      Observable.of(new TodoAction.FindAll())
+    .pipe(
+      map(toPayload),
+      switchMap(payload =>
+        this.todoService
+          .update(payload)
+          .pipe(
+            map(data => new TodoAction.UpdateSuccess(data)),
+            catchError(error => of(new TodoAction.UpdateFailure(error)))
+          )
+      )
     );
 
   /**
@@ -93,21 +91,15 @@ export class TodoEffects {
    */
   @Effect() delete$: Observable<Action> = this.actions$
     .ofType(TodoAction.DELETE)
-    .map(toPayload)
-    .switchMap(payload =>
-      this.todoService
-        .delete(payload)
-        .map(() => new TodoAction.DeleteSuccess(payload))
-        .catch(error => Observable.of(new TodoAction.DeleteFailed(error)))
-    );
-
-  /**
-   * Delete success
-   */
-  @Effect({ dispatch: false }) deleteSuccess$: Observable<Action> = this.actions$
-    .ofType(TodoAction.DELETE_SUCCESS)
-    .map(toPayload)
-    .switchMap(payload =>
-      Observable.of(new TodoAction.FindAll())
+    .pipe(
+      map(toPayload),
+      switchMap(payload =>
+        this.todoService
+          .delete(payload)
+          .pipe(
+            map(() => new TodoAction.DeleteSuccess(payload)),
+            catchError(error => of(new TodoAction.DeleteFailure(error)))
+          )
+      )
     );
 }

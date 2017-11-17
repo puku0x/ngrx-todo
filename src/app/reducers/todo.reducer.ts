@@ -27,9 +27,6 @@ export const initialState = {
  * @param action
  */
 export function reducer(state = initialState, action: TodoAction.Actions): State {
-  console.log('state', state);
-  console.log('action', action);
-
   switch (action.type) {
     case TodoAction.FIND_ALL: {
       return Object.assign({}, state, { loading: true });
@@ -37,7 +34,7 @@ export function reducer(state = initialState, action: TodoAction.Actions): State
     case TodoAction.FIND_ALL_SUCCESS: {
       return Object.assign({}, state, { loading: false, todos: action.payload });
     }
-    case TodoAction.FIND_ALL_FAILED: {
+    case TodoAction.FIND_ALL_FAILURE: {
       return Object.assign({}, state, { loading: false });
     }
     case TodoAction.FIND: {
@@ -46,7 +43,7 @@ export function reducer(state = initialState, action: TodoAction.Actions): State
     case TodoAction.FIND_SUCCESS: {
       return Object.assign({}, state, { loading: false, todo: action.payload });
     }
-    case TodoAction.FIND_FAILED: {
+    case TodoAction.FIND_FAILURE: {
       return Object.assign({}, state, { loading: false });
     }
     case TodoAction.CREATE: {
@@ -55,7 +52,7 @@ export function reducer(state = initialState, action: TodoAction.Actions): State
     case TodoAction.CREATE_SUCCESS: {
       return Object.assign({}, state, { loading: false, todos: [...state.todos, action.payload] });
     }
-    case TodoAction.CREATE_FAILED: {
+    case TodoAction.CREATE_FAILURE: {
       return Object.assign({}, state, { loading: false });
     }
     case TodoAction.UPDATE: {
@@ -66,7 +63,7 @@ export function reducer(state = initialState, action: TodoAction.Actions): State
       const newTodos = index < 0 ? state.todos : [...state.todos.slice(0, index), action.payload, ...state.todos.slice(index + 1)];
       return Object.assign({}, state, { loading: false, todos: newTodos, todo: action.payload　});
     }
-    case TodoAction.UPDATE_FAILED: {
+    case TodoAction.UPDATE_FAILURE: {
       return Object.assign({}, state, { loading: false });
     }
     case TodoAction.DELETE: {
@@ -75,7 +72,7 @@ export function reducer(state = initialState, action: TodoAction.Actions): State
     case TodoAction.DELETE_SUCCESS: {
       return Object.assign({}, state, { loading: false, todos: state.todos.filter(todo => todo.id !== action.payload) });
     }
-    case TodoAction.DELETE_FAILED: {
+    case TodoAction.DELETE_FAILURE: {
       return Object.assign({}, state, { loading: false });
     }
     default: {
