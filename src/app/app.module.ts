@@ -21,7 +21,7 @@ import { environment } from '../environments/environment';
     FormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    StoreDevtoolsModule.instrument({ logOnly: environment.production}),
     CoreModule.forRoot(),
   ],
   providers: [],
