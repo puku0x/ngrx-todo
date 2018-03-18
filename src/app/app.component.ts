@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
 
 import { Todo } from './models';
-import * as TodoAction from './actions';
+import * as TodoActions from './actions';
 import * as fromTodo from './reducers';
 
 @Component({
@@ -26,7 +25,7 @@ export class AppComponent implements OnInit {
    * Create
    */
   create(content: string) {
-    this.store.dispatch(new TodoAction.CreateTodo({
+    this.store.dispatch(new TodoActions.CreateTodo({
       todo : {
         id: null,
         content: content
@@ -38,7 +37,7 @@ export class AppComponent implements OnInit {
    * Update
    */
   update(todo: Todo) {
-    this.store.dispatch(new TodoAction.UpdateTodo({
+    this.store.dispatch(new TodoActions.UpdateTodo({
       todo: {
         id: todo.id,
         changes: todo
@@ -50,7 +49,7 @@ export class AppComponent implements OnInit {
    * Delete
    */
   delete(todo: Todo) {
-    this.store.dispatch(new TodoAction.DeleteTodo({ id: todo.id }));
+    this.store.dispatch(new TodoActions.DeleteTodo({ id: todo.id }));
   }
 
   /**
@@ -58,7 +57,7 @@ export class AppComponent implements OnInit {
    */
   ngOnInit() {
     this.loading$ = this.store.pipe(select(fromTodo.selectLoading));
-    this.todos$ = this.store.pipe(select(fromTodo.selectAllTodos));
-    this.store.dispatch(new TodoAction.LoadTodos());
+    this.todos$ = this.store.pipe(select(fromTodo.selectTodos));
+    this.store.dispatch(new TodoActions.LoadTodos());
   }
 }

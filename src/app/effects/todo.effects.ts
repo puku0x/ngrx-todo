@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { map, mergeMap, switchMap, catchError } from 'rxjs/operators';
+import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 
 import { TodoService } from '../core/services';
 import {
@@ -55,7 +55,7 @@ export class TodoEffects {
   @Effect()
   createTodo$: Observable<Action> = this.actions$.pipe(
     ofType<CreateTodo>(TodoActionTypes.CreateTodo),
-    mergeMap(action =>
+    concatMap(action =>
       this.todoService
         .create(action.payload.todo)
         .pipe(
@@ -71,7 +71,7 @@ export class TodoEffects {
   @Effect()
   updateTodo$: Observable<Action> = this.actions$.pipe(
     ofType<UpdateTodo>(TodoActionTypes.UpdateTodo),
-    mergeMap(action =>
+    concatMap(action =>
       this.todoService
         .update({ ...action.payload.todo.changes })
         .pipe(
@@ -87,7 +87,7 @@ export class TodoEffects {
   @Effect()
   deleteTodo$: Observable<Action> = this.actions$.pipe(
     ofType<DeleteTodo>(TodoActionTypes.DeleteTodo),
-    mergeMap(action =>
+    concatMap(action =>
       this.todoService
         .delete(action.payload.id)
         .pipe(

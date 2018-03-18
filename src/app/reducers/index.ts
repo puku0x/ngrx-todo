@@ -32,6 +32,6 @@ export const metaReducers: MetaReducer<State>[] = !environment.production ? [] :
  * Selectors
  */
 export const getTodosState = createFeatureSelector<fromTodo.State>('todos');
-export const selectAllTodos = createSelector(getTodosState, fromTodo.selectAll);
+export const selectTodos = createSelector(getTodosState, fromTodo.selectAll);
 export const selectLoading = createSelector(getTodosState, state => state.loading);
 

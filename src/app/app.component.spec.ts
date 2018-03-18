@@ -4,21 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import {
-  TodoActionTypes,
-  LoadTodos,
-  LoadTodosSuccess,
-  LoadTodosFail,
-  CreateTodo,
-  CreateTodoSuccess,
-  CreateTodoFail,
-  UpdateTodo,
-  UpdateTodoSuccess,
-  UpdateTodoFail,
-  DeleteTodo,
-  DeleteTodoSuccess,
-  DeleteTodoFail,
-} from './actions';
+import * as TodoActions from './actions';
 import * as fromTodo from './reducers/todo.reducer';
 import { reducers, metaReducers } from './reducers';
 import { Todo } from './models';
@@ -60,7 +46,7 @@ describe('AppComponent', () => {
   it('should dispatch an action to load data', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const action = new LoadTodos();
+    const action = new TodoActions.LoadTodos();
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
@@ -68,7 +54,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app: AppComponent = fixture.debugElement.componentInstance;
     app.create('test');
-    const action = new CreateTodo({
+    const action = new TodoActions.CreateTodo({
       todo: {
         id: null,
         content: 'test',
@@ -81,7 +67,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app: AppComponent = fixture.debugElement.componentInstance;
     app.update(new Todo(1, 'test'));
-    const action = new UpdateTodo({
+    const action = new TodoActions.UpdateTodo({
       todo: {
         id: 1,
         changes: new Todo(1, 'test')
@@ -94,7 +80,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app: AppComponent = fixture.debugElement.componentInstance;
     app.delete(new Todo(1, 'test'));
-    const action = new DeleteTodo({ id: 1 });
+    const action = new TodoActions.DeleteTodo({ id: 1 });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
