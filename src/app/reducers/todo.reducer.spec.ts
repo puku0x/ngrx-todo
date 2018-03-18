@@ -1,265 +1,254 @@
-import * as TodoAction from '../actions/todo.action';
-import * as fromTodo from './todo.reducer';
-import { Todo } from '../models';
+import { Todo } from '../models/todo.model';
+import {
+  TodoActions,
+  TodoActionTypes,
+  LoadTodos,
+  LoadTodosSuccess,
+  LoadTodosFail,
+  CreateTodo,
+  CreateTodoSuccess,
+  CreateTodoFail,
+  UpdateTodo,
+  UpdateTodoSuccess,
+  UpdateTodoFail,
+  DeleteTodo,
+  DeleteTodoSuccess,
+  DeleteTodoFail
+} from '../actions/todo.actions';
+import { reducer, initialState, State } from '../reducers/todo.reducer';
 
-describe('fromTodos', () => {
-  it('should return the initial state', () => {
-    expect(fromTodo.reducer(undefined, {type: null})).toEqual(fromTodo.initialState)
-  });
+describe('Todo Reducer', () => {
+  describe('unknown action', () => {
+    it('should return the initial state', () => {
+      const action = {} as any;
 
-  it('should handle FIND_ALL', () => {
-    const initialState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: []
-    };
-    const expectedState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.FindAll();
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
+      const result = reducer(initialState, action);
 
-  it('should handle FIND_ALL_SUCCESS', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: []
-    };
-    const todos = [new Todo(1, 'test1'), new Todo(2, 'test2')];
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [...todos]
-    };
-    const action = new TodoAction.FindAllSuccess(todos);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
+      expect(result).toBe(initialState);
+    });
 
-  it('should handle FIND_ALL_FAILED', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: []
-    };
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: []
-    };
-    const action = new TodoAction.FindAllFailure();
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle FIND', () => {
-    const initialState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const expectedState: fromTodo.State = {
-      loading: true,
-      todo: initialState.todos[0],
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.Find(initialState.todos[0].id);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle FIND_SUCCESS', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const todo = Object.assign({}, initialState.todos[0]);
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: todo,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.FindSuccess(todo);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle FIND_FAILED', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const todo = Object.assign({}, initialState.todos[0]);
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.FindFailure();
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle CREATE', () => {
-    const initialState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: []
-    };
-    const todo = new Todo(1, 'test');
-    const expectedState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.Create(todo);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle CREATE_SUCCESS', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: []
-    };
-    const todo = new Todo(1, 'test');
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [todo]
-    };
-    const action = new TodoAction.CreateSuccess(todo);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle CREATE_FAILED', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: []
-    };
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.CreateFailure();
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle UPDATE', () => {
-    const initialState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const todo: Todo = {
-      id: initialState.todos[0].id,
-      content: 'test2',
-    };
-    const expectedState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.Update(todo);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle UPDATE_SUCCESS', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const todo: Todo = {
-      id: initialState.todos[0].id,
-      content: 'test2',
-    };
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: todo,
-      todos: [todo]
-    };
-    const action = new TodoAction.UpdateSuccess(todo);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle UPDATE_FAILED', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const todo: Todo = {
-      id: initialState.todos[0].id,
-      content: 'test2',
-    };
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.UpdateFailure();
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle DELETE', () => {
-    const initialState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const expectedState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.Delete(initialState.todos[0].id);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle DELETE_SUCCESS', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: []
-    };
-    const action = new TodoAction.DeleteSuccess(initialState.todos[0].id);
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle DELETE_FAILED', () => {
-    const initialState: fromTodo.State = {
-      loading: true,
-      todo: null,
-      todos: [new Todo(1, 'test1')]
-    };
-    const expectedState: fromTodo.State = {
-      loading: false,
-      todo: null,
-      todos: [...initialState.todos]
-    };
-    const action = new TodoAction.DeleteFailure();
-    expect(fromTodo.reducer(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle selectors', () => {
-    const state = {
-      todo: {
+    it('should handle LoadTodos', () => {
+      const initial: State = {
+        loading: false,
+        ids: [],
+        entities: {}
+      };
+      const expected: State = {
         loading: true,
-        todo: new Todo(1, 'test1'),
-        todos: [new Todo(1, 'test1'), new Todo(2, 'test1'), new Todo(2, 'test3')]
-      }
-    };
-    expect(fromTodo.getLoading(state)).toEqual(state.todo.loading);
-    expect(fromTodo.getTodo(state)).toEqual(state.todo.todo);
-    expect(fromTodo.getTodos(state)).toEqual(state.todo.todos);
-  });
+        ids: initial.ids,
+        entities: initial.entities
+      };
+      const action = new LoadTodos();
+      expect(reducer(initial, action)).toEqual(expected);
+    });
 
+    it('should handle LoadTodosSuccess', () => {
+      const todos = [
+        new Todo(1, 'todo1'),
+        new Todo(2, 'todo2'),
+        new Todo(3, 'todo3'),
+      ];
+      const initial: State = {
+        loading: true,
+        ids: [],
+        entities: {}
+      };
+      const expected: State = {
+        loading: false,
+        ids: [1, 2, 3],
+        entities: {
+          1: todos[0],
+          2: todos[1],
+          3: todos[2],
+        }
+      };
+      const action = new LoadTodosSuccess({ todos });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle LoadTodosFail', () => {
+      const initial: State = {
+        loading: true,
+        ids: [],
+        entities: {}
+      };
+      const expected: State = {
+        loading: false,
+        ids: initial.ids,
+        entities: initial.entities
+      };
+      const action = new LoadTodosFail({ error: 'error' });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle CreateTodo', () => {
+      const todo = new Todo(1, 'todo1');
+      const initial: State = {
+        loading: false,
+        ids: [],
+        entities: {}
+      };
+      const expected: State = {
+        loading: true,
+        ids: initial.ids,
+        entities: initial.entities
+      };
+      const action = new CreateTodo({ todo });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle CreateTodoSuccess', () => {
+      const todo = new Todo(1, 'todo1');
+      const initial: State = {
+        loading: true,
+        ids: [],
+        entities: {}
+      };
+      const expected: State = {
+        loading: false,
+        ids: [1],
+        entities: {
+          1: todo
+        }
+      };
+      const action = new CreateTodoSuccess({ todo });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle CreateTodoFail', () => {
+      const initial: State = {
+        loading: true,
+        ids: [],
+        entities: {}
+      };
+      const expected: State = {
+        loading: false,
+        ids: initial.ids,
+        entities: initial.entities
+      };
+      const action = new CreateTodoFail({ error: 'error' });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle UpdateTodo', () => {
+      const initial: State = {
+        loading: false,
+        ids: [1],
+        entities: {
+          1: new Todo(1, 'todo1'),
+        }
+      };
+      const expected: State = {
+        loading: true,
+        ids: initial.ids,
+        entities: initial.entities
+      };
+      const action = new UpdateTodo({
+        todo: {
+          id: 1,
+          changes: {
+            id: 1,
+            content: 'todo2'
+          }
+        }
+      });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle UpdateTodoSuccess', () => {
+      const initial: State = {
+        loading: true,
+        ids: [1],
+        entities: {
+          1: {
+            id: 1,
+            content: 'todo1'
+          }
+        }
+      };
+      const expected: State = {
+        loading: false,
+        ids: [1],
+        entities: {
+          1: {
+            id: 1,
+            content: 'todo2'
+          }
+        }
+      };
+      const action = new UpdateTodoSuccess({
+        todo: {
+          id: 1,
+          changes: new Todo(1, 'todo2')
+        }
+      });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle UpdateTodoFail', () => {
+      const initial: State = {
+        loading: true,
+        ids: [],
+        entities: {}
+      };
+      const expected: State = {
+        loading: false,
+        ids: initial.ids,
+        entities: initial.entities
+      };
+      const action = new UpdateTodoFail({ error: 'error' });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle DeleteTodo', () => {
+      const initial: State = {
+        loading: false,
+        ids: [1],
+        entities: {
+          1: new Todo(1, 'todo1'),
+        }
+      };
+      const expected: State = {
+        loading: true,
+        ids: initial.ids,
+        entities: initial.entities
+      };
+      const action = new DeleteTodo({ id: 1 });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle DeleteTodoSuccess', () => {
+      const initial: State = {
+        loading: true,
+        ids: [1],
+        entities: {
+          1: new Todo(1, 'todo1'),
+        }
+      };
+      const expected: State = {
+        loading: false,
+        ids: [],
+        entities: {}
+      };
+      const action = new DeleteTodoSuccess({ id: 1 });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+
+    it('should handle DeleteTodoFail', () => {
+      const initial: State = {
+        loading: true,
+        ids: [1],
+        entities: {
+          1: new Todo(1, 'todo1')
+        }
+      };
+      const expected: State = {
+        loading: false,
+        ids: initial.ids,
+        entities: initial.entities
+      };
+      const action = new DeleteTodoFail({ error: 'error' });
+      expect(reducer(initial, action)).toEqual(expected);
+    });
+  });
 });

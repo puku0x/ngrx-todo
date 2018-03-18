@@ -1,12 +1,12 @@
 <h2>{{title}}</h2>
 
-<input type="text" #content>
-<button (click)="create(content.value); content.value = null;">Add</button>
+<input type="text" #input>
+<button (click)="create(input.value); input.value = null;" [disabled]="loading$ | async">Add</button>
 
 <ul>
   <li *ngFor="let todo of todos$ | async">
     <input type="text" [(ngModel)]="todo.content">
-    <button (click)="update(todo)">Update</button>
-    <button (click)="delete(todo)">Delete</button>
+    <button (click)="update(todo)" [disabled]="loading$ | async">Update</button>
+    <button (click)="delete(todo)" [disabled]="loading$ | async">Delete</button>
   </li>
 </ul>

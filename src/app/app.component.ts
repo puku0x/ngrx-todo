@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
-import * as TodoAction from './actions/todo.action';
-import * as fromTodo from './reducers/todo.reducer';
-import { Page, Todo } from './models';
+import { Todo } from './models';
+import * as TodoAction from './actions';
+import * as fromTodo from './reducers';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ import { Page, Todo } from './models';
 })
 export class AppComponent implements OnInit {
   title = 'ngrx-todo';
+  loading$: Observable<boolean>;
   todos$: Observable<Todo[]>;
 
   /**
@@ -23,31 +25,40 @@ export class AppComponent implements OnInit {
   /**
    * Create
    */
-  create(text: string) {
-    const todo = new Todo(null, text);
-    this.store.dispatch(new TodoAction.Create(todo));
+  create(content: string) {
+    this.store.dispatch(new TodoAction.CreateTodo({
+      todo : {
+        id: null,
+        content: content
+      }
+    }));
   }
 
   /**
    * Update
    */
   update(todo: Todo) {
-    this.store.dispatch(new TodoAction.Update(todo));
+    this.store.dispatch(new TodoAction.UpdateTodo({
+      todo: {
+        id: todo.id,
+        changes: todo
+      }
+    }));
   }
 
   /**
    * Delete
    */
   delete(todo: Todo) {
-    this.store.dispatch(new TodoAction.Delete(todo.id));
+    this.store.dispatch(new TodoAction.DeleteTodo({ id: todo.id }));
   }
 
   /**
    * Initialize
    */
   ngOnInit() {
-    this.todos$ = this.store.select(fromTodo.getTodos);
-    this.store.dispatch(new TodoAction.FindAll());
+    this.loading$ = this.store.pipe(select(fromTodo.selectLoading));
+    this.todos$ = this.store.pipe(select(fromTodo.selectAllTodos));
+    this.store.dispatch(new TodoAction.LoadTodos());
   }
-
 }

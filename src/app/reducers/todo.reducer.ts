@@ -1,79 +1,74 @@
-import { Action, createSelector, createFeatureSelector } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import * as TodoAction from '../actions/todo.action';
-import { Page, Todo } from '../models';
+import { Todo } from '../models/todo.model';
+import { TodoActions, TodoActionTypes } from '../actions/todo.actions';
 
 /**
  * State
  */
-export interface State {
-  readonly loading: boolean;
-  readonly todos: Todo[];
-  readonly todo: Todo;
+export interface State extends EntityState<Todo> {
+  // additional entities state properties
+  loading: boolean;
 }
+
+/**
+ * Adapter
+ */
+export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 /**
  * Initial state
  */
-export const initialState = {
+export const initialState: State = adapter.getInitialState({
+  // additional entity state properties
   loading: false,
-  todos: [],
-  todo: null,
-};
+});
 
 /**
  * Reducer
  * @param state
  * @param action
  */
-export function reducer(state = initialState, action: TodoAction.Actions): State {
+export function reducer(
+  state = initialState,
+  action: TodoActions
+): State {
   switch (action.type) {
-    case TodoAction.FIND_ALL: {
-      return Object.assign({}, state, { loading: true });
+    case TodoActionTypes.LoadTodos: {
+      return { ...state, loading: true };
     }
-    case TodoAction.FIND_ALL_SUCCESS: {
-      return Object.assign({}, state, { loading: false, todos: action.payload });
+    case TodoActionTypes.LoadTodosSuccess: {
+      return adapter.addAll(action.payload.todos, { ...state, loading: false } );
     }
-    case TodoAction.FIND_ALL_FAILURE: {
-      return Object.assign({}, state, { loading: false });
+    case TodoActionTypes.LoadTodosFail: {
+      return { ...state, loading: false };
     }
-    case TodoAction.FIND: {
-      return Object.assign({}, state, { loading: true, todo: state.todos.find(todo => todo.id === action.payload) });
+    case TodoActionTypes.CreateTodo: {
+      return { ...state, loading: true };
     }
-    case TodoAction.FIND_SUCCESS: {
-      return Object.assign({}, state, { loading: false, todo: action.payload });
+    case TodoActionTypes.CreateTodoSuccess: {
+      return adapter.addOne(action.payload.todo, { ...state, loading: false });
     }
-    case TodoAction.FIND_FAILURE: {
-      return Object.assign({}, state, { loading: false });
+    case TodoActionTypes.CreateTodoFail: {
+      return { ...state, loading: false };
     }
-    case TodoAction.CREATE: {
-      return Object.assign({}, state, { loading: true });
+    case TodoActionTypes.UpdateTodo: {
+      return { ...state, loading: true };
     }
-    case TodoAction.CREATE_SUCCESS: {
-      return Object.assign({}, state, { loading: false, todos: [...state.todos, action.payload] });
+    case TodoActionTypes.UpdateTodoSuccess: {
+      return adapter.updateOne(action.payload.todo, { ...state, loading: false });
     }
-    case TodoAction.CREATE_FAILURE: {
-      return Object.assign({}, state, { loading: false });
+    case TodoActionTypes.UpdateTodoFail: {
+      return { ...state, loading: false };
     }
-    case TodoAction.UPDATE: {
-      return Object.assign({}, state, { loading: true });
+    case TodoActionTypes.DeleteTodo: {
+      return { ...state, loading: true };
     }
-    case TodoAction.UPDATE_SUCCESS: {
-      const index = state.todos.map(todo => todo.id).indexOf(action.payload.id);
-      const newTodos = index < 0 ? state.todos : [...state.todos.slice(0, index), action.payload, ...state.todos.slice(index + 1)];
-      return Object.assign({}, state, { loading: false, todos: newTodos, todo: action.payload　});
+    case TodoActionTypes.DeleteTodoSuccess: {
+      return adapter.removeOne(action.payload.id, { ...state, loading: false });
     }
-    case TodoAction.UPDATE_FAILURE: {
-      return Object.assign({}, state, { loading: false });
-    }
-    case TodoAction.DELETE: {
-      return Object.assign({}, state, { loading: true });
-    }
-    case TodoAction.DELETE_SUCCESS: {
-      return Object.assign({}, state, { loading: false, todos: state.todos.filter(todo => todo.id !== action.payload) });
-    }
-    case TodoAction.DELETE_FAILURE: {
-      return Object.assign({}, state, { loading: false });
+    case TodoActionTypes.DeleteTodoFail: {
+      return { ...state, loading: false };
     }
     default: {
       return state;
@@ -81,10 +76,9 @@ export function reducer(state = initialState, action: TodoAction.Actions): State
   }
 }
 
-/**
- * Selectors
- */
-export const getState = createFeatureSelector<State>('todo');
-export const getLoading = createSelector(getState, (state: State) => state.loading);
-export const getTodo = createSelector(getState, (state: State) => state.todo);
-export const getTodos = createSelector(getState, (state: State) => state.todos);
+export const {
+  selectIds,
+  selectEntities,
+  selectAll,
+  selectTotal,
+} = adapter.getSelectors();

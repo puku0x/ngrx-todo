@@ -38,7 +38,7 @@ describe('TodoService', () => {
       sort: null,
       totalElements: 3,
       totalPages: 1
-    }
+    };
     service.findAll().subscribe(data => {
       expect(data).toEqual(response);
     });
@@ -49,7 +49,7 @@ describe('TodoService', () => {
   });
 
   it('should successfully mock find request', () => {
-    const todo: Todo = new Todo(1, 'test');
+    const todo = new Todo(1, 'test');
     service.find(1).subscribe(data => {
       expect(data).toEqual(todo);
     });
@@ -60,7 +60,7 @@ describe('TodoService', () => {
   });
 
   it('should successfully mock create request', () => {
-    const todo: Todo = new Todo(1, 'test');
+    const todo = new Todo(1, 'test');
     service.create(new Todo(null, 'test')).subscribe(data => {
       expect(data).toEqual(todo);
     });
@@ -71,8 +71,8 @@ describe('TodoService', () => {
   });
 
   it('should successfully mock update request', () => {
-    const todo: Todo = new Todo(1, 'test');
-    const todo2: Todo = new Todo(todo.id, 'test2');
+    const todo = new Todo(1, 'test');
+    const todo2 = new Todo(todo.id, 'test2');
     service.update(todo2).subscribe(data => {
       expect(data).toEqual(todo2);
     });
@@ -83,7 +83,7 @@ describe('TodoService', () => {
   });
 
   it('should successfully mock delete request', () => {
-    const todo: Todo = new Todo(1, 'test');
+    const todo = new Todo(1, 'test');
     service.delete(todo.id).subscribe(data => {
       expect(data).toEqual(null);
     });

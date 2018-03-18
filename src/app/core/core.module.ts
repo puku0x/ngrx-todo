@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { TodoService } from './services/todo.service';
@@ -7,6 +8,7 @@ import { TodoService } from './services/todo.service';
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     FormsModule
   ],
   declarations: []
