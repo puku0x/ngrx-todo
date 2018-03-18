@@ -3,8 +3,6 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Actions } from '@ngrx/effects';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import { _throw } from 'rxjs/observable/throw';
 
 import { TodoEffects } from './todo.effects';
 import { TodoService } from '../core/services/todo.service';
@@ -23,7 +21,7 @@ import {
   DeleteTodoSuccess,
   DeleteTodoFail,
 } from '../actions';
-import { Page, Todo } from '../models';
+import { Todo } from '../models';
 
 describe('TodoEffects', () => {
   let actions$: Observable<any>;
@@ -51,22 +49,16 @@ describe('TodoEffects', () => {
 
   describe('loadTodos$', () => {
     it('should return LoadTodosSuccess', () => {
-      const page: Page<Todo> = {
-        content: [new Todo(1, 'test1'), new Todo(2, 'test2'), new Todo(3, 'test3') ],
-        last: false,
-        first: true,
-        number: 0,
-        numberOfElements: 3,
-        size: 100,
-        sort: null,
-        totalElements: 3,
-        totalPages: 1
-      };
+      const todos = [
+        new Todo('1', 'test1'),
+        new Todo('2', 'test2'),
+        new Todo('3', 'test3'),
+      ];
       const action = new LoadTodos();
-      const completion = new LoadTodosSuccess({ todos: page.content });
+      const completion = new LoadTodosSuccess({ todos });
 
       actions$ = hot('-a', { a: action });
-      const response = cold('-b', { b: page });
+      const response = cold('-b', { b: todos });
       const expected = cold('--c', { c: completion });
       service.findAll = () => response;
 
@@ -89,7 +81,7 @@ describe('TodoEffects', () => {
 
   describe('createTodo$', () => {
     it('should return CreateTodoSuccess', () => {
-      const todo = new Todo(1, 'todo1');
+      const todo = new Todo('1', 'todo1');
       const action = new CreateTodo({ todo });
       const completion = new CreateTodoSuccess({ todo });
 
@@ -103,7 +95,7 @@ describe('TodoEffects', () => {
 
     it('should return CreateTodoFail', () => {
       const error = 'error';
-      const action = new CreateTodo({ todo: new Todo(1, 'todo1') });
+      const action = new CreateTodo({ todo: new Todo('1', 'todo1') });
       const completion = new CreateTodoFail({ error });
 
       actions$ = hot('-a', { a: action });
@@ -117,9 +109,9 @@ describe('TodoEffects', () => {
 
   describe('updateTodo$', () => {
     it('should return UpdateTodoSuccess', () => {
-      const todo = new Todo(1, 'todo1');
-      const action = new UpdateTodo({ todo: {id: 1, changes: todo } });
-      const completion = new UpdateTodoSuccess({ todo: {id: 1, changes: todo } });
+      const todo = new Todo('1', 'todo1');
+      const action = new UpdateTodo({ todo: {id: '1', changes: todo } });
+      const completion = new UpdateTodoSuccess({ todo: {id: '1', changes: todo } });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-b', { b: todo });
@@ -131,7 +123,7 @@ describe('TodoEffects', () => {
 
     it('should return UpdateTodoFail', () => {
       const error = 'error';
-      const action = new UpdateTodo({ todo: { id: 1, changes: new Todo(1, 'todo1') } });
+      const action = new UpdateTodo({ todo: { id: 1, changes: new Todo('1', 'todo1') } });
       const completion = new UpdateTodoFail({ error });
 
       actions$ = hot('-a', { a: action });
@@ -145,7 +137,7 @@ describe('TodoEffects', () => {
 
   describe('deleteTodo$', () => {
     it('should return DeleteTodoSuccess', () => {
-      const id = 1;
+      const id = '1';
       const action = new DeleteTodo({ id });
       const completion = new DeleteTodoSuccess({ id });
 
@@ -159,7 +151,7 @@ describe('TodoEffects', () => {
 
     it('should return DeleteTodoFail', () => {
       const error = 'error';
-      const action = new DeleteTodo({ id: 1 });
+      const action = new DeleteTodo({ id: '1' });
       const completion = new DeleteTodoFail({ error });
 
       actions$ = hot('-a', { a: action });

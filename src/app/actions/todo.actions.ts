@@ -97,7 +97,7 @@ export class UpdateTodoFail implements Action {
  */
 export class DeleteTodo implements Action {
   readonly type = TodoActionTypes.DeleteTodo;
-  constructor(public payload: { id: number }) {}
+  constructor(public payload: { id: string }) {}
 }
 
 /**
@@ -105,7 +105,7 @@ export class DeleteTodo implements Action {
  */
 export class DeleteTodoSuccess implements Action {
   readonly type = TodoActionTypes.DeleteTodoSuccess;
-  constructor(public payload?: { id: number }) {}
+  constructor(public payload?: { id: string }) {}
 }
 
 /**

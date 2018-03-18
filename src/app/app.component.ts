@@ -24,12 +24,9 @@ export class AppComponent implements OnInit {
   /**
    * Create
    */
-  create(content: string) {
+  create(text: string) {
     this.store.dispatch(new TodoActions.CreateTodo({
-      todo : {
-        id: null,
-        content: content
-      }
+      todo : new Todo(null, text)
     }));
   }
 

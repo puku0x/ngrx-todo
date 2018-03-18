@@ -3,7 +3,10 @@
  */
 export class Todo {
   constructor(
-    public id?: number,
-    public content?: string,
+    public id?: string,
+    public text?: string,
+    public checked?: boolean,
+    public createdAt?: number,
+    public updatedAt?: number,
   ) {}
 }

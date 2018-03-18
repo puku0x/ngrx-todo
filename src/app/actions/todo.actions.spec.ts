@@ -27,7 +27,7 @@ describe('TodoActions', () => {
   });
 
   it('should create an action to create todo', () => {
-    const todo = new Todo(1, 'test');
+    const todo = new Todo('1', 'test');
     const expectedAction = {
       type: TodoActionTypes.CreateTodo,
       payload: { todo }
@@ -38,7 +38,7 @@ describe('TodoActions', () => {
   });
 
   it('should create an action to update todo', () => {
-    const todo = new Todo(1, 'testtest');
+    const todo = new Todo('1', 'testtest');
     const expectedAction = {
       type: TodoActionTypes.UpdateTodo,
       payload: {
@@ -56,7 +56,7 @@ describe('TodoActions', () => {
   it('should create an action to delete todo', () => {
     const expectedAction = {
       type: TodoActionTypes.DeleteTodo,
-      payload: { id: 1}
+      payload: { id: '1' }
     };
     const action = new DeleteTodo(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);

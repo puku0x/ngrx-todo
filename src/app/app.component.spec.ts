@@ -26,16 +26,19 @@ describe('AppComponent', () => {
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
   }));
+
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
+
   it(`should have as title 'ngrx-todo'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('ngrx-todo');
   }));
+
   it('should render title in a h2 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
@@ -55,10 +58,7 @@ describe('AppComponent', () => {
     const app: AppComponent = fixture.debugElement.componentInstance;
     app.create('test');
     const action = new TodoActions.CreateTodo({
-      todo: {
-        id: null,
-        content: 'test',
-      }
+      todo: new Todo(null, 'test')
     });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
@@ -66,11 +66,11 @@ describe('AppComponent', () => {
   it('should dispatch an action to update data', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app: AppComponent = fixture.debugElement.componentInstance;
-    app.update(new Todo(1, 'test'));
+    app.update(new Todo('1', 'test'));
     const action = new TodoActions.UpdateTodo({
       todo: {
-        id: 1,
-        changes: new Todo(1, 'test')
+        id: '1',
+        changes: new Todo('1', 'test')
       }
     });
     expect(store.dispatch).toHaveBeenCalledWith(action);
@@ -79,8 +79,8 @@ describe('AppComponent', () => {
   it('should dispatch an action to delete data', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app: AppComponent = fixture.debugElement.componentInstance;
-    app.delete(new Todo(1, 'test'));
-    const action = new TodoActions.DeleteTodo({ id: 1 });
+    app.delete(new Todo('1', 'test'));
+    const action = new TodoActions.DeleteTodo({ id: '1' });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 

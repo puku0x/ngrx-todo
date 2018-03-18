@@ -43,7 +43,7 @@ export class TodoEffects {
       this.todoService
         .findAll(action.payload.offset, action.payload.limit)
         .pipe(
-          map(data => new LoadTodosSuccess({ todos: data.content })),
+          map(data => new LoadTodosSuccess({ todos: data })),
           catchError(error => of(new LoadTodosFail({ error })))
         )
     )
@@ -75,7 +75,7 @@ export class TodoEffects {
       this.todoService
         .update({ ...action.payload.todo.changes })
         .pipe(
-          map(data => new UpdateTodoSuccess({ todo: { id: data.id, changes: data} })),
+          map(data => new UpdateTodoSuccess({ todo: { id: data.id, changes: data } })),
           catchError(error => of(new UpdateTodoFail({ error })))
         )
     )

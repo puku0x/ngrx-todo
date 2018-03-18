@@ -5,7 +5,7 @@
 
 <ul>
   <li *ngFor="let todo of todos$ | async">
-    <input type="text" [(ngModel)]="todo.content">
+    <input type="text" [(ngModel)]="todo.text">
     <button (click)="update(todo)" [disabled]="loading$ | async">Update</button>
     <button (click)="delete(todo)" [disabled]="loading$ | async">Delete</button>
   </li>
