@@ -28,9 +28,6 @@ before_deploy:
   - npm run build
 
 deploy:
-  provider: pages
+  provider: firebase
+  token: $FIREBASE_TOKEN
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: dist
-  on:
-    branch: master
