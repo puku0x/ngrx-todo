@@ -6,7 +6,7 @@ import { TodoService } from './todo.service';
 import { Todo } from '../../models';
 
 describe('TodoService', () => {
-  const baseUrl = 'https://8e8tlaxl92.execute-api.us-east-1.amazonaws.com/dev';
+  const baseUrl = 'https://api.puku0x.net/v1';
   let service: TodoService;
   let httpMock: HttpTestingController;
 
