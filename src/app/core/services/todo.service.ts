@@ -9,8 +9,7 @@ import { Todo } from '../../models';
  */
 @Injectable()
 export class TodoService {
-  baseUrl = 'https://8e8tlaxl92.execute-api.us-east-1.amazonaws.com/dev';
-  // baseUrl = 'https://spring-boot-travis-heroku.herokuapp.com/api/v1';
+  baseUrl = 'https://api.puku0x.net/v1';
   // baseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient) { }
