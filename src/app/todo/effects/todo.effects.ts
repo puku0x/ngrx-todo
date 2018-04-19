@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 
-import { TodoService } from '../core/services';
+import { TodoService } from '@app/core/services';
 import {
   TodoActionTypes,
   LoadTodos,

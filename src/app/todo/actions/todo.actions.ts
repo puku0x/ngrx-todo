@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
-import { Todo } from '../models';
+import { Todo } from '@app/models';
 
 export enum TodoActionTypes {
   LoadTodos         = '[Todo] Load',
@@ -116,7 +116,7 @@ export class DeleteTodoFail implements Action {
   constructor(public payload?: { error: any }) {}
 }
 
-export type TodoActions =
+export type TodoActionUnion =
  LoadTodos
  | LoadTodosSuccess
  | LoadTodosFail

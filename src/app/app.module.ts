@@ -1,16 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
-import { CoreModule } from './core/core.module';
+import { CoreModule } from '@app/core/core.module';
+import { TodoModule } from '@app/todo/todo.module';
+import { reducers, metaReducers } from '@app/reducers';
+import { environment } from '@env/environment';
 import { AppComponent } from './app.component';
-import { reducers, metaReducers } from './reducers';
-import { effects } from './effects';
-import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -19,10 +19,12 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(reducers, { metaReducers }),
-    EffectsModule.forRoot(effects),
-    StoreDevtoolsModule.instrument({ logOnly: environment.production}),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+    EffectsModule.forRoot([]),
     CoreModule.forRoot(),
+    TodoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

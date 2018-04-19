@@ -1,12 +1,10 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { CoreModule } from '../core.module';
+import { Todo } from '@app/models';
 import { TodoService } from './todo.service';
-import { Todo } from '../../models';
 
 describe('TodoService', () => {
-  const baseUrl = 'https://api.puku0x.net/v1';
   let service: TodoService;
   let httpMock: HttpTestingController;
 
@@ -34,22 +32,22 @@ describe('TodoService', () => {
       new Todo('3', 'test3'),
     ];
     service.findAll().subscribe(data => {
-      expect(data).toEqual(response);
+      expect(data).toBe(response);
     });
-    httpMock
-      .expectOne(`${baseUrl}/todos`)
-      .flush(response);
+    const req = httpMock.expectOne(`/todos`);
+    expect(req.request.method).toEqual('GET');
+    req.flush(response);
     httpMock.verify();
   });
 
   it('should successfully mock find request', () => {
     const todo = new Todo('1', 'test');
     service.find(todo.id).subscribe(data => {
-      expect(data).toEqual(todo);
+      expect(data).toBe(todo);
     });
-    httpMock
-      .expectOne(`${baseUrl}/todos/1`)
-      .flush(todo);
+    const req = httpMock.expectOne(`/todos/1`);
+    expect(req.request.method).toEqual('GET');
+    req.flush(todo);
     httpMock.verify();
   });
 
@@ -58,9 +56,9 @@ describe('TodoService', () => {
     service.create(new Todo(null, 'test')).subscribe(data => {
       expect(data).toEqual(todo);
     });
-    httpMock
-      .expectOne(`${baseUrl}/todos`)
-      .flush(todo);
+    const req = httpMock.expectOne(`/todos`);
+    expect(req.request.method).toEqual('POST');
+    req.flush(todo);
     httpMock.verify();
   });
 
@@ -70,9 +68,9 @@ describe('TodoService', () => {
     service.update(todo2).subscribe(data => {
       expect(data).toEqual(todo2);
     });
-    httpMock
-      .expectOne(`${baseUrl}/todos/1`)
-      .flush(todo2);
+    const req = httpMock.expectOne(`/todos/1`);
+    expect(req.request.method).toEqual('PUT');
+    req.flush(todo2);
     httpMock.verify();
   });
 
@@ -81,8 +79,8 @@ describe('TodoService', () => {
     service.delete(todo.id).subscribe(data => {
       expect(data).toEqual(null);
     });
-    httpMock
-      .expectOne(`${baseUrl}/todos/1`);
+    const req = httpMock.expectOne(`/todos/1`);
+    expect(req.request.method).toEqual('DELETE');
     httpMock.verify();
   });
 

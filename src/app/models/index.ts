@@ -1,4 +1,4 @@
 /**
  * Models
  */
-export { Todo } from './todo.model';
+export { Todo } from './todo';

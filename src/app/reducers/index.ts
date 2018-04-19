@@ -5,33 +5,23 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
+import { storeFreeze } from 'ngrx-store-freeze';
 
-import { environment } from '../../environments/environment';
-import * as fromTodo from './todo.reducer';
+import { environment } from '@env/environment';
 
 /**
- * App state
+ * Root state
  */
 export interface State {
-  todos: fromTodo.State;
 }
 
 /**
- * App reducers
+ * Root reducers
  */
 export const reducers: ActionReducerMap<State> = {
-  todos: fromTodo.reducer,
 };
 
 /**
  * Meta reducers
  */
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
-
-/**
- * Selectors
- */
-export const getTodosState = createFeatureSelector<fromTodo.State>('todos');
-export const selectTodos = createSelector(getTodosState, fromTodo.selectAll);
-export const selectLoading = createSelector(getTodosState, state => state.loading);
-
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [storeFreeze] : [];

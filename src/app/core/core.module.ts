@@ -1,9 +1,10 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
-import { TodoService } from './services/todo.service';
+import { TodoService } from './services';
+import { RequestInterceptor } from './interceptors';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ export class CoreModule {
       ngModule: CoreModule,
       providers: [
         TodoService,
+        { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
       ]
     };
   }

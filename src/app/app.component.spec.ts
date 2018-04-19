@@ -1,11 +1,14 @@
 import { TestBed, async } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
+import { CoreModule } from './core/core.module';
+import { TodoModule } from './todo/todo.module';
 import { AppComponent } from './app.component';
-import * as TodoActions from './actions';
-import * as fromTodo from './reducers/todo.reducer';
+import * as TodoActions from './todo/actions';
+import * as fromTodo from './todo/reducers';
 import { reducers, metaReducers } from './reducers';
 import { Todo } from './models';
 
@@ -16,8 +19,12 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         FormsModule,
+        ReactiveFormsModule,
         StoreModule.forRoot(reducers, { metaReducers }),
-        RouterTestingModule
+        EffectsModule.forRoot([]),
+        RouterTestingModule,
+        CoreModule.forRoot(),
+        TodoModule
       ],
       declarations: [
         AppComponent
@@ -25,18 +32,14 @@ describe('AppComponent', () => {
     }).compileComponents();
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'select').and.callThrough();
+    spyOn(store, 'pipe').and.callThrough();
   }));
 
   it('should create the app', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
-
-  it(`should have as title 'ngrx-todo'`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('ngrx-todo');
   }));
 
   it('should render title in a h2 tag', async(() => {
@@ -48,9 +51,11 @@ describe('AppComponent', () => {
 
   it('should dispatch an action to load data', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
+    const app: AppComponent = fixture.debugElement.componentInstance;
+    app.ngOnInit();
     const action = new TodoActions.LoadTodos();
     expect(store.dispatch).toHaveBeenCalledWith(action);
+    expect(store.pipe).toHaveBeenCalled();
   });
 
   it('should dispatch an action to create data', () => {

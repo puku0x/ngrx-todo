@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { Todo } from './models';
-import * as TodoActions from './actions';
-import * as fromTodo from './reducers';
+import { Todo } from '@app/models';
+import * as TodoActions from '@app/todo/actions';
+import * as fromTodo from '@app/todo/reducers';
 
 @Component({
   selector: 'app-root',
@@ -12,22 +13,30 @@ import * as fromTodo from './reducers';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'ngrx-todo';
   loading$: Observable<boolean>;
   todos$: Observable<Todo[]>;
+  todoForm: FormGroup;
 
   /**
    * Constructor
    */
-  constructor(private store: Store<fromTodo.State>) { }
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<fromTodo.State>
+  ) {
+    this.todoForm = this.fb.group({
+      text: ['', Validators.required]
+    });
+  }
 
   /**
    * Create
    */
   create(text: string) {
     this.store.dispatch(new TodoActions.CreateTodo({
-      todo : new Todo(null, text)
+      todo: new Todo(null, text)
     }));
+    this.todoForm.reset();
   }
 
   /**
@@ -53,8 +62,8 @@ export class AppComponent implements OnInit {
    * Initialize
    */
   ngOnInit() {
-    this.loading$ = this.store.pipe(select(fromTodo.selectLoading));
-    this.todos$ = this.store.pipe(select(fromTodo.selectTodos));
+    this.loading$ = this.store.pipe(select(fromTodo.getLoading));
+    this.todos$ = this.store.pipe(select(fromTodo.getTodos));
     this.store.dispatch(new TodoActions.LoadTodos());
   }
 }

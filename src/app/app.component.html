@@ -1,8 +1,9 @@
-<h2>{{title}}</h2>
+<h2>ngrx-todo</h2>
 
-<input type="text" #input>
-<button (click)="create(input.value); input.value = null;" [disabled]="loading$ | async">Add</button>
-
+<form [formGroup]="todoForm" (ngSubmit)="create(todoForm.value.text)">
+  <input type="text" formControlName="text">
+  <button [disabled]="todoForm.invalid || (loading$ | async)">Add</button>
+</form>
 <ul>
   <li *ngFor="let todo of todos$ | async">
     <input type="text" [(ngModel)]="todo.text">
