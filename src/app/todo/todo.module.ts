@@ -9,7 +9,7 @@ import { TodoEffects } from './effects/todo.effects';
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature('todo', fromTodo.reducers, { metaReducers: fromTodo.metaReducers }),
+    StoreModule.forFeature('todo', fromTodo.reducers),
     EffectsModule.forFeature([TodoEffects])
   ],
   declarations: []

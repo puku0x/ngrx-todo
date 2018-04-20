@@ -4,13 +4,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { CoreModule } from './core/core.module';
-import { TodoModule } from './todo/todo.module';
+import { CoreModule } from '@app/core/core.module';
+import { TodoModule } from '@app/todo/todo.module';
+import * as TodoActions from '@app/todo/actions';
+import * as fromTodo from '@app/todo/reducers';
+import { reducers, metaReducers } from '@app/reducers';
+import { Todo } from '@app/models';
 import { AppComponent } from './app.component';
-import * as TodoActions from './todo/actions';
-import * as fromTodo from './todo/reducers';
-import { reducers, metaReducers } from './reducers';
-import { Todo } from './models';
 
 describe('AppComponent', () => {
   let store: Store<fromTodo.State>;
