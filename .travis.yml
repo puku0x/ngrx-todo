@@ -19,7 +19,6 @@ before_install:
 
 script:
   - npm run test
-  - npm run e2e
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
