@@ -1,0 +1,18 @@
+<div class="input-form">
+  <form [formGroup]="todoForm" (ngSubmit)="create(todoForm.value.text)">
+    <mat-form-field>
+      <input matInput placeholder="Add a new Todo" formControlName="text">
+    </mat-form-field>
+    <button mat-button color="primary" [disabled]="todoForm.invalid || (loading$ | async)">Add</button>
+  </form>
+</div>
+
+<mat-list>
+  <mat-list-item *ngFor="let todo of todos$ | async">
+    <mat-form-field>
+      <input matInput [(ngModel)]="todo.text">
+    </mat-form-field>
+    <button mat-button color="primary" (click)="update(todo)" [disabled]="loading$ | async">Update</button>
+    <button mat-button color="warn" (click)="delete(todo)" [disabled]="loading$ | async">Delete</button>
+  </mat-list-item>
+</mat-list>

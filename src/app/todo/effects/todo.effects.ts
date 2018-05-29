@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
+import { Observable, of } from 'rxjs';
 import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 
-import { TodoService } from '@app/core/services';
+import { TodoService } from '../../core/services';
 import {
   TodoActionTypes,
   LoadTodos,
@@ -23,7 +22,7 @@ import {
 } from '../actions';
 
 /**
- * Effects
+ * Todo effects
  */
 @Injectable()
 export class TodoEffects {
@@ -96,5 +95,4 @@ export class TodoEffects {
         )
     )
   );
-
 }

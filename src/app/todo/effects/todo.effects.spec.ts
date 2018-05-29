@@ -2,10 +2,10 @@ import { TestBed, inject } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Actions } from '@ngrx/effects';
 import { cold, hot } from 'jasmine-marbles';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
-import { Todo } from '@app/models';
-import { TodoService } from '@app/core/services';
+import { Todo } from '../../models';
+import { TodoService } from '../../core/services';
 import { TodoEffects } from './todo.effects';
 import {
   TodoActionTypes,

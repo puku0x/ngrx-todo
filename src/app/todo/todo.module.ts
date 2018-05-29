@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
+import { MaterialModule } from '../material';
+import { SharedModule } from '../shared';
 import * as fromTodo from './reducers';
 import { TodoEffects } from './effects/todo.effects';
+import { TodoRoutingModule } from './todo-routing.module';
+import { TodoComponent } from './todo.component';
 
 @NgModule({
   imports: [
-    CommonModule,
+    MaterialModule,
+    SharedModule,
     StoreModule.forFeature('todo', fromTodo.reducers),
-    EffectsModule.forFeature([TodoEffects])
+    EffectsModule.forFeature([TodoEffects]),
+    TodoRoutingModule
   ],
-  declarations: []
+  declarations: [TodoComponent]
 })
 export class TodoModule { }

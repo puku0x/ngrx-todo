@@ -1,4 +1,4 @@
-import { Todo } from '@app/models';
+import { Todo } from '../../models';
 import {
   TodoActionTypes,
   LoadTodos,

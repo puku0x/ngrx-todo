@@ -7,7 +7,7 @@ import {
 } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import { environment } from '@env/environment';
+import { environment } from '../../environments/environment';
 
 /**
  * Root state

@@ -1,13 +1,6 @@
-<h2>ngrx-todo</h2>
-
-<form [formGroup]="todoForm" (ngSubmit)="create(todoForm.value.text)">
-  <input type="text" formControlName="text">
-  <button [disabled]="todoForm.invalid || (loading$ | async)">Add</button>
-</form>
-<ul>
-  <li *ngFor="let todo of todos$ | async">
-    <input type="text" [(ngModel)]="todo.text">
-    <button (click)="update(todo)" [disabled]="loading$ | async">Update</button>
-    <button (click)="delete(todo)" [disabled]="loading$ | async">Delete</button>
-  </li>
-</ul>
+<header>
+  <mat-toolbar color="primary">
+    <h1>{{title}}</h1>
+  </mat-toolbar>
+</header>
+<router-outlet></router-outlet>
