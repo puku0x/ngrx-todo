@@ -1,6 +1,6 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
-import { Todo } from '../../models';
+import { Todo } from '@app/models';
 import { TodoActions, TodoActionTypes } from '../actions';
 
 /**

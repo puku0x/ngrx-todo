@@ -4,8 +4,7 @@ import { MatToolbarModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { reducers, metaReducers } from './reducers';
-
+import { reducers, metaReducers } from '@app/core';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Todo } from '../models';
+import { Todo } from '@app/models';
 import * as TodoActions from './actions';
 import * as fromTodo from './reducers';
 

@@ -4,15 +4,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { MaterialModule } from '../material';
-import { SharedModule } from '../shared';
-import { Todo } from '../models';
-import { reducers, metaReducers } from '../reducers';
+import { SharedModule } from '@app/shared';
+import { Todo } from '@app/models';
+import { CoreModule, reducers, metaReducers } from '@app/core';
 import * as TodoActions from './actions';
 import * as fromTodo from './reducers';
 import { TodoEffects } from './effects/todo.effects';
 import { TodoComponent } from './todo.component';
-import { CoreModule } from '../core/core.module';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
@@ -24,7 +22,6 @@ describe('TodoComponent', () => {
       imports: [
         BrowserAnimationsModule,
         RouterTestingModule,
-        MaterialModule,
         SharedModule,
         StoreModule.forRoot(reducers, { metaReducers }),
         StoreModule.forFeature('todo', fromTodo.reducers),

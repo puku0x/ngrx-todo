@@ -1,16 +1,22 @@
 import { NgModule, ModuleWithProviders, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
 
+import { environment } from '@env/environment';
 import { TodoService } from './services';
 import { RequestInterceptor } from './interceptors';
+import { reducers, metaReducers } from './reducers';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    FormsModule
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+    EffectsModule.forRoot([]),
   ],
   declarations: []
 })
