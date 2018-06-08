@@ -4,7 +4,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@app/shared';
 import * as fromTodo from './reducers';
-import { TodoEffects } from './effects/todo.effects';
+import { TodoEffects } from './effects';
 import { TodoRoutingModule } from './todo-routing.module';
 import { TodoComponent } from './todo.component';
 

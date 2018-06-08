@@ -4,7 +4,7 @@
 [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
 # ngrx-todo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
 
 ## Development server
 

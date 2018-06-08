@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 
 import { TodoService } from '@app/core';
 import { Todo } from '@app/models';
-import { TodoEffects } from './todo.effects';
+import { TodoEffects } from './todo.effect';
 import {
   TodoActionTypes,
   LoadTodos,

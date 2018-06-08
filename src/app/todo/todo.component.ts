@@ -1,7 +1,8 @@
 import { Component, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
 import * as TodoActions from './actions';
@@ -31,14 +32,13 @@ export class TodoComponent implements OnInit, OnDestroy {
     });
   }
 
-
   /**
    * Initialize
    */
   ngOnInit() {
-    this.loading$ = this.store.pipe(select(fromTodo.getLoading));
-    this.todos$ = this.store.pipe(select(fromTodo.getTodos));
     this.store.dispatch(new TodoActions.LoadTodos());
+    this.loading$ = this.store.select(fromTodo.getLoading);
+    this.todos$ = this.store.select(fromTodo.getTodos);
   }
 
   /**
@@ -61,11 +61,11 @@ export class TodoComponent implements OnInit, OnDestroy {
   /**
    * Update
    */
-  update(todo: Todo) {
+  update(todo: Todo, text: string) {
     this.store.dispatch(new TodoActions.UpdateTodo({
       todo: {
         id: todo.id,
-        changes: todo
+        changes: { ...todo, text }
       }
     }));
   }
