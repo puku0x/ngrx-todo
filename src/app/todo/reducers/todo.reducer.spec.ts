@@ -15,7 +15,12 @@ import {
   DeleteTodoSuccess,
   DeleteTodoFail
 } from '../actions';
-import { reducer, initialState, State } from './todo.reducer';
+import {
+  reducer,
+  initialState,
+  State,
+  getLoading
+} from './todo.reducer';
 
 describe('Todo Reducer', () => {
   describe('unknown action', () => {
@@ -257,6 +262,19 @@ describe('Todo Reducer', () => {
       };
       const action = new DeleteTodoFail({ error: 'error' });
       expect(reducer(initial, action)).toEqual(expected);
+    });
+  });
+
+  describe('Selectors', () => {
+    describe('getLoading', () => {
+      it('should return loading', () => {
+        const result = getLoading({
+          ...initialState,
+          loading: true,
+        });
+
+        expect(result).toEqual(true);
+      });
     });
   });
 

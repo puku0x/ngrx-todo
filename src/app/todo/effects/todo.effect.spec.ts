@@ -65,7 +65,7 @@ describe('TodoEffects', () => {
       expect(effects.loadTodos$).toBeObservable(expected);
     });
 
-    it('should return LoadTodosF', () => {
+    it('should return LoadTodosFail', () => {
       const error = 'error';
       const action = new LoadTodos();
       const completion = new LoadTodosFail({ error });

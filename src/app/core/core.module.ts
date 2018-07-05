@@ -6,7 +6,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
 import { environment } from '@env/environment';
-import { TodoService } from './services';
 import { RequestInterceptor } from './interceptors';
 import { reducers, metaReducers } from './reducers';
 
@@ -25,7 +24,6 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        TodoService,
         { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
       ]
     };
@@ -37,8 +35,7 @@ export class CoreModule {
    */
   constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
-      throw new Error(
-        'CoreModule is already loaded. Import it in the AppModule only');
+      throw new Error('CoreModule is already loaded. Import it in the AppModule only');
     }
   }
 }

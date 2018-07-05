@@ -30,6 +30,9 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.todoForm = this.fb.group({
       text: ['', Validators.required]
     });
+
+    this.loading$ = this.store.select(fromTodo.getLoading);
+    this.todos$ = this.store.select(fromTodo.getTodos);
   }
 
   /**
@@ -37,8 +40,6 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.store.dispatch(new TodoActions.LoadTodos());
-    this.loading$ = this.store.select(fromTodo.getLoading);
-    this.todos$ = this.store.select(fromTodo.getTodos);
   }
 
   /**

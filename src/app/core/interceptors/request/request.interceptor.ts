@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '@env/environment';
+
 /**
  * Interceptor
  */
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
-
-  private baseUrl = 'https://api.puku0x.net/v1';
-  // baseUrl = 'http://localhost:8080/api/v1';
 
   /**
    * Constructor
@@ -23,7 +22,7 @@ export class RequestInterceptor implements HttpInterceptor {
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const req = request.clone({
-      url: `${this.baseUrl}${request.url}`
+      url: `${environment.baseUrl}${request.url}`
     });
     return next.handle(req);
   }

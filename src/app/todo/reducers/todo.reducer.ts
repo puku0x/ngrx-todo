@@ -76,6 +76,10 @@ export function reducer(
   }
 }
 
+/**
+ * Selectors
+ */
+export const getLoading = (state: State) => state.loading;
 export const {
   selectIds,
   selectEntities,

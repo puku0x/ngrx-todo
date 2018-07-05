@@ -7,7 +7,9 @@ import { Todo } from '@app/models';
 /**
  * Service
  */
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class TodoService {
 
   constructor(private http: HttpClient) { }
@@ -18,7 +20,7 @@ export class TodoService {
    * @param limit
    */
   findAll(offset?: number, limit?: number): Observable<Todo[]> {
-    const url = `/todos`;
+    const url = `/v1/todos`;
     return this.http.get<Todo[]>(url);
   }
 
@@ -27,7 +29,7 @@ export class TodoService {
    * @param id
    */
   find(id: string): Observable<Todo> {
-    const url = `/todos/${id}`;
+    const url = `/v1/todos/${id}`;
     return this.http.get<Todo>(url);
   }
 
@@ -36,7 +38,7 @@ export class TodoService {
    * @param todo
    */
   create(todo: Todo): Observable<Todo> {
-    const url = `/todos`;
+    const url = `/v1/todos`;
     return this.http.post<Todo>(url, todo);
   }
 
@@ -45,7 +47,7 @@ export class TodoService {
    * @param todo
    */
   update(todo: Todo): Observable<Todo> {
-    const url = `/todos/${todo.id}`;
+    const url = `/v1/todos/${todo.id}`;
     return this.http.put<Todo>(url, todo);
   }
 
@@ -54,7 +56,7 @@ export class TodoService {
    * @param id
    */
   delete(id: string): Observable<void>  {
-    const url = `/todos/${id}`;
+    const url = `/v1/todos/${id}`;
     return this.http.delete<void>(url);
   }
 

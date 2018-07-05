@@ -11,4 +11,8 @@ describe('CoreModule', () => {
     expect(coreModule).toBeTruthy();
   });
 
+  it('should refuse multiple imports', () => {
+    expect(() => new CoreModule(coreModule)).toThrow();
+  });
+
 });
