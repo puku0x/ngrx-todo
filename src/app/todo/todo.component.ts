@@ -52,7 +52,7 @@ export class TodoComponent implements OnInit, OnDestroy {
   /**
    * Create
    */
-  create(text: string) {
+  onCreate(text: string) {
     this.store.dispatch(new TodoActions.CreateTodo({
       todo: new Todo(null, text)
     }));
@@ -62,19 +62,19 @@ export class TodoComponent implements OnInit, OnDestroy {
   /**
    * Update
    */
-  update(todo: Todo, text: string) {
+  onUpdate(todo: Todo) {
     this.store.dispatch(new TodoActions.UpdateTodo({
       todo: {
         id: todo.id,
-        changes: { ...todo, text }
+        changes: todo
       }
     }));
   }
 
   /**
-   * Delete
+   * Remove
    */
-  delete(todo: Todo) {
-    this.store.dispatch(new TodoActions.DeleteTodo({ id: todo.id }));
+  onRemove(id: string) {
+    this.store.dispatch(new TodoActions.DeleteTodo({ id }));
   }
 }

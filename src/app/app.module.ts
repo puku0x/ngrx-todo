@@ -15,8 +15,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    AppRoutingModule,
     CoreModule.forRoot(),
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

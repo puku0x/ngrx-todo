@@ -272,7 +272,6 @@ describe('Todo Reducer', () => {
           ...initialState,
           loading: true,
         });
-
         expect(result).toEqual(true);
       });
     });

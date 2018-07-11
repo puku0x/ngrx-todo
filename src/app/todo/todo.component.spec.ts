@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -10,6 +10,7 @@ import { CoreModule, reducers, metaReducers } from '@app/core';
 import * as TodoActions from './actions';
 import * as fromTodo from './reducers';
 import { TodoEffects } from './effects';
+import { TodoComponentsModule } from './components';
 import { TodoComponent } from './todo.component';
 
 describe('TodoComponent', () => {
@@ -20,14 +21,13 @@ describe('TodoComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserAnimationsModule,
+        NoopAnimationsModule,
         RouterTestingModule,
+        CoreModule.forRoot(),
         SharedModule,
-        StoreModule.forRoot(reducers, { metaReducers }),
         StoreModule.forFeature('todo', fromTodo.reducers),
-        EffectsModule.forRoot([]),
         EffectsModule.forFeature([TodoEffects]),
-        CoreModule.forRoot()
+        TodoComponentsModule
       ],
       declarations: [ TodoComponent ]
     })
@@ -58,7 +58,7 @@ describe('TodoComponent', () => {
   it('should dispatch an action to create data', () => {
     const text = 'test';
     const app: TodoComponent = fixture.debugElement.componentInstance;
-    app.create(text);
+    app.onCreate(text);
     const action = new TodoActions.CreateTodo({
       todo: new Todo(null, text)
     });
@@ -67,23 +67,22 @@ describe('TodoComponent', () => {
 
   it('should dispatch an action to update data', () => {
     const todo = new Todo('1', 'test');
-    const text = 'testtest';
     const app: TodoComponent = fixture.debugElement.componentInstance;
-    app.update(todo, text);
+    app.onUpdate(todo);
     const action = new TodoActions.UpdateTodo({
       todo: {
         id: '1',
-        changes: { ...todo, text: text }
+        changes: todo
       }
     });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
   it('should dispatch an action to delete data', () => {
-    const todo = new Todo('1', 'test');
+    const id = '1';
     const app: TodoComponent = fixture.debugElement.componentInstance;
-    app.delete(todo);
-    const action = new TodoActions.DeleteTodo({ id: todo.id });
+    app.onRemove(id);
+    const action = new TodoActions.DeleteTodo({ id });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });
