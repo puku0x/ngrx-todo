@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { MatToolbarModule } from '@angular/material';
 
 import { CoreModule } from '@app/core';
+import { TodoStateModule } from './todo/+state/todo-state.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -15,7 +16,8 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    CoreModule.forRoot(),
+    CoreModule,
+    TodoStateModule,
     AppRoutingModule,
   ],
   providers: [],

@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { environment } from '@env/environment';
 import { RequestInterceptor } from './interceptors';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './+state/reducers';
 
 @NgModule({
   imports: [
@@ -17,25 +17,19 @@ import { reducers, metaReducers } from './reducers';
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     EffectsModule.forRoot([]),
   ],
-  declarations: []
+  declarations: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+  ]
 })
 export class CoreModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: CoreModule,
-      providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
-      ]
-    };
-  }
-
   /**
    * Constructor
    * @param parentModule
    */
-  constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     if (parentModule) {
-      throw new Error('CoreModule is already loaded. Import it in the AppModule only');
+      throw new Error('CoreModule is already loaded.');
     }
   }
 }

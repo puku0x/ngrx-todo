@@ -6,11 +6,12 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { SharedModule } from '@app/shared';
 import { Todo } from '@app/models';
-import { CoreModule, reducers, metaReducers } from '@app/core';
-import * as TodoActions from './actions';
-import * as fromTodo from './reducers';
-import { TodoEffects } from './effects';
-import { TodoComponentsModule } from './components';
+import { CoreModule } from '@app/core';
+
+import { TodoStateModule } from './+state/todo-state.module';
+import * as TodoActions from './+state/actions';
+import * as fromTodo from './+state/reducers';
+import { TodoFormComponent, TodoItemComponent, TodoListComponent } from './components';
 import { TodoComponent } from './todo.component';
 
 describe('TodoComponent', () => {
@@ -23,13 +24,16 @@ describe('TodoComponent', () => {
       imports: [
         NoopAnimationsModule,
         RouterTestingModule,
-        CoreModule.forRoot(),
+        CoreModule,
         SharedModule,
-        StoreModule.forFeature('todo', fromTodo.reducers),
-        EffectsModule.forFeature([TodoEffects]),
-        TodoComponentsModule
+        TodoStateModule,
       ],
-      declarations: [ TodoComponent ]
+      declarations: [
+        TodoComponent,
+        TodoFormComponent,
+        TodoItemComponent,
+        TodoListComponent
+      ]
     })
     .compileComponents();
     store = TestBed.get(Store);

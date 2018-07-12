@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 
-import { TodoService } from '@app/core';
+import { TodoService } from '../../services';
 import {
   TodoActionTypes,
   LoadTodos,

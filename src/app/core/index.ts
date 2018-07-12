@@ -1,3 +1,2 @@
-export * from './services';
-export * from './reducers';
+export * from './+state/reducers';
 export * from './core.module';

@@ -4,8 +4,8 @@ import { Actions } from '@ngrx/effects';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
-import { TodoService } from '@app/core';
 import { Todo } from '@app/models';
+import { TodoService } from '../../services';
 import { TodoEffects } from './todo.effect';
 import {
   TodoActionTypes,

@@ -1,20 +1,19 @@
-import { Component, EventEmitter, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
-import * as TodoActions from './actions';
-import * as fromTodo from './reducers';
+import * as TodoActions from './+state/actions';
+import * as fromTodo from './+state/reducers';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.scss']
 })
-export class TodoComponent implements OnInit, OnDestroy {
-  private readonly onDestroy$ = new EventEmitter();
+export class TodoComponent implements OnInit {
 
   loading$: Observable<boolean>;
   todos$: Observable<Todo[]>;
@@ -30,7 +29,6 @@ export class TodoComponent implements OnInit, OnDestroy {
     this.todoForm = this.fb.group({
       text: ['', Validators.required]
     });
-
     this.loading$ = this.store.select(fromTodo.getLoading);
     this.todos$ = this.store.select(fromTodo.getTodos);
   }
@@ -40,13 +38,6 @@ export class TodoComponent implements OnInit, OnDestroy {
    */
   ngOnInit() {
     this.store.dispatch(new TodoActions.LoadTodos());
-  }
-
-  /**
-   * Finalize
-   */
-  ngOnDestroy() {
-    this.onDestroy$.emit();
   }
 
   /**
