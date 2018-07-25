@@ -5,7 +5,7 @@ import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
 import { Todo } from '@app/models';
-import { TodoService } from '../../services';
+import { TodoService } from '@app/core';
 import { TodoEffects } from './todo.effect';
 import {
   TodoActionTypes,

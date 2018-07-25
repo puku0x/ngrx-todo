@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://api.puku0x.net'
+  baseUrl: 'https://ngrx-todo.puku0x.net/api'
 };

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://api.puku0x.net'
+  baseUrl: 'https://ngrx-todo.puku0x.net/api'
 };
 
 /*
