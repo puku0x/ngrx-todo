@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://ngrx-todo.puku0x.net/api'
+  apiUrl: 'https://us-central1-todo-api-4119c.cloudfunctions.net',
 };
