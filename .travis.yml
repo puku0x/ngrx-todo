@@ -14,9 +14,6 @@ cache:
 addons:
   chrome: stable
 
-install:
-  - npm ci
-
 before_install:
   - npm install coveralls
 
