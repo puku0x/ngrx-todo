@@ -1,5 +1,5 @@
 import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Todo } from '@app/models';
 
@@ -10,7 +10,7 @@ import { Todo } from '@app/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoItemComponent implements OnInit {
-  @Input() loading: boolean;
+  @Input() disabled: boolean;
   @Input() todo: Todo;
   @Output() update = new EventEmitter<Todo>();
   @Output() remove = new EventEmitter<string>();
@@ -22,7 +22,7 @@ export class TodoItemComponent implements OnInit {
    */
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      text: ['', Validators.required]
+      text: [{ value: '', disabled: this.disabled }, Validators.required]
     });
   }
 

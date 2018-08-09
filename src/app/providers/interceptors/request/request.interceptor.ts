@@ -16,13 +16,13 @@ export class RequestInterceptor implements HttpInterceptor {
   constructor() { }
 
   /**
-   * Add base URL
+   * Add URL for endpoint
    * @param request
    * @param next
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const req = request.clone({
-      url: `${environment.baseUrl}${request.url}`
+      url: `${environment.apiUrl}${request.url}`
     });
     return next.handle(req);
   }

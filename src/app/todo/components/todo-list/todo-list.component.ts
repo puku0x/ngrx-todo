@@ -9,7 +9,7 @@ import { Todo } from '@app/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoListComponent {
-  @Input() loading: boolean;
+  @Input() disabled: boolean;
   @Input() todos: Todo[];
   @Output() update = new EventEmitter<Todo>();
   @Output() remove = new EventEmitter<string>();

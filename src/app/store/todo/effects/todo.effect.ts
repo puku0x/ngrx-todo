@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 
-import { TodoService } from '@app/core';
+import { TodoService } from '@app/providers';
 import {
   TodoActionTypes,
   LoadTodos,
@@ -88,7 +88,7 @@ export class TodoEffects {
     ofType<DeleteTodo>(TodoActionTypes.DeleteTodo),
     concatMap(action =>
       this.todoService
-        .delete(action.payload.id)
+        .remove(action.payload.id)
         .pipe(
           map(() => new DeleteTodoSuccess({ id: action.payload.id })),
           catchError(error => of(new DeleteTodoFail({ error })))

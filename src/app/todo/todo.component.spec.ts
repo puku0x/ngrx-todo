@@ -1,16 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { StoreModule, Store } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Store } from '@ngrx/store';
 
 import { SharedModule } from '@app/shared';
 import { Todo } from '@app/models';
-import { CoreModule } from '@app/core';
 
-import { TodoStateModule } from './+state/todo-state.module';
-import * as TodoActions from './+state/actions';
-import * as fromTodo from './+state/reducers';
+import { AppStoreModule } from '@app/store';
+import * as TodoActions from '@app/store/todo/actions';
+import * as fromTodo from '@app/store/todo/reducers';
 import { TodoFormComponent, TodoItemComponent, TodoListComponent } from './components';
 import { TodoComponent } from './todo.component';
 
@@ -24,9 +23,9 @@ describe('TodoComponent', () => {
       imports: [
         NoopAnimationsModule,
         RouterTestingModule,
-        CoreModule,
+        HttpClientTestingModule,
+        AppStoreModule,
         SharedModule,
-        TodoStateModule,
       ],
       declarations: [
         TodoComponent,
@@ -38,7 +37,7 @@ describe('TodoComponent', () => {
     .compileComponents();
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
-    spyOn(store, 'select').and.callThrough();
+    spyOn(store, 'pipe').and.callThrough();
   }));
 
   beforeEach(() => {
@@ -56,7 +55,7 @@ describe('TodoComponent', () => {
     app.ngOnInit();
     const action = new TodoActions.LoadTodos();
     expect(store.dispatch).toHaveBeenCalledWith(action);
-    expect(store.select).toHaveBeenCalled();
+    expect(store.pipe).toHaveBeenCalled();
   });
 
   it('should dispatch an action to create data', () => {

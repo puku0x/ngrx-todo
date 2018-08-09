@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 import { Todo } from '@app/models';
@@ -76,7 +76,7 @@ describe('TodoService', () => {
 
   it('should successfully mock delete request', () => {
     const todo = new Todo('1', 'test');
-    service.delete(todo.id).subscribe(data => {
+    service.remove(todo.id).subscribe(data => {
       expect(data).toEqual(null);
     });
     const req = httpMock.expectOne(`/v1/todos/1`);

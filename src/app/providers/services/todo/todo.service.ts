@@ -21,6 +21,11 @@ export class TodoService {
    */
   findAll(offset?: number, limit?: number): Observable<Todo[]> {
     const url = `/v1/todos`;
+
+    let params = new HttpParams();
+    params = !!offset ? params.set('offset', `${offset}`) : params;
+    params = !!limit ? params.set('limit', `${limit}`) : params;
+
     return this.http.get<Todo[]>(url);
   }
 
@@ -55,7 +60,7 @@ export class TodoService {
    * Delete
    * @param id
    */
-  delete(id: string): Observable<void>  {
+  remove(id: string): Observable<void>  {
     const url = `/v1/todos/${id}`;
     return this.http.delete<void>(url);
   }

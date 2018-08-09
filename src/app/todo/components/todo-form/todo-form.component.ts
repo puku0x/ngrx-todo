@@ -8,7 +8,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoFormComponent {
-  @Input() loading: boolean;
+  @Input() disabled: boolean;
   @Output() create = new EventEmitter<string>();
 
   form: FormGroup;
@@ -18,7 +18,7 @@ export class TodoFormComponent {
    */
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
-      text: ['', Validators.required]
+      text: [{ value: '', disabled: this.disabled }, Validators.required]
     });
   }
 }

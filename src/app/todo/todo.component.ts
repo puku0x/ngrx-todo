@@ -1,12 +1,10 @@
-import { Component, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
-import * as TodoActions from './+state/actions';
-import * as fromTodo from './+state/reducers';
+import * as TodoActions from '@app/store/todo/actions';
+import * as fromTodo from '@app/store/todo/reducers';
 
 @Component({
   selector: 'app-todo',
@@ -14,23 +12,15 @@ import * as fromTodo from './+state/reducers';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-
   loading$: Observable<boolean>;
   todos$: Observable<Todo[]>;
-  todoForm: FormGroup;
 
   /**
    * Constructor
    */
-  constructor(
-    private fb: FormBuilder,
-    private store: Store<fromTodo.State>
-  ) {
-    this.todoForm = this.fb.group({
-      text: ['', Validators.required]
-    });
-    this.loading$ = this.store.select(fromTodo.getLoading);
-    this.todos$ = this.store.select(fromTodo.getTodos);
+  constructor(private store: Store<fromTodo.State>) {
+    this.loading$ = this.store.pipe(select(fromTodo.getLoading));
+    this.todos$ = this.store.pipe(select(fromTodo.getTodos));
   }
 
   /**
@@ -47,7 +37,6 @@ export class TodoComponent implements OnInit {
     this.store.dispatch(new TodoActions.CreateTodo({
       todo: new Todo(null, text)
     }));
-    this.todoForm.reset();
   }
 
   /**

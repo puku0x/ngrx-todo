@@ -1,10 +1,10 @@
 <section class="input-form">
-  <app-todo-form [loading]="loading$ | async" (create)="onCreate($event)"></app-todo-form>
+  <app-todo-form [disabled]="loading$ | async" (create)="onCreate($event)"></app-todo-form>
 </section>
 <section>
   <app-todo-list
     [todos]="todos$ | async"
-    [loading]="loading$ | async"
+    [disabled]="loading$ | async"
     (update)="onUpdate($event)"
     (remove)="onRemove($event)"
   ></app-todo-list>
