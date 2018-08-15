@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import {
   MatButtonModule,
+  MatDialogModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
   MatListModule,
   MatProgressBarModule,
@@ -11,7 +13,9 @@ import {
 // Modules
 const modules = [
   MatButtonModule,
+  MatDialogModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
   MatListModule,
   MatProgressBarModule,

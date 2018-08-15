@@ -1,7 +1,19 @@
-header {
+.header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 2;
+}
+
+.footer {
+  margin-top: 8px;
+  padding: 16px;
+}
+
+.footer-content {
+  text-align: center;
+  color: #ccc;
+  font-size: 0.5rem;
+  line-height: 1.0rem;
 }

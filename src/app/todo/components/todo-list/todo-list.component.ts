@@ -11,6 +11,8 @@ import { Todo } from '@app/models';
 export class TodoListComponent {
   @Input() disabled: boolean;
   @Input() todos: Todo[];
+  @Output() select = new EventEmitter<Todo>();
+  @Output() delete = new EventEmitter<Todo>();
   @Output() update = new EventEmitter<Todo>();
   @Output() remove = new EventEmitter<string>();
 }

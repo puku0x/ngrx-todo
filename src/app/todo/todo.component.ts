@@ -1,10 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, TemplateRef, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Actions, ofType } from '@ngrx/effects';
+import { Observable, race } from 'rxjs';
+import { tap, takeUntil, concatMap } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
 import * as TodoActions from '@app/store/todo/actions';
 import * as fromTodo from '@app/store/todo/reducers';
+import { TodoEditDialogComponent } from './components/todo-edit-dialog/todo-edit-dialog.component';
+import { TodoDeleteDialogComponent } from './components/todo-delete-dialog/todo-delete-dialog.component';
+import { TodoActionTypes } from '@app/store/todo/actions';
 
 @Component({
   selector: 'app-todo',
@@ -14,11 +20,19 @@ import * as fromTodo from '@app/store/todo/reducers';
 export class TodoComponent implements OnInit {
   loading$: Observable<boolean>;
   todos$: Observable<Todo[]>;
+  todo: Todo;
+
+  @ViewChild('editDialog') editDialog: TemplateRef<TodoEditDialogComponent>;
+  @ViewChild('deleteDialog') deleteDialog: TemplateRef<TodoDeleteDialogComponent>;
 
   /**
    * Constructor
    */
-  constructor(private store: Store<fromTodo.State>) {
+  constructor(
+    private store: Store<fromTodo.State>,
+    private actions$: Actions,
+    private dialog: MatDialog,
+  ) {
     this.loading$ = this.store.pipe(select(fromTodo.getLoading));
     this.todos$ = this.store.pipe(select(fromTodo.getTodos));
   }
@@ -31,11 +45,61 @@ export class TodoComponent implements OnInit {
   }
 
   /**
+   * Open dialog
+   */
+  openEditDialog(todo?: Todo) {
+    if (!todo) {
+      this.todo = new Todo();
+    }
+    this.todo = { ...todo };
+
+    // Open
+    const dialogRef = this.dialog.open(this.editDialog, {
+      disableClose: true,
+      width: '480px'
+    });
+
+    // Close
+    this.actions$.pipe(
+      ofType(TodoActionTypes.CreateTodoSuccess, TodoActionTypes.UpdateTodoSuccess),
+      tap(() => dialogRef.close()),
+      takeUntil(dialogRef.afterClosed())
+    ).subscribe();
+  }
+
+  /**
+   * Open delete dialog
+   */
+  openDeleteDialog(todo: Todo) {
+    this.todo = { ...todo };
+
+    // Open
+    const dialogRef = this.dialog.open(this.deleteDialog, {
+      disableClose: true,
+      width: '480px'
+    });
+
+    // Close
+    this.actions$.pipe(
+      ofType(TodoActionTypes.DeleteTodoSuccess),
+      tap(() => dialogRef.close()),
+      takeUntil(dialogRef.afterClosed())
+    ).subscribe();
+  }
+
+  /**
+   * Close dialog
+   */
+  closeDialog() {
+    this.dialog.closeAll();
+  }
+
+  /**
    * Create
    */
-  onCreate(text: string) {
+  onCreate(todo: Todo) {
     this.store.dispatch(new TodoActions.CreateTodo({
-      todo: new Todo(null, text)
+      todo
     }));
   }
 
@@ -52,9 +116,10 @@ export class TodoComponent implements OnInit {
   }
 
   /**
-   * Remove
+   * Delete
    */
-  onRemove(id: string) {
+  onDelete(todo: Todo) {
+    const id = todo.id;
     this.store.dispatch(new TodoActions.DeleteTodo({ id }));
   }
 }

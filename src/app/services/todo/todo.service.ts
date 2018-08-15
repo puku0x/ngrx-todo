@@ -60,7 +60,7 @@ export class TodoService {
    * Delete
    * @param id
    */
-  remove(id: string): Observable<void>  {
+  delete(id: string): Observable<void>  {
     const url = `/v1/todos/${id}`;
     return this.http.delete<void>(url);
   }

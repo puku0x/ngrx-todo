@@ -5,7 +5,7 @@ import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
 import { Todo } from '@app/models';
-import { TodoService } from '@app/providers';
+import { TodoService } from '@app/services';
 import { TodoEffects } from './todo.effect';
 import {
   TodoActionTypes,
@@ -35,7 +35,7 @@ describe('TodoEffects', () => {
         provideMockActions(() => actions$),
         {
           provide: TodoService,
-          useValue: jasmine.createSpyObj('TodoService', ['findAll', 'find', 'create', 'update', 'remove']),
+          useValue: jasmine.createSpyObj('TodoService', ['findAll', 'find', 'create', 'update', 'delete']),
         }
       ],
     });
@@ -144,7 +144,7 @@ describe('TodoEffects', () => {
       actions$ = hot('-a', { a: action });
       const response = cold('-b', { b: id });
       const expected = cold('--c', { c: completion });
-      service.remove = () => response;
+      service.delete = () => response;
 
       expect(effects.deleteTodo$).toBeObservable(expected);
     });
@@ -157,7 +157,7 @@ describe('TodoEffects', () => {
       actions$ = hot('-a', { a: action });
       const response = cold('-#', { }, error);
       const expected = cold('--c', { c: completion });
-      service.remove = () => response;
+      service.delete = () => response;
 
       expect(effects.deleteTodo$).toBeObservable(expected);
     });

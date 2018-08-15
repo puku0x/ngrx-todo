@@ -1,5 +1,8 @@
-<mat-list>
-  <mat-list-item *ngFor="let todo of todos">
-    <app-todo-item [todo]="todo" [disabled]="disabled" (update)="update.emit($event)" (remove)="remove.emit($event)"></app-todo-item>
+<mat-nav-list>
+  <mat-list-item *ngFor="let todo of todos" (click)="select.emit(todo)">
+    <a matLine>{{ todo.text }}</a>
+    <button class="delete-button" mat-icon-button (click)="delete.emit(todo); $event.stopPropagation()">
+      <mat-icon>delete</mat-icon>
+     </button>
   </mat-list-item>
-</mat-list>
+</mat-nav-list>

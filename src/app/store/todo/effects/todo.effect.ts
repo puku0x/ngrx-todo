@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 
-import { TodoService } from '@app/providers';
+import { TodoService } from '@app/services';
 import {
   TodoActionTypes,
   LoadTodos,
@@ -38,14 +38,14 @@ export class TodoEffects {
   @Effect()
   loadTodos$: Observable<Action> = this.actions$.pipe(
     ofType<LoadTodos>(TodoActionTypes.LoadTodos),
-    switchMap(action =>
-      this.todoService
-        .findAll(action.payload.offset, action.payload.limit)
-        .pipe(
-          map(data => new LoadTodosSuccess({ todos: data })),
-          catchError(error => of(new LoadTodosFail({ error })))
-        )
-    )
+    map(action => action.payload),
+    switchMap(payload => {
+      const { offset, limit } = payload;
+      return this.todoService.findAll(offset, limit).pipe(
+        map(result => new LoadTodosSuccess({ todos: result })),
+        catchError(error => of(new LoadTodosFail({ error })))
+      );
+    })
   );
 
   /**
@@ -54,14 +54,14 @@ export class TodoEffects {
   @Effect()
   createTodo$: Observable<Action> = this.actions$.pipe(
     ofType<CreateTodo>(TodoActionTypes.CreateTodo),
-    concatMap(action =>
-      this.todoService
-        .create(action.payload.todo)
-        .pipe(
-          map(data => new CreateTodoSuccess({ todo: data })),
-          catchError(error => of(new CreateTodoFail({ error })))
-        )
-    )
+    map(action => action.payload),
+    concatMap(payload => {
+      const { todo } = payload;
+      return this.todoService.create(todo).pipe(
+        map(result => new CreateTodoSuccess({ todo: result })),
+        catchError(error => of(new CreateTodoFail({ error })))
+      );
+    })
   );
 
   /**
@@ -70,14 +70,14 @@ export class TodoEffects {
   @Effect()
   updateTodo$: Observable<Action> = this.actions$.pipe(
     ofType<UpdateTodo>(TodoActionTypes.UpdateTodo),
-    concatMap(action =>
-      this.todoService
-        .update({ ...action.payload.todo.changes })
-        .pipe(
-          map(data => new UpdateTodoSuccess({ todo: { id: data.id, changes: data } })),
-          catchError(error => of(new UpdateTodoFail({ error })))
-        )
-    )
+    map(action => action.payload),
+    concatMap(payload => {
+      const { todo } = payload;
+      return this.todoService.update(todo.changes).pipe(
+        map(result => new UpdateTodoSuccess({ todo: { id: result.id, changes: result }})),
+        catchError(error => of(new UpdateTodoFail({ error })))
+      );
+    })
   );
 
   /**
@@ -86,13 +86,13 @@ export class TodoEffects {
   @Effect()
   deleteTodo$: Observable<Action> = this.actions$.pipe(
     ofType<DeleteTodo>(TodoActionTypes.DeleteTodo),
-    concatMap(action =>
-      this.todoService
-        .remove(action.payload.id)
-        .pipe(
-          map(() => new DeleteTodoSuccess({ id: action.payload.id })),
-          catchError(error => of(new DeleteTodoFail({ error })))
-        )
-    )
+    map(action => action.payload),
+    concatMap(payload => {
+      const { id } = payload;
+      return this.todoService.delete(id).pipe(
+        map(() => new DeleteTodoSuccess({ id })),
+        catchError(error => of(new DeleteTodoFail({ error })))
+      );
+    })
   );
 }

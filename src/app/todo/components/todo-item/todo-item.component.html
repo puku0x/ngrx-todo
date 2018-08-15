@@ -1,7 +1,0 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
-  <mat-form-field>
-    <input matInput formControlName="text">
-  </mat-form-field>
-  <button type="submit" mat-button color="primary" [disabled]="disabled || form.invalid">Update</button>
-  <button type="button" mat-button color="warn" (click)="remove.emit(todo.id)" [disabled]="disabled">Delete</button>
-</form>

@@ -10,7 +10,7 @@ import { Todo } from '@app/models';
 import { AppStoreModule } from '@app/store';
 import * as TodoActions from '@app/store/todo/actions';
 import * as fromTodo from '@app/store/todo/reducers';
-import { TodoFormComponent, TodoItemComponent, TodoListComponent } from './components';
+import { TodoListComponent, TodoEditDialogComponent, TodoDeleteDialogComponent } from './components';
 import { TodoComponent } from './todo.component';
 
 describe('TodoComponent', () => {
@@ -29,9 +29,9 @@ describe('TodoComponent', () => {
       ],
       declarations: [
         TodoComponent,
-        TodoFormComponent,
-        TodoItemComponent,
-        TodoListComponent
+        TodoListComponent,
+        TodoEditDialogComponent,
+        TodoDeleteDialogComponent,
       ]
     })
     .compileComponents();
@@ -59,12 +59,10 @@ describe('TodoComponent', () => {
   });
 
   it('should dispatch an action to create data', () => {
-    const text = 'test';
+    const todo = new Todo(null, 'test');
     const app: TodoComponent = fixture.debugElement.componentInstance;
-    app.onCreate(text);
-    const action = new TodoActions.CreateTodo({
-      todo: new Todo(null, text)
-    });
+    app.onCreate(todo);
+    const action = new TodoActions.CreateTodo({ todo });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
@@ -82,10 +80,10 @@ describe('TodoComponent', () => {
   });
 
   it('should dispatch an action to delete data', () => {
-    const id = '1';
+    const todo = new Todo('1', 'test');
     const app: TodoComponent = fixture.debugElement.componentInstance;
-    app.onRemove(id);
-    const action = new TodoActions.DeleteTodo({ id });
+    app.onDelete(todo);
+    const action = new TodoActions.DeleteTodo({ id: todo.id });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });

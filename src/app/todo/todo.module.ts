@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '@app/shared';
-import { TodoFormComponent, TodoItemComponent, TodoListComponent } from './components';
+import { TodoListComponent, TodoEditDialogComponent, TodoDeleteDialogComponent } from './components';
 import { TodoRoutingModule } from './todo-routing.module';
 import { TodoComponent } from './todo.component';
 
@@ -12,9 +12,9 @@ import { TodoComponent } from './todo.component';
   ],
   declarations: [
     TodoComponent,
-    TodoFormComponent,
-    TodoItemComponent,
-    TodoListComponent
+    TodoListComponent,
+    TodoEditDialogComponent,
+    TodoDeleteDialogComponent
   ]
 })
 export class TodoModule { }

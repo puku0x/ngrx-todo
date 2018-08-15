@@ -76,7 +76,7 @@ describe('TodoService', () => {
 
   it('should successfully mock delete request', () => {
     const todo = new Todo('1', 'test');
-    service.remove(todo.id).subscribe(data => {
+    service.delete(todo.id).subscribe(data => {
       expect(data).toEqual(null);
     });
     const req = httpMock.expectOne(`/v1/todos/1`);

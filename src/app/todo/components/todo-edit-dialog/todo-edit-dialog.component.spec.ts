@@ -2,28 +2,28 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   MatButtonModule,
+  MatDialogModule,
   MatFormFieldModule,
-  MatInputModule,
  } from '@angular/material';
 
-import { TodoFormComponent } from './todo-form.component';
+import { TodoEditDialogComponent } from './todo-edit-dialog.component';
 
-describe('TodoFormComponent', () => {
-  let component: TodoFormComponent;
-  let fixture: ComponentFixture<TodoFormComponent>;
+describe('TodoEditDialogComponent', () => {
+  let component: TodoEditDialogComponent;
+  let fixture: ComponentFixture<TodoEditDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
         MatButtonModule,
+        MatDialogModule,
         MatFormFieldModule,
-        MatInputModule,
       ],
-      declarations: [ TodoFormComponent ],
+      declarations: [TodoEditDialogComponent],
     })
     .compileComponents();
-    fixture = TestBed.createComponent(TodoFormComponent);
+    fixture = TestBed.createComponent(TodoEditDialogComponent);
     component = fixture.componentInstance;
   }));
 

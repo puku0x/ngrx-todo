@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material';
 
-import { RequestInterceptor } from './providers';
+import { RequestInterceptor } from './interceptors';
 import { AppStoreModule } from './store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

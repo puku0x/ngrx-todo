@@ -4,11 +4,10 @@ import {
   MatButtonModule,
   MatFormFieldModule,
   MatListModule,
-  MatInputModule,
+  MatIconModule,
  } from '@angular/material';
 
  import { TodoListComponent } from './todo-list.component';
- import { TodoItemComponent } from '../todo-item/todo-item.component';
 
 describe('TodoListComponent', () => {
   let component: TodoListComponent;
@@ -20,9 +19,9 @@ describe('TodoListComponent', () => {
         ReactiveFormsModule,
         MatFormFieldModule,
         MatListModule,
-        MatInputModule
+        MatIconModule,
       ],
-      declarations: [ TodoListComponent, TodoItemComponent ],
+      declarations: [ TodoListComponent ],
     })
     .compileComponents();
     fixture = TestBed.createComponent(TodoListComponent);

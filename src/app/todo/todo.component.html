@@ -1,11 +1,28 @@
-<section class="input-form">
-  <app-todo-form [disabled]="loading$ | async" (create)="onCreate($event)"></app-todo-form>
-</section>
 <section>
-  <app-todo-list
-    [todos]="todos$ | async"
-    [disabled]="loading$ | async"
-    (update)="onUpdate($event)"
-    (remove)="onRemove($event)"
-  ></app-todo-list>
+  <app-todo-list [todos]="todos$ | async" (select)="openEditDialog($event)" (delete)="openDeleteDialog($event)"></app-todo-list>
 </section>
+
+<ng-template #editDialog>
+  <app-todo-edit-dialog
+    [todo]="todo"
+    [loading]="loading$ | async"
+    (create)="onCreate($event)"
+    (update)="onUpdate($event)"
+    (close)="closeDialog()"
+  ></app-todo-edit-dialog>
+</ng-template>
+
+<ng-template #deleteDialog>
+  <app-todo-delete-dialog
+    [todo]="todo"
+    [loading]="loading$ | async"
+    (delete)="onDelete($event)"
+    (cancel)="closeDialog()"
+  ></app-todo-delete-dialog>
+</ng-template>
+
+<div class="fab-bottom-right">
+  <button mat-fab color="accent" (click)="openEditDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

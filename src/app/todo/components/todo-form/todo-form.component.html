@@ -1,6 +1,0 @@
-<form [formGroup]="form" (ngSubmit)="create.emit(form.value.text); form.reset()">
-  <mat-form-field>
-    <input matInput formControlName="text" placeholder="Add a new Todo">
-  </mat-form-field>
-  <button mat-button color="primary" [disabled]="disabled || form.invalid">Add</button>
-</form>

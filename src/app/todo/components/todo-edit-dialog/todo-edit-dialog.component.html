@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Edit</h2>
+
+<form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput formControlName="text" placeholder="Todo">
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="buttons">
+      <button type="button" mat-button (click)="onClose()" [disabled]="loading">Cancel</button>
+      <button type="submit" mat-button color="primary" [disabled]="form.invalid || loading">Save</button>
+    </div>
+  </mat-dialog-actions>
+</form>
