@@ -2,21 +2,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Store } from '@ngrx/store';
 
-import { SharedModule } from '@app/shared';
 import { Todo } from '@app/models';
-
+import { SharedModule } from '@app/shared';
 import { AppStoreModule } from '@app/store';
-import * as TodoActions from '@app/store/todo/actions';
-import * as fromTodo from '@app/store/todo/reducers';
+import { TodoFacade } from '@app/store/todo';
 import { TodoListComponent, TodoEditDialogComponent, TodoDeleteDialogComponent } from './components';
 import { TodoComponent } from './todo.component';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
   let fixture: ComponentFixture<TodoComponent>;
-  let store: Store<fromTodo.State>;
+  let service: TodoFacade;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,9 +32,11 @@ describe('TodoComponent', () => {
       ]
     })
     .compileComponents();
-    store = TestBed.get(Store);
-    spyOn(store, 'dispatch').and.callThrough();
-    spyOn(store, 'pipe').and.callThrough();
+    service = TestBed.get(TodoFacade);
+    spyOn(service, 'findAll').and.callThrough();
+    spyOn(service, 'create').and.callThrough();
+    spyOn(service, 'update').and.callThrough();
+    spyOn(service, 'delete').and.callThrough();
   }));
 
   beforeEach(() => {
@@ -50,40 +49,67 @@ describe('TodoComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should dispatch an action to load data', () => {
+  it('should call findALl', () => {
     const app: TodoComponent = fixture.debugElement.componentInstance;
     app.ngOnInit();
-    const action = new TodoActions.LoadTodos();
-    expect(store.dispatch).toHaveBeenCalledWith(action);
-    expect(store.pipe).toHaveBeenCalled();
+    expect(service.findAll).toHaveBeenCalled();
   });
 
-  it('should dispatch an action to create data', () => {
+  it('should call create', () => {
+    const app: TodoComponent = fixture.debugElement.componentInstance;
     const todo = new Todo(null, 'test');
-    const app: TodoComponent = fixture.debugElement.componentInstance;
     app.onCreate(todo);
-    const action = new TodoActions.CreateTodo({ todo });
-    expect(store.dispatch).toHaveBeenCalledWith(action);
+    expect(service.create).toHaveBeenCalledWith(todo);
   });
 
-  it('should dispatch an action to update data', () => {
-    const todo = new Todo('1', 'test');
+  it('should call update', () => {
     const app: TodoComponent = fixture.debugElement.componentInstance;
+    const todo = new Todo('1', 'test');
     app.onUpdate(todo);
-    const action = new TodoActions.UpdateTodo({
-      todo: {
-        id: '1',
-        changes: todo
-      }
-    });
-    expect(store.dispatch).toHaveBeenCalledWith(action);
+    expect(service.update).toHaveBeenCalledWith(todo);
   });
 
-  it('should dispatch an action to delete data', () => {
-    const todo = new Todo('1', 'test');
+  it('should call delete', () => {
     const app: TodoComponent = fixture.debugElement.componentInstance;
+    const todo = new Todo('1', 'test');
     app.onDelete(todo);
-    const action = new TodoActions.DeleteTodo({ id: todo.id });
-    expect(store.dispatch).toHaveBeenCalledWith(action);
+    expect(service.delete).toHaveBeenCalledWith(todo.id);
   });
+
+  // it('should dispatch an action to load data', () => {
+  //   const app: TodoComponent = fixture.debugElement.componentInstance;
+  //   app.ngOnInit();
+  //   const action = new TodoActions.LoadTodos();
+  //   expect(store.dispatch).toHaveBeenCalledWith(action);
+  //   expect(store.pipe).toHaveBeenCalled();
+  // });
+
+  // it('should dispatch an action to create data', () => {
+  //   const todo = new Todo(null, 'test');
+  //   const app: TodoComponent = fixture.debugElement.componentInstance;
+  //   app.onCreate(todo);
+  //   const action = new TodoActions.CreateTodo({ todo });
+  //   expect(store.dispatch).toHaveBeenCalledWith(action);
+  // });
+
+  // it('should dispatch an action to update data', () => {
+  //   const todo = new Todo('1', 'test');
+  //   const app: TodoComponent = fixture.debugElement.componentInstance;
+  //   app.onUpdate(todo);
+  //   const action = new TodoActions.UpdateTodo({
+  //     todo: {
+  //       id: '1',
+  //       changes: todo
+  //     }
+  //   });
+  //   expect(store.dispatch).toHaveBeenCalledWith(action);
+  // });
+
+  // it('should dispatch an action to delete data', () => {
+  //   const todo = new Todo('1', 'test');
+  //   const app: TodoComponent = fixture.debugElement.componentInstance;
+  //   app.onDelete(todo);
+  //   const action = new TodoActions.DeleteTodo({ id: todo.id });
+  //   expect(store.dispatch).toHaveBeenCalledWith(action);
+  // });
 });

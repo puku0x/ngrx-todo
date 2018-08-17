@@ -1,7 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import { Todo } from '@app/models';
-import { TodoActions, TodoActionTypes } from '../actions';
+import { TodoActionTypes, TodoAction } from '../actions';
 
 /**
  * State
@@ -29,10 +29,7 @@ export const initialState: State = adapter.getInitialState({
  * @param state
  * @param action
  */
-export function reducer(
-  state = initialState,
-  action: TodoActions
-): State {
+export function reducer(state = initialState, action: TodoAction): State {
   switch (action.type) {
     case TodoActionTypes.LoadTodos: {
       return { ...state, loading: true };
@@ -76,13 +73,3 @@ export function reducer(
   }
 }
 
-/**
- * Selectors
- */
-export const getLoading = (state: State) => state.loading;
-export const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal,
-} = adapter.getSelectors();

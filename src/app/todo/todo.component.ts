@@ -1,16 +1,11 @@
 import { Component, ViewChild, TemplateRef, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material';
-import { Store, select } from '@ngrx/store';
-import { Actions, ofType } from '@ngrx/effects';
-import { Observable, race } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { Observable, merge } from 'rxjs';
 import { tap, takeUntil, concatMap } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
-import * as TodoActions from '@app/store/todo/actions';
-import * as fromTodo from '@app/store/todo/reducers';
-import { TodoEditDialogComponent } from './components/todo-edit-dialog/todo-edit-dialog.component';
-import { TodoDeleteDialogComponent } from './components/todo-delete-dialog/todo-delete-dialog.component';
-import { TodoActionTypes } from '@app/store/todo/actions';
+import { TodoFacade } from '@app/store/todo';
+import { TodoEditDialogComponent, TodoDeleteDialogComponent } from './components';
 
 @Component({
   selector: 'app-todo',
@@ -29,19 +24,18 @@ export class TodoComponent implements OnInit {
    * Constructor
    */
   constructor(
-    private store: Store<fromTodo.State>,
-    private actions$: Actions,
     private dialog: MatDialog,
+    private todoService: TodoFacade
   ) {
-    this.loading$ = this.store.pipe(select(fromTodo.getLoading));
-    this.todos$ = this.store.pipe(select(fromTodo.getTodos));
+    this.loading$ = this.todoService.loading$;
+    this.todos$ = this.todoService.todos$;
   }
 
   /**
    * Initialize
    */
   ngOnInit() {
-    this.store.dispatch(new TodoActions.LoadTodos());
+    this.todoService.findAll();
   }
 
   /**
@@ -60,8 +54,7 @@ export class TodoComponent implements OnInit {
     });
 
     // Close
-    this.actions$.pipe(
-      ofType(TodoActionTypes.CreateTodoSuccess, TodoActionTypes.UpdateTodoSuccess),
+    merge(this.todoService.createTodoSuccess$, this.todoService.updateTodoSuccess$).pipe(
       tap(() => dialogRef.close()),
       takeUntil(dialogRef.afterClosed())
     ).subscribe();
@@ -80,8 +73,7 @@ export class TodoComponent implements OnInit {
     });
 
     // Close
-    this.actions$.pipe(
-      ofType(TodoActionTypes.DeleteTodoSuccess),
+    this.todoService.deleteTodoSuccess$.pipe(
       tap(() => dialogRef.close()),
       takeUntil(dialogRef.afterClosed())
     ).subscribe();
@@ -98,21 +90,14 @@ export class TodoComponent implements OnInit {
    * Create
    */
   onCreate(todo: Todo) {
-    this.store.dispatch(new TodoActions.CreateTodo({
-      todo
-    }));
+    this.todoService.create(todo);
   }
 
   /**
    * Update
    */
   onUpdate(todo: Todo) {
-    this.store.dispatch(new TodoActions.UpdateTodo({
-      todo: {
-        id: todo.id,
-        changes: todo
-      }
-    }));
+    this.todoService.update(todo);
   }
 
   /**
@@ -120,6 +105,6 @@ export class TodoComponent implements OnInit {
    */
   onDelete(todo: Todo) {
     const id = todo.id;
-    this.store.dispatch(new TodoActions.DeleteTodo({ id }));
+    this.todoService.delete(id);
   }
 }

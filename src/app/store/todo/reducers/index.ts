@@ -1,31 +1,25 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer
-} from '@ngrx/store';
+export * from './todo.reducer';
 
-import * as fromTodo from './todo.reducer';
+// import {
+//   ActionReducer,
+//   ActionReducerMap,
+//   createFeatureSelector,
+//   createSelector,
+//   MetaReducer
+// } from '@ngrx/store';
 
-/**
- * State
- */
-export interface State {
-  todos: fromTodo.State;
-}
+// import * as fromTodo from './todo.reducer';
 
-/**
- * Reducers
- */
-export const reducers: ActionReducerMap<State> = {
-  todos: fromTodo.reducer,
-};
+// /**
+//  * State
+//  */
+// export interface State {
+//   todos: fromTodo.State;
+// }
 
-/**
- * Selectors
- */
-export const getTodoFeatureState = createFeatureSelector<State>('todo');
-export const getTodoEntityState = createSelector(getTodoFeatureState, state => state.todos);
-export const getTodos = createSelector(getTodoEntityState, fromTodo.selectAll);
-export const getLoading = createSelector(getTodoEntityState, fromTodo.getLoading);
+// /**
+//  * Reducers
+//  */
+// export const reducers: ActionReducerMap<State> = {
+//   todos: fromTodo.reducer,
+// };

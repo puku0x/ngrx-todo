@@ -116,7 +116,7 @@ export class DeleteTodoFail implements Action {
   constructor(public payload?: { error: any }) {}
 }
 
-export type TodoActions =
+export type TodoAction =
    LoadTodos
  | LoadTodosSuccess
  | LoadTodosFail

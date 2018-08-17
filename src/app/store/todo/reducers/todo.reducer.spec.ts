@@ -1,6 +1,6 @@
 import { Todo } from '@app/models';
 import {
-  TodoActions,
+  TodoAction,
   TodoActionTypes,
   LoadTodos,
   LoadTodosSuccess,
@@ -19,7 +19,6 @@ import {
   reducer,
   initialState,
   State,
-  getLoading
 } from './todo.reducer';
 
 describe('Todo Reducer', () => {
@@ -262,18 +261,6 @@ describe('Todo Reducer', () => {
       };
       const action = new DeleteTodoFail({ error: 'error' });
       expect(reducer(initial, action)).toEqual(expected);
-    });
-  });
-
-  describe('Selectors', () => {
-    describe('getLoading', () => {
-      it('should return loading', () => {
-        const result = getLoading({
-          ...initialState,
-          loading: true,
-        });
-        expect(result).toEqual(true);
-      });
     });
   });
 

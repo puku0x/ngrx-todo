@@ -16,8 +16,8 @@ export class TodoService {
 
   /**
    * Find all
-   * @param offset
-   * @param limit
+   * @param {number} offset
+   * @param {number} limit
    */
   findAll(offset?: number, limit?: number): Observable<Todo[]> {
     const url = `/v1/todos`;
@@ -40,7 +40,7 @@ export class TodoService {
 
   /**
    * Create
-   * @param todo
+   * @param {Todo} todo
    */
   create(todo: Todo): Observable<Todo> {
     const url = `/v1/todos`;
@@ -49,7 +49,7 @@ export class TodoService {
 
   /**
    * Update
-   * @param todo
+   * @param {Todo} todo
    */
   update(todo: Todo): Observable<Todo> {
     const url = `/v1/todos/${todo.id}`;
@@ -58,7 +58,7 @@ export class TodoService {
 
   /**
    * Delete
-   * @param id
+   * @param {string} id
    */
   delete(id: string): Observable<void>  {
     const url = `/v1/todos/${id}`;
