@@ -1,13 +1,35 @@
 .header {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
-  z-index: 2;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.3);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.icon {
+  display: flex;
+  padding: 4px;
+}
+
+.main {
+  min-height: 100%;
+  height: auto !important;
+  max-width: 100%;
+  padding-top: 64px;
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding-top: 56px;
+  }
 }
 
 .footer {
-  margin-top: 8px;
   padding: 16px;
 }
 

@@ -16,18 +16,7 @@ $app-theme:   mat-light-theme($app-primary, $app-accent);
 // Include the default theme styles.
 @include angular-material-theme($app-theme);
 
-app-root {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 64px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+html {
+  font-family: Roboto,Helvetica Neue,sans-serif;
 }
 
-@media (max-width: 600px) {
-  app-root {
-    top: 56px;
-  }
-}

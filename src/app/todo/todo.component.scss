@@ -1,21 +1,5 @@
-.input-form {
-  padding: 16px;
-  position: fixed;
-  top: 64px;
-  width: 100%;
-  z-index: 1;
-  background-color: white;
-}
-
-@media (max-width: 600px) {
-  .input-form {
-    top: 56px;
-  }
-}
-
 .fab-bottom-right {
   position: fixed;
-  bottom: 0;
-  right: 0;
-  padding: 16px;
+  bottom: 20px;
+  right: 20px;
 }
