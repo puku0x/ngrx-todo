@@ -23,8 +23,8 @@ export enum TodoActionTypes {
  */
 export class LoadTodos implements Action {
   readonly type = TodoActionTypes.LoadTodos;
-  constructor(public payload?: { offset: number, limit: number }) {
-    this.payload = payload || { offset: 0, limit: 100 };
+  constructor(public payload?: { offset?: number, limit?: number }) {
+    this.payload = payload || { };
   }
 }
 

@@ -45,7 +45,7 @@ export class TodoFacade {
    * @param {number} limit
    */
   findAll(offset?: number, limit?: number) {
-    this.store.dispatch(new LoadTodos( { offset, limit }));
+    this.store.dispatch(new LoadTodos({ offset, limit }));
   }
 
   /**
