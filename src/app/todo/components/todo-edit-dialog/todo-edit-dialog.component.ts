@@ -14,7 +14,7 @@ export class TodoEditDialogComponent implements OnInit {
   @Input() todo: Todo;
   @Output() create = new EventEmitter<Todo>();
   @Output() update = new EventEmitter<Todo>();
-  @Output() close = new EventEmitter();
+  @Output() cancel = new EventEmitter();
 
   form: FormGroup;
 
@@ -43,10 +43,4 @@ export class TodoEditDialogComponent implements OnInit {
     }
   }
 
-  /**
-   * Close dialog
-   */
-  onClose() {
-    this.close.emit();
-  }
 }

@@ -12,23 +12,4 @@ export class TodoDeleteDialogComponent {
   @Input() todo: Todo;
   @Output() delete = new EventEmitter<Todo>();
   @Output() cancel = new EventEmitter();
-
-  /**
-   * Constructor
-   */
-  constructor() { }
-
-  /**
-   * Delete
-   */
-  onDelete() {
-    this.delete.emit(this.todo);
-  }
-
-  /**
-   * Close dialog
-   */
-  onClose() {
-    this.cancel.emit();
-  }
 }

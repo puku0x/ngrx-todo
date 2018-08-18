@@ -76,40 +76,4 @@ describe('TodoComponent', () => {
     expect(service.delete).toHaveBeenCalledWith(todo.id);
   });
 
-  // it('should dispatch an action to load data', () => {
-  //   const app: TodoComponent = fixture.debugElement.componentInstance;
-  //   app.ngOnInit();
-  //   const action = new TodoActions.LoadTodos();
-  //   expect(store.dispatch).toHaveBeenCalledWith(action);
-  //   expect(store.pipe).toHaveBeenCalled();
-  // });
-
-  // it('should dispatch an action to create data', () => {
-  //   const todo = new Todo(null, 'test');
-  //   const app: TodoComponent = fixture.debugElement.componentInstance;
-  //   app.onCreate(todo);
-  //   const action = new TodoActions.CreateTodo({ todo });
-  //   expect(store.dispatch).toHaveBeenCalledWith(action);
-  // });
-
-  // it('should dispatch an action to update data', () => {
-  //   const todo = new Todo('1', 'test');
-  //   const app: TodoComponent = fixture.debugElement.componentInstance;
-  //   app.onUpdate(todo);
-  //   const action = new TodoActions.UpdateTodo({
-  //     todo: {
-  //       id: '1',
-  //       changes: todo
-  //     }
-  //   });
-  //   expect(store.dispatch).toHaveBeenCalledWith(action);
-  // });
-
-  // it('should dispatch an action to delete data', () => {
-  //   const todo = new Todo('1', 'test');
-  //   const app: TodoComponent = fixture.debugElement.componentInstance;
-  //   app.onDelete(todo);
-  //   const action = new TodoActions.DeleteTodo({ id: todo.id });
-  //   expect(store.dispatch).toHaveBeenCalledWith(action);
-  // });
 });
