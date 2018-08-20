@@ -13,7 +13,6 @@ import { adapter } from '../reducers/todo.reducer';
 /**
  * Selectors
  */
-// export const getLoading = (state: State) => state.loading;
 const {
   selectIds,
   selectEntities,
@@ -21,12 +20,8 @@ const {
   selectTotal,
 } = adapter.getSelectors();
 const getTodoState = createFeatureSelector<State>('todo');
-// const getTodoEntityState = createSelector(getTodoFeatureState, state => state.todos);
 const getLoading = createSelector(getTodoState, state => state.loading);
 const getTodos = createSelector(getTodoState, selectAll);
-// export const getTodos = createSelector(getTodoEntityState, fromTodo.selectAll);
-// export const getLoading = createSelector(getTodoEntityState, fromTodo.getLoading);
-
 
 /**
  * Query
