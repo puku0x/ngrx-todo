@@ -16,14 +16,26 @@ export class RequestInterceptor implements HttpInterceptor {
   constructor() { }
 
   /**
-   * Add URL for endpoint
+   * Interceptor for request
    * @param request
    * @param next
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const req = request.clone({
-      url: `${environment.apiUrl}${request.url}`
+      url: this.addApiEndpoint(request.url)
     });
     return next.handle(req);
+  }
+
+  /**
+   * Add API endpoint url
+   * @param url
+   */
+  private addApiEndpoint(url: string) {
+    if (url.indexOf('http://') >= 0 || url.indexOf('https://') >= 0) {
+      return url;
+    } else {
+      return `${environment.apiEndpoint}${url}`;
+    }
   }
 }
