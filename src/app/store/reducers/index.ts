@@ -5,6 +5,7 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
+import * as fromRouter from '@ngrx/router-store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from '@env/environment';
@@ -13,12 +14,14 @@ import { environment } from '@env/environment';
  * Root state
  */
 export interface State {
+  router: fromRouter.RouterReducerState;
 }
 
 /**
  * Root reducers
  */
 export const reducers: ActionReducerMap<State> = {
+  router: fromRouter.routerReducer,
 };
 
 /**
