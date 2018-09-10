@@ -8,8 +8,8 @@
     [loading]="loading$ | async"
     (create)="onCreate($event)"
     (update)="onUpdate($event)"
-    (cancel)="closeDialog()"
-  ></app-todo-edit-dialog>
+    (cancel)="closeDialog()">
+  </app-todo-edit-dialog>
 </ng-template>
 
 <ng-template #deleteDialog>
@@ -17,8 +17,8 @@
     [todo]="todo"
     [loading]="loading$ | async"
     (delete)="onDelete($event)"
-    (cancel)="closeDialog()"
-  ></app-todo-delete-dialog>
+    (cancel)="closeDialog()">
+  </app-todo-delete-dialog>
 </ng-template>
 
 <div class="fab-bottom-right">
