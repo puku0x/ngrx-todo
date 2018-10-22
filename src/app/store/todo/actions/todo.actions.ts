@@ -116,16 +116,16 @@ export class DeleteTodoFail implements Action {
   constructor(public payload?: { error: any }) {}
 }
 
-export type TodoAction =
-   LoadTodos
- | LoadTodosSuccess
- | LoadTodosFail
- | CreateTodo
- | CreateTodoSuccess
- | CreateTodoFail
- | UpdateTodo
- | UpdateTodoSuccess
- | UpdateTodoFail
- | DeleteTodo
- | DeleteTodoSuccess
- | DeleteTodoFail;
+export type TodoActions =
+  | LoadTodos
+  | LoadTodosSuccess
+  | LoadTodosFail
+  | CreateTodo
+  | CreateTodoSuccess
+  | CreateTodoFail
+  | UpdateTodo
+  | UpdateTodoSuccess
+  | UpdateTodoFail
+  | DeleteTodo
+  | DeleteTodoSuccess
+  | DeleteTodoFail;

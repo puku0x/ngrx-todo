@@ -19,7 +19,7 @@ import {
   State,
 } from './todo.reducer';
 
-describe('Todo Reducer', () => {
+describe('TodoReducer', () => {
   describe('unknown action', () => {
     it('should return the initial state', () => {
       const action = {} as any;
@@ -28,7 +28,7 @@ describe('Todo Reducer', () => {
     });
   });
 
-  describe('Todo action', () => {
+  describe('TodoAction', () => {
     it('should handle LoadTodos', () => {
       const initial: State = {
         loading: false,
