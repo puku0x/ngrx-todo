@@ -24,17 +24,22 @@ export const reducers: ActionReducerMap<State> = {
 
 /**
  * Logger
+ * @param reducer Reducer
  */
-export function logger(reducer: ActionReducer<State>) {
-  return (state, action) => {
-    const newState = reducer(state, action);
+export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
+  return (state: State, action: any): any => {
+    const result = reducer(state, action);
+    console.groupCollapsed(action.type);
+    console.log('prev state', state);
     console.log('action', action);
-    console.log('state', newState);
-    return newState;
+    console.log('next state', result);
+    console.groupEnd();
+
+    return result;
   };
 }
 
 /**
  * Meta reducers
  */
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [storeFreeze, logger] : [];
+export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger, storeFreeze] : [];

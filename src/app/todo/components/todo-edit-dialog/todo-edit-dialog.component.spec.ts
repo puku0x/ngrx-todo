@@ -1,13 +1,10 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import {
-  MatButtonModule,
-  MatDialogModule,
-  MatFormFieldModule,
- } from '@angular/material';
 
-import { TodoEditDialogComponent } from './todo-edit-dialog.component';
 import { Todo } from '@app/models';
+import { MaterialModule } from '@app/material';
+import { SharedModule } from '@app/shared';
+import { TodoEditDialogComponent } from './todo-edit-dialog.component';
 
 describe('TodoEditDialogComponent', () => {
   let component: TodoEditDialogComponent;
@@ -16,12 +13,11 @@ describe('TodoEditDialogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatFormFieldModule,
+        MaterialModule,
+        SharedModule,
       ],
       declarations: [TodoEditDialogComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
     fixture = TestBed.createComponent(TodoEditDialogComponent);

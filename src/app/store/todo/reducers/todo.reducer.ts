@@ -4,10 +4,14 @@ import { Todo } from '@app/models';
 import { TodoActionTypes, TodoActions } from '../actions';
 
 /**
+ * State ID
+ */
+export const STATE_ID = 'todo';
+
+/**
  * State
  */
 export interface State extends EntityState<Todo> {
-  // additional entities state properties
   loading: boolean;
 }
 
@@ -20,14 +24,13 @@ export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
  * Initial state
  */
 export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
   loading: false,
 });
 
 /**
  * Reducer
- * @param state
- * @param action
+ * @param state State
+ * @param action Action
  */
 export function reducer(state = initialState, action: TodoActions): State {
   switch (action.type) {

@@ -1,8 +1,5 @@
 <mat-nav-list>
-  <mat-list-item *ngFor="let todo of todos" (click)="select.emit(todo)">
-    <a matLine>{{ todo.text }}</a>
-    <button class="delete-button" mat-icon-button (click)="delete.emit(todo); $event.stopPropagation()">
-      <mat-icon>delete</mat-icon>
-     </button>
-  </mat-list-item>
+  <ng-container *ngFor="let todo of todos; trackBy: trackById">
+    <app-todo-list-item [todo]="todo" (select)="select.emit($event)" (delete)="delete.emit($event)"></app-todo-list-item>
+  </ng-container>
 </mat-nav-list>

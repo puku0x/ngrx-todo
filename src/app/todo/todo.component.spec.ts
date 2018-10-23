@@ -1,13 +1,14 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { Todo } from '@app/models';
+import { MaterialModule } from '@app/material';
 import { SharedModule } from '@app/shared';
 import { AppStoreModule } from '@app/store';
 import { TodoFacade } from '@app/store/todo';
-import { TodoListComponent, TodoEditDialogComponent, TodoDeleteDialogComponent } from './components';
+
 import { TodoComponent } from './todo.component';
 
 describe('TodoComponent', () => {
@@ -18,18 +19,16 @@ describe('TodoComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        NoopAnimationsModule,
         RouterTestingModule,
         HttpClientTestingModule,
-        AppStoreModule,
+        MaterialModule,
         SharedModule,
+        AppStoreModule,
       ],
       declarations: [
         TodoComponent,
-        TodoListComponent,
-        TodoEditDialogComponent,
-        TodoDeleteDialogComponent,
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
     service = TestBed.get(TodoFacade);

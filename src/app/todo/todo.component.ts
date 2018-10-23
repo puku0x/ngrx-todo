@@ -1,11 +1,12 @@
 import { Component, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable, merge } from 'rxjs';
-import { tap, takeUntil, concatMap } from 'rxjs/operators';
+import { tap, takeUntil } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
 import { TodoFacade } from '@app/store/todo';
-import { TodoEditDialogComponent, TodoDeleteDialogComponent } from './components';
+import { TodoEditDialogComponent } from './components/todo-edit-dialog/todo-edit-dialog.component';
+import { TodoDeleteDialogComponent } from './components/todo-delete-dialog/todo-delete-dialog.component';
 
 @Component({
   selector: 'app-todo',
@@ -77,13 +78,6 @@ export class TodoComponent implements OnInit {
       tap(() => dialogRef.close()),
       takeUntil(dialogRef.afterClosed())
     ).subscribe();
-  }
-
-  /**
-   * Close dialog
-   */
-  closeDialog() {
-    this.dialog.closeAll();
   }
 
   /**

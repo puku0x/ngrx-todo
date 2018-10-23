@@ -9,10 +9,16 @@ import { Todo } from '@app/models';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoListComponent {
-  @Input() disabled: boolean;
   @Input() todos: Todo[];
   @Output() select = new EventEmitter<Todo>();
   @Output() delete = new EventEmitter<Todo>();
-  @Output() update = new EventEmitter<Todo>();
-  @Output() remove = new EventEmitter<string>();
+
+  /**
+   * TrackBy function for performance
+   * @param index Index
+   * @param todo Todo
+   */
+  trackById(index, todo: Todo) {
+    return todo.id;
+  }
 }

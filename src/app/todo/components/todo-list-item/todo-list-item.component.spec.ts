@@ -3,11 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MaterialModule } from '@app/material';
 import { SharedModule } from '@app/shared';
-import { TodoListComponent } from './todo-list.component';
+import { TodoListItemComponent } from './todo-list-item.component';
 
-describe('TodoListComponent', () => {
-  let component: TodoListComponent;
-  let fixture: ComponentFixture<TodoListComponent>;
+describe('TodoListItemComponent', () => {
+  let component: TodoListItemComponent;
+  let fixture: ComponentFixture<TodoListItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,11 +15,11 @@ describe('TodoListComponent', () => {
         MaterialModule,
         SharedModule,
       ],
-      declarations: [TodoListComponent],
+      declarations: [TodoListItemComponent],
       schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
-    fixture = TestBed.createComponent(TodoListComponent);
+    fixture = TestBed.createComponent(TodoListItemComponent);
     component = fixture.componentInstance;
   }));
 

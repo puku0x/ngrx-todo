@@ -41,8 +41,8 @@ export class TodoFacade {
 
   /**
    * Find all
-   * @param {number} offset
-   * @param {number} limit
+   * @param offset Offset
+   * @param limit Limit
    */
   findAll(offset?: number, limit?: number) {
     this.store.dispatch(new LoadTodos({ offset, limit }));
@@ -50,7 +50,7 @@ export class TodoFacade {
 
   /**
    * Create
-   * @param {Todo} todo
+   * @param todo Todo
    */
   create(todo: Todo) {
     this.store.dispatch(new CreateTodo({ todo }));
@@ -58,7 +58,7 @@ export class TodoFacade {
 
   /**
    * Update
-   * @param {Todo} todo
+   * @param todo Todo
    */
   update(todo: Todo) {
     this.store.dispatch(new UpdateTodo({
@@ -71,7 +71,7 @@ export class TodoFacade {
 
   /**
    * Delete
-   * @param {string} id
+   * @param id ID
    */
   delete(id: string) {
     this.store.dispatch(new DeleteTodo({ id }));

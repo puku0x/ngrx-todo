@@ -1,9 +1,9 @@
 import { Todo } from '@app/models';
-import * as fromTodo from '../reducers';
+import { State as TodoState, STATE_ID } from '../reducers';
 import { todoQuery } from './todo.selector';
 
 interface State {
-  todo: fromTodo.State;
+  [STATE_ID]: TodoState;
 }
 
 describe('TodoSelector', () => {
@@ -14,7 +14,7 @@ describe('TodoSelector', () => {
       new Todo('3', 'todo3'),
     ];
     const state: State = {
-      todo: {
+      [STATE_ID]: {
         loading: true,
         ids: ['1', '2', '3'],
         entities: {

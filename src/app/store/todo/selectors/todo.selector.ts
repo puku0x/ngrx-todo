@@ -1,13 +1,6 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
-  MetaReducer
-} from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-
-import { State } from '../reducers';
+import { State, STATE_ID } from '../reducers';
 import { adapter } from '../reducers/todo.reducer';
 
 /**
@@ -19,12 +12,12 @@ const {
   selectAll,
   selectTotal,
 } = adapter.getSelectors();
-const getTodoState = createFeatureSelector<State>('todo');
+const getTodoState = createFeatureSelector<State>(STATE_ID);
 const getLoading = createSelector(getTodoState, state => state.loading);
 const getTodos = createSelector(getTodoState, selectAll);
 
 /**
- * Query
+ * Queries
  */
 export const todoQuery = {
   getLoading,

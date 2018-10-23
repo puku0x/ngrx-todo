@@ -7,8 +7,7 @@
     [todo]="todo"
     [loading]="loading$ | async"
     (create)="onCreate($event)"
-    (update)="onUpdate($event)"
-    (cancel)="closeDialog()">
+    (update)="onUpdate($event)">
   </app-todo-edit-dialog>
 </ng-template>
 
@@ -16,8 +15,7 @@
   <app-todo-delete-dialog
     [todo]="todo"
     [loading]="loading$ | async"
-    (delete)="onDelete($event)"
-    (cancel)="closeDialog()">
+    (delete)="onDelete($event)">
   </app-todo-delete-dialog>
 </ng-template>
 

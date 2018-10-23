@@ -5,7 +5,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <div class="buttons">
-    <button type="button" mat-button (click)="cancel.emit()" [disabled]="loading">Cancel</button>
+    <button type="button" mat-button mat-dialog-close [disabled]="loading">Cancel</button>
     <button type="submit" mat-button color="primary" (click)="delete.emit(todo)" [disabled]="loading">Delete</button>
   </div>
 </mat-dialog-actions>
