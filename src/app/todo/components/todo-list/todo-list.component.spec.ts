@@ -1,6 +1,7 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Todo } from '@app/models';
 import { MaterialModule } from '@app/material';
 import { SharedModule } from '@app/shared';
 import { TodoListComponent } from './todo-list.component';
@@ -25,6 +26,11 @@ describe('TodoListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should return trackById', () => {
+    const todo = new Todo('1', 'test');
+    expect(component.trackById('0', todo)).toBe(todo.id);
   });
 
 });

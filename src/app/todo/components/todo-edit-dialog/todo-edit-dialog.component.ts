@@ -26,7 +26,6 @@ export class TodoEditDialogComponent implements OnInit {
     this.form = this.fb.group({
       text: [this.todo.text, Validators.required]
     });
-
   }
 
   /**

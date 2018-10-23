@@ -2,6 +2,8 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialog } from '@angular/material';
+import { of } from 'rxjs';
 
 import { Todo } from '@app/models';
 import { MaterialModule } from '@app/material';
@@ -14,7 +16,8 @@ import { TodoComponent } from './todo.component';
 describe('TodoComponent', () => {
   let component: TodoComponent;
   let fixture: ComponentFixture<TodoComponent>;
-  let service: TodoFacade;
+  let dialogService: MatDialog;
+  let todoService: TodoFacade;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -31,11 +34,22 @@ describe('TodoComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
     })
     .compileComponents();
-    service = TestBed.get(TodoFacade);
-    spyOn(service, 'findAll').and.callThrough();
-    spyOn(service, 'create').and.callThrough();
-    spyOn(service, 'update').and.callThrough();
-    spyOn(service, 'delete').and.callThrough();
+
+    // Dialog service
+    dialogService = TestBed.get(MatDialog);
+    spyOn(dialogService, 'open').and.returnValue({
+      afterClosed: () => {
+        return of(true);
+      },
+      close: () => {}
+    });
+
+    // Todo service
+    todoService = TestBed.get(TodoFacade);
+    spyOn(todoService, 'findAll').and.callThrough();
+    spyOn(todoService, 'create').and.callThrough();
+    spyOn(todoService, 'update').and.callThrough();
+    spyOn(todoService, 'delete').and.callThrough();
   }));
 
   beforeEach(() => {
@@ -51,28 +65,42 @@ describe('TodoComponent', () => {
   it('should call findALl', () => {
     const app: TodoComponent = fixture.debugElement.componentInstance;
     app.ngOnInit();
-    expect(service.findAll).toHaveBeenCalled();
+    expect(todoService.findAll).toHaveBeenCalled();
   });
 
   it('should call create', () => {
     const app: TodoComponent = fixture.debugElement.componentInstance;
     const todo = new Todo(null, 'test');
     app.onCreate(todo);
-    expect(service.create).toHaveBeenCalledWith(todo);
+    expect(todoService.create).toHaveBeenCalledWith(todo);
   });
 
   it('should call update', () => {
     const app: TodoComponent = fixture.debugElement.componentInstance;
     const todo = new Todo('1', 'test');
     app.onUpdate(todo);
-    expect(service.update).toHaveBeenCalledWith(todo);
+    expect(todoService.update).toHaveBeenCalledWith(todo);
   });
 
   it('should call delete', () => {
     const app: TodoComponent = fixture.debugElement.componentInstance;
     const todo = new Todo('1', 'test');
     app.onDelete(todo);
-    expect(service.delete).toHaveBeenCalledWith(todo.id);
+    expect(todoService.delete).toHaveBeenCalledWith(todo.id);
+  });
+
+  it('should open edit dialog', () => {
+    const app: TodoComponent = fixture.debugElement.componentInstance;
+    const todo = new Todo('1', 'test');
+    app.openEditDialog(todo);
+    expect(dialogService.open).toHaveBeenCalled();
+  });
+
+  it('should open delete dialog', () => {
+    const app: TodoComponent = fixture.debugElement.componentInstance;
+    const todo = new Todo('1', 'test');
+    app.openDeleteDialog(todo);
+    expect(dialogService.open).toHaveBeenCalled();
   });
 
 });
