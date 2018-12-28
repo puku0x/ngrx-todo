@@ -16,11 +16,11 @@ export class TodoService {
 
   /**
    * Find all
-   * @param {number} offset
-   * @param {number} limit
+   * @param offset Offset
+   * @param limit Limit
    */
   findAll(offset?: number, limit?: number): Observable<Todo[]> {
-    const url = `/v1/todos`;
+    const url = `/api/v1/todos`;
 
     let params = new HttpParams();
     params = !!offset ? params.set('offset', `${offset}`) : params;
@@ -31,37 +31,37 @@ export class TodoService {
 
   /**
    * Find
-   * @param id
+   * @param id Id
    */
   find(id: string): Observable<Todo> {
-    const url = `/v1/todos/${id}`;
+    const url = `/api/v1/todos/${id}`;
     return this.http.get<Todo>(url);
   }
 
   /**
    * Create
-   * @param {Todo} todo
+   * @param todo Todo
    */
   create(todo: Todo): Observable<Todo> {
-    const url = `/v1/todos`;
+    const url = `/api/v1/todos`;
     return this.http.post<Todo>(url, todo);
   }
 
   /**
    * Update
-   * @param {Todo} todo
+   * @param todo Todo
    */
   update(todo: Todo): Observable<Todo> {
-    const url = `/v1/todos/${todo.id}`;
+    const url = `/api/v1/todos/${todo.id}`;
     return this.http.put<Todo>(url, todo);
   }
 
   /**
    * Delete
-   * @param {string} id
+   * @param id Id
    */
   delete(id: string): Observable<void>  {
-    const url = `/v1/todos/${id}`;
+    const url = `/api/v1/todos/${id}`;
     return this.http.delete<void>(url);
   }
 

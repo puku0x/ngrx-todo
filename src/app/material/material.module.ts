@@ -7,10 +7,9 @@ import {
   MatInputModule,
   MatListModule,
   MatProgressBarModule,
-  MatToolbarModule,
- } from '@angular/material';
+  MatToolbarModule
+} from '@angular/material';
 
-// Modules
 const modules = [
   MatButtonModule,
   MatDialogModule,
@@ -19,16 +18,12 @@ const modules = [
   MatInputModule,
   MatListModule,
   MatProgressBarModule,
-  MatToolbarModule,
+  MatToolbarModule
 ];
 
 @NgModule({
-  imports: [
-    ...modules
-  ],
-  exports: [
-    ...modules
-  ],
+  imports: [...modules],
+  exports: [...modules],
   declarations: []
 })
-export class MaterialModule { }
+export class MaterialModule {}

@@ -32,7 +32,7 @@ export class TodoEditDialogComponent implements OnInit {
    * Save
    */
   onSubmit() {
-    const text = this.form.get('text').value;
+    const text = this.form.get('text').value as string;
     const newTodo = { ...this.todo, text };
     if (!newTodo.id) {
       this.create.emit(newTodo);

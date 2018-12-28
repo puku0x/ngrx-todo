@@ -9,6 +9,6 @@ describe('workspace-project App', () => {
 
   it('should display title', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('ngrx-todo');
+    expect(page.getTitleText()).toEqual('ngrx-todo');
   });
 });

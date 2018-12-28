@@ -5,8 +5,7 @@ import { tap, takeUntil } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
 import { TodoFacade } from '@app/store/todo';
-import { TodoEditDialogComponent } from './components/todo-edit-dialog/todo-edit-dialog.component';
-import { TodoDeleteDialogComponent } from './components/todo-delete-dialog/todo-delete-dialog.component';
+import { TodoDeleteDialogComponent, TodoEditDialogComponent } from './components';
 
 @Component({
   selector: 'app-todo',
@@ -49,10 +48,7 @@ export class TodoComponent implements OnInit {
     this.todo = { ...todo };
 
     // Open
-    const dialogRef = this.dialog.open(this.editDialog, {
-      disableClose: true,
-      width: '480px'
-    });
+    const dialogRef = this.dialog.open(this.editDialog);
 
     // Close
     merge(this.todoService.createTodoSuccess$, this.todoService.updateTodoSuccess$).pipe(
@@ -68,10 +64,7 @@ export class TodoComponent implements OnInit {
     this.todo = { ...todo };
 
     // Open
-    const dialogRef = this.dialog.open(this.deleteDialog, {
-      disableClose: true,
-      width: '480px'
-    });
+    const dialogRef = this.dialog.open(this.deleteDialog);
 
     // Close
     this.todoService.deleteTodoSuccess$.pipe(

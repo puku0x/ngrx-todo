@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~sanitize.css";
 @import "~@angular/material/theming";
 // Plus imports for other components in your app.
 
@@ -16,6 +15,11 @@ $app-theme:   mat-light-theme($app-primary, $app-accent);
 // Include the default theme styles.
 @include angular-material-theme($app-theme);
 
-html {
-  font-family: Roboto,Helvetica Neue,sans-serif;
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
