@@ -28,9 +28,4 @@ describe('TodoListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return trackById', () => {
-    const todo = new Todo('1', 'test');
-    expect(component.trackById('0', todo)).toBe(todo.id);
-  });
-
 });

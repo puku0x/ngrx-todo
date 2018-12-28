@@ -1,5 +1,5 @@
 <mat-nav-list>
-  <ng-container *ngFor="let todo of todos; trackBy: trackById">
+  <ng-container *ngFor="let todo of todos">
     <app-todo-list-item [todo]="todo" (select)="select.emit($event)" (delete)="delete.emit($event)"></app-todo-list-item>
   </ng-container>
 </mat-nav-list>

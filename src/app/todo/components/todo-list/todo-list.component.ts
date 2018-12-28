@@ -12,13 +12,4 @@ export class TodoListComponent {
   @Input() todos: Todo[];
   @Output() select = new EventEmitter<Todo>();
   @Output() delete = new EventEmitter<Todo>();
-
-  /**
-   * TrackBy function for performance
-   * @param index Index
-   * @param todo Todo
-   */
-  trackById(index, todo: Todo) {
-    return todo.id;
-  }
 }
