@@ -18,8 +18,8 @@ before_install:
   - npm install -D coveralls
 
 script:
-  - npm run test -- --no-watch --browsers=ChromeHeadless
-  - npm run e2e
+  - npm run test -- --no-watch --browsers=ChromeHeadlessCI
+#  - npm run e2e
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
