@@ -21,10 +21,11 @@ import {
   DeleteTodo,
   DeleteTodoSuccess,
   DeleteTodoFail,
+  TodoActions
 } from '../actions';
 
 describe('TodoEffects', () => {
-  let actions$: Observable<any>;
+  let actions$: Observable<TodoActions>;
   let effects: TodoEffects;
   let service: TodoService;
 
@@ -35,7 +36,7 @@ describe('TodoEffects', () => {
         provideMockActions(() => actions$),
         {
           provide: TodoService,
-          useValue: jasmine.createSpyObj('TodoService', ['findAll', 'find', 'create', 'update', 'delete']),
+          useValue: jasmine.createSpyObj('TodoService', ['findAll', 'create', 'update', 'delete']),
         }
       ],
     });

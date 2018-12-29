@@ -8,35 +8,28 @@ import { todoQuery } from './selectors';
 import {
   TodoActionTypes,
   LoadTodos,
-  LoadTodosSuccess,
-  LoadTodosFail,
   CreateTodo,
-  CreateTodoSuccess,
-  CreateTodoFail,
   UpdateTodo,
-  UpdateTodoSuccess,
-  UpdateTodoFail,
   DeleteTodo,
-  DeleteTodoSuccess,
-  DeleteTodoFail,
+  TodoActions
 } from './actions';
 
 @Injectable()
 export class TodoFacade {
   loading$           = this.store.pipe(select(todoQuery.getLoading));
   todos$             = this.store.pipe(select(todoQuery.getTodos));
-  loadTodosSuccess$  = this.actions$.pipe(ofType<LoadTodosSuccess>(TodoActionTypes.LoadTodosSuccess));
-  loadTodosFail$     = this.actions$.pipe(ofType<LoadTodosFail>(TodoActionTypes.LoadTodosFail));
-  createTodoSuccess$ = this.actions$.pipe(ofType<CreateTodoSuccess>(TodoActionTypes.CreateTodoSuccess));
-  createTodoFail$    = this.actions$.pipe(ofType<CreateTodoFail>(TodoActionTypes.CreateTodoFail));
-  updateTodoSuccess$ = this.actions$.pipe(ofType<UpdateTodoSuccess>(TodoActionTypes.UpdateTodoSuccess));
-  updateTodoFail$    = this.actions$.pipe(ofType<UpdateTodoFail>(TodoActionTypes.UpdateTodoFail));
-  deleteTodoSuccess$ = this.actions$.pipe(ofType<DeleteTodoSuccess>(TodoActionTypes.DeleteTodoSuccess));
-  deleteTodoFail$    = this.actions$.pipe(ofType<DeleteTodoFail>(TodoActionTypes.DeleteTodoFail));
+  loadTodosSuccess$  = this.actions$.pipe(ofType(TodoActionTypes.LoadTodosSuccess));
+  loadTodosFail$     = this.actions$.pipe(ofType(TodoActionTypes.LoadTodosFail));
+  createTodoSuccess$ = this.actions$.pipe(ofType(TodoActionTypes.CreateTodoSuccess));
+  createTodoFail$    = this.actions$.pipe(ofType(TodoActionTypes.CreateTodoFail));
+  updateTodoSuccess$ = this.actions$.pipe(ofType(TodoActionTypes.UpdateTodoSuccess));
+  updateTodoFail$    = this.actions$.pipe(ofType(TodoActionTypes.UpdateTodoFail));
+  deleteTodoSuccess$ = this.actions$.pipe(ofType(TodoActionTypes.DeleteTodoSuccess));
+  deleteTodoFail$    = this.actions$.pipe(ofType(TodoActionTypes.DeleteTodoFail));
 
   constructor(
     private store: Store<State>,
-    private actions$: Actions,
+    private actions$: Actions<TodoActions>,
   ) { }
 
   /**

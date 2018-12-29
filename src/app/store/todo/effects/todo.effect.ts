@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 
 import { TodoService } from '@app/services';
 import {
   TodoActionTypes,
-  LoadTodos,
   LoadTodosSuccess,
   LoadTodosFail,
-  CreateTodo,
   CreateTodoSuccess,
   CreateTodoFail,
-  UpdateTodo,
   UpdateTodoSuccess,
   UpdateTodoFail,
-  DeleteTodo,
   DeleteTodoSuccess,
   DeleteTodoFail,
+  TodoActions
 } from '../actions';
 
 /**
@@ -28,7 +24,7 @@ import {
 export class TodoEffects {
 
   constructor(
-    private actions$: Actions,
+    private actions$: Actions<TodoActions>,
     private todoService: TodoService
   ) { }
 
@@ -36,8 +32,8 @@ export class TodoEffects {
    * Load todos
    */
   @Effect()
-  loadTodos$: Observable<Action> = this.actions$.pipe(
-    ofType<LoadTodos>(TodoActionTypes.LoadTodos),
+  loadTodos$ = this.actions$.pipe(
+    ofType(TodoActionTypes.LoadTodos),
     switchMap(action => {
       const { offset, limit } = action.payload;
       return this.todoService.findAll(offset, limit).pipe(
@@ -51,8 +47,8 @@ export class TodoEffects {
    * Create
    */
   @Effect()
-  createTodo$: Observable<Action> = this.actions$.pipe(
-    ofType<CreateTodo>(TodoActionTypes.CreateTodo),
+  createTodo$ = this.actions$.pipe(
+    ofType(TodoActionTypes.CreateTodo),
     concatMap(action => {
       const { todo } = action.payload;
       return this.todoService.create(todo).pipe(
@@ -66,8 +62,8 @@ export class TodoEffects {
    * Update
    */
   @Effect()
-  updateTodo$: Observable<Action> = this.actions$.pipe(
-    ofType<UpdateTodo>(TodoActionTypes.UpdateTodo),
+  updateTodo$ = this.actions$.pipe(
+    ofType(TodoActionTypes.UpdateTodo),
     concatMap(action => {
       const { todo } = action.payload;
       return this.todoService.update(todo.changes).pipe(
@@ -81,8 +77,8 @@ export class TodoEffects {
    * Delete
    */
   @Effect()
-  deleteTodo$: Observable<Action> = this.actions$.pipe(
-    ofType<DeleteTodo>(TodoActionTypes.DeleteTodo),
+  deleteTodo$ = this.actions$.pipe(
+    ofType(TodoActionTypes.DeleteTodo),
     concatMap(action => {
       const { id } = action.payload;
       return this.todoService.delete(id).pipe(
