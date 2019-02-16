@@ -2,7 +2,6 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Todo } from '@app/models';
-import { MaterialModule } from '@app/material';
 import { SharedModule } from '@app/shared';
 import { TodoEditDialogComponent } from './todo-edit-dialog.component';
 
@@ -13,7 +12,6 @@ describe('TodoEditDialogComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        MaterialModule,
         SharedModule,
       ],
       declarations: [TodoEditDialogComponent],

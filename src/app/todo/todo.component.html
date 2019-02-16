@@ -1,5 +1,12 @@
 <section>
-  <app-todo-list [todos]="todos$ | async" (select)="openEditDialog($event)" (delete)="openDeleteDialog($event)"></app-todo-list>
+  <app-todo-list>
+    <app-todo-list-item
+      *ngFor="let todo of todos$ | async"
+      [todo]="todo"
+      (select)="openEditDialog($event)"
+      (delete)="openDeleteDialog($event)"
+    ></app-todo-list-item>
+  </app-todo-list>
 </section>
 
 <ng-template #editDialog>
@@ -7,16 +14,16 @@
     [todo]="todo"
     [loading]="loading$ | async"
     (create)="onCreate($event)"
-    (update)="onUpdate($event)">
-  </app-todo-edit-dialog>
+    (update)="onUpdate($event)"
+  ></app-todo-edit-dialog>
 </ng-template>
 
 <ng-template #deleteDialog>
   <app-todo-delete-dialog
     [todo]="todo"
     [loading]="loading$ | async"
-    (delete)="onDelete($event)">
-  </app-todo-delete-dialog>
+    (delete)="onDelete($event)"
+  ></app-todo-delete-dialog>
 </ng-template>
 
 <div class="fab-bottom-right">

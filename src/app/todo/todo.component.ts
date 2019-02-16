@@ -48,13 +48,14 @@ export class TodoComponent implements OnInit {
     this.todo = { ...todo };
 
     // Open
-    const dialogRef = this.dialog.open(this.editDialog);
+    const dialogRef = this.dialog.open(this.editDialog, {
+      width: '480px'
+    });
 
     // Close
     merge(this.todoService.createTodoSuccess$, this.todoService.updateTodoSuccess$).pipe(
-      tap(() => dialogRef.close()),
       takeUntil(dialogRef.afterClosed())
-    ).subscribe();
+    ).subscribe(() => dialogRef.close());
   }
 
   /**
@@ -68,9 +69,8 @@ export class TodoComponent implements OnInit {
 
     // Close
     this.todoService.deleteTodoSuccess$.pipe(
-      tap(() => dialogRef.close()),
       takeUntil(dialogRef.afterClosed())
-    ).subscribe();
+    ).subscribe(() => dialogRef.close());
   }
 
   /**
