@@ -18,14 +18,14 @@ before_install:
   - npm install -D coveralls
 
 script:
-  - npm run test -- --no-watch --browsers=ChromeHeadlessCI
-#  - npm run e2e
+  - npm run test:ci
+#  - npm run e2e:ci
 
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 before_deploy:
-  - npm run build
+  - npm run build:ci
 
 deploy:
   provider: firebase

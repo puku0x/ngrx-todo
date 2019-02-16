@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=0.0.0.0",
-    "build": "ng build --prod",
+    "start": "ng serve --open",
+    "build": "ng build",
+    "build:ci": "ng build --prod --no-progress",
     "test": "ng test --code-coverage",
+    "test:ci": "ng test --no-watch --no-progress --code-coverage --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "e2e:ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js"
   },
   "private": true,
   "dependencies": {
