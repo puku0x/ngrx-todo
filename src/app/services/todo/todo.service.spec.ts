@@ -21,6 +21,10 @@ describe('TodoService', () => {
     httpMock = TestBed.get(HttpTestingController);
   });
 
+  afterEach(() => {
+    httpMock.verify();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -29,7 +33,7 @@ describe('TodoService', () => {
     const response = [
       new Todo('1', 'test1'),
       new Todo('2', 'test2'),
-      new Todo('3', 'test3'),
+      new Todo('3', 'test3')
     ];
     service.findAll().subscribe(data => {
       expect(data).toBe(response);
@@ -37,7 +41,6 @@ describe('TodoService', () => {
     const req = httpMock.expectOne(`/api/v1/todos`);
     expect(req.request.method).toEqual('GET');
     req.flush(response);
-    httpMock.verify();
   });
 
   it('should successfully mock find request', () => {
@@ -48,7 +51,6 @@ describe('TodoService', () => {
     const req = httpMock.expectOne(`/api/v1/todos/1`);
     expect(req.request.method).toEqual('GET');
     req.flush(todo);
-    httpMock.verify();
   });
 
   it('should successfully mock create request', () => {
@@ -59,7 +61,6 @@ describe('TodoService', () => {
     const req = httpMock.expectOne(`/api/v1/todos`);
     expect(req.request.method).toEqual('POST');
     req.flush(todo);
-    httpMock.verify();
   });
 
   it('should successfully mock update request', () => {
@@ -71,7 +72,6 @@ describe('TodoService', () => {
     const req = httpMock.expectOne(`/api/v1/todos/1`);
     expect(req.request.method).toEqual('PUT');
     req.flush(todo2);
-    httpMock.verify();
   });
 
   it('should successfully mock delete request', () => {
@@ -81,7 +81,6 @@ describe('TodoService', () => {
     });
     const req = httpMock.expectOne(`/api/v1/todos/1`);
     expect(req.request.method).toEqual('DELETE');
-    httpMock.verify();
   });
 
 });

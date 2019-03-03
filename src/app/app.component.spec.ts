@@ -1,8 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { MaterialModule } from './material';
-import { SharedModule } from './shared';
+import { MaterialModule } from '@app/material';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -10,8 +9,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        MaterialModule,
-        SharedModule,
+        MaterialModule
       ],
       declarations: [
         AppComponent
