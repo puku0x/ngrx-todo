@@ -13,8 +13,6 @@ import { TodoComponent } from './todo.component';
     TodoComponentsModule,
     TodoRoutingModule
   ],
-  declarations: [
-    TodoComponent
-  ]
+  declarations: [TodoComponent]
 })
-export class TodoModule { }
+export class TodoModule {}

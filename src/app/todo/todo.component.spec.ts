@@ -26,14 +26,11 @@ describe('TodoComponent', () => {
         HttpClientTestingModule,
         MaterialModule,
         SharedModule,
-        AppStoreModule,
+        AppStoreModule
       ],
-      declarations: [
-        TodoComponent,
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-    })
-    .compileComponents();
+      declarations: [TodoComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
 
     // Dialog service
     dialogService = TestBed.get(MatDialog);
@@ -102,5 +99,4 @@ describe('TodoComponent', () => {
     app.openDeleteDialog(todo);
     expect(dialogService.open).toHaveBeenCalled();
   });
-
 });

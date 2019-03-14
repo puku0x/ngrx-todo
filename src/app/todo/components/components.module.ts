@@ -15,19 +15,12 @@ const components = [
   TodoEditDialogComponent,
   TodoDeleteDialogComponent,
   TodoListComponent,
-  TodoListItemComponent,
+  TodoListItemComponent
 ];
 
 @NgModule({
-  imports: [
-    MaterialModule,
-    SharedModule,
-  ],
-  exports: [
-    ...components
-  ],
-  declarations: [
-    ...components
-  ]
+  imports: [MaterialModule, SharedModule],
+  exports: [...components],
+  declarations: [...components]
 })
-export class TodoComponentsModule { }
+export class TodoComponentsModule {}

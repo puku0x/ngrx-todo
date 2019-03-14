@@ -1,4 +1,11 @@
-import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+  EventEmitter,
+  OnInit
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { Todo } from '@app/models';
@@ -20,7 +27,7 @@ export class TodoEditDialogComponent implements OnInit {
   /**
    * Constructor
    */
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -40,5 +47,4 @@ export class TodoEditDialogComponent implements OnInit {
       this.update.emit(newTodo);
     }
   }
-
 }

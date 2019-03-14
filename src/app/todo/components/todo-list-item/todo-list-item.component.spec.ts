@@ -12,8 +12,7 @@ describe('TodoListItemComponent', () => {
       imports: [],
       declarations: [TodoListItemComponent],
       schemas: [NO_ERRORS_SCHEMA]
-    })
-    .compileComponents();
+    }).compileComponents();
     fixture = TestBed.createComponent(TodoListItemComponent);
     component = fixture.componentInstance;
   }));
@@ -21,5 +20,4 @@ describe('TodoListItemComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });

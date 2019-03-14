@@ -11,13 +11,10 @@ describe('TodoEditDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        SharedModule,
-      ],
+      imports: [SharedModule],
       declarations: [TodoEditDialogComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
     fixture = TestBed.createComponent(TodoEditDialogComponent);
     component = fixture.componentInstance;
     spyOn(component.create, 'emit');
@@ -41,5 +38,4 @@ describe('TodoEditDialogComponent', () => {
     component.onSubmit();
     expect(component.update.emit).toHaveBeenCalled();
   });
-
 });

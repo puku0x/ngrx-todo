@@ -1,7 +1,7 @@
 <section>
   <app-todo-list>
     <app-todo-list-item
-      *ngFor="let todo of todos$ | async"
+      *ngFor="let todo of (todos$ | async)"
       [todo]="todo"
       (select)="openEditDialog($event)"
       (delete)="openDeleteDialog($event)"

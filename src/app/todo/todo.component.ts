@@ -5,7 +5,10 @@ import { tap, takeUntil } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
 import { TodoFacade } from '@app/store/todo';
-import { TodoDeleteDialogComponent, TodoEditDialogComponent } from './components';
+import {
+  TodoDeleteDialogComponent,
+  TodoEditDialogComponent
+} from './components';
 
 @Component({
   selector: 'app-todo',
@@ -18,15 +21,14 @@ export class TodoComponent implements OnInit {
   todo: Todo;
 
   @ViewChild('editDialog') editDialog: TemplateRef<TodoEditDialogComponent>;
-  @ViewChild('deleteDialog') deleteDialog: TemplateRef<TodoDeleteDialogComponent>;
+  @ViewChild('deleteDialog') deleteDialog: TemplateRef<
+    TodoDeleteDialogComponent
+  >;
 
   /**
    * Constructor
    */
-  constructor(
-    private dialog: MatDialog,
-    private todoService: TodoFacade
-  ) {
+  constructor(private dialog: MatDialog, private todoService: TodoFacade) {
     this.loading$ = this.todoService.loading$;
     this.todos$ = this.todoService.todos$;
   }
@@ -53,9 +55,12 @@ export class TodoComponent implements OnInit {
     });
 
     // Close
-    merge(this.todoService.createTodoSuccess$, this.todoService.updateTodoSuccess$).pipe(
-      takeUntil(dialogRef.afterClosed())
-    ).subscribe(() => dialogRef.close());
+    merge(
+      this.todoService.createTodoSuccess$,
+      this.todoService.updateTodoSuccess$
+    )
+      .pipe(takeUntil(dialogRef.afterClosed()))
+      .subscribe(() => dialogRef.close());
   }
 
   /**
@@ -68,9 +73,9 @@ export class TodoComponent implements OnInit {
     const dialogRef = this.dialog.open(this.deleteDialog);
 
     // Close
-    this.todoService.deleteTodoSuccess$.pipe(
-      takeUntil(dialogRef.afterClosed())
-    ).subscribe(() => dialogRef.close());
+    this.todoService.deleteTodoSuccess$
+      .pipe(takeUntil(dialogRef.afterClosed()))
+      .subscribe(() => dialogRef.close());
   }
 
   /**

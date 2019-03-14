@@ -17,4 +17,4 @@ import { TodoStoreModule } from './todo';
     TodoStoreModule
   ]
 })
-export class AppStoreModule { }
+export class AppStoreModule {}

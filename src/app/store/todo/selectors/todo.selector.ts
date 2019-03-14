@@ -10,16 +10,22 @@ const {
   selectIds,
   selectEntities,
   selectAll,
-  selectTotal,
+  selectTotal
 } = adapter.getSelectors();
 const getTodoState = createFeatureSelector<State>(STATE_ID);
-const getLoading = createSelector(getTodoState, state => state.loading);
-const getTodos = createSelector(getTodoState, selectAll);
+const getLoading = createSelector(
+  getTodoState,
+  state => state.loading
+);
+const getTodos = createSelector(
+  getTodoState,
+  selectAll
+);
 
 /**
  * Queries
  */
 export const todoQuery = {
   getLoading,
-  getTodos,
+  getTodos
 };

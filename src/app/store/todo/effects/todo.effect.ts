@@ -22,11 +22,10 @@ import {
  */
 @Injectable()
 export class TodoEffects {
-
   constructor(
     private actions$: Actions<TodoActions>,
     private todoService: TodoService
-  ) { }
+  ) {}
 
   /**
    * Load todos
@@ -67,7 +66,10 @@ export class TodoEffects {
     concatMap(action => {
       const { todo } = action.payload;
       return this.todoService.update(todo.changes).pipe(
-        map(result => new UpdateTodoSuccess({ todo: { id: result.id, changes: result }})),
+        map(
+          result =>
+            new UpdateTodoSuccess({ todo: { id: result.id, changes: result } })
+        ),
         catchError(error => of(new UpdateTodoFail({ error })))
       );
     })

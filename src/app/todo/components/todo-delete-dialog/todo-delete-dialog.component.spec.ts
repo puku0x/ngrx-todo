@@ -11,9 +11,8 @@ describe('TodoDeleteDialogComponent', () => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [TodoDeleteDialogComponent],
-      schemas: [NO_ERRORS_SCHEMA],
-    })
-    .compileComponents();
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
     fixture = TestBed.createComponent(TodoDeleteDialogComponent);
     component = fixture.componentInstance;
   }));
@@ -21,5 +20,4 @@ describe('TodoDeleteDialogComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });

@@ -1,8 +1,4 @@
-import {
-  ActionReducer,
-  ActionReducerMap,
-  MetaReducer
-} from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import { storeFreeze } from 'ngrx-store-freeze';
 
@@ -19,7 +15,7 @@ export interface State {
  * Root reducers
  */
 export const reducers: ActionReducerMap<State> = {
-  router: fromRouter.routerReducer,
+  router: fromRouter.routerReducer
 };
 
 /**
@@ -42,4 +38,6 @@ export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
 /**
  * Meta reducers
  */
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [logger, storeFreeze] : [];
+export const metaReducers: MetaReducer<State>[] = !environment.production
+  ? [logger, storeFreeze]
+  : [];

@@ -9,11 +9,10 @@ import { environment } from '@env/environment';
  */
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
-
   /**
    * Constructor
    */
-  constructor() { }
+  constructor() {}
 
   /**
    * Interceptor for request

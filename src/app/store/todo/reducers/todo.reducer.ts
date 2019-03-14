@@ -24,7 +24,7 @@ export const adapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
  * Initial state
  */
 export const initialState: State = adapter.getInitialState({
-  loading: false,
+  loading: false
 });
 
 /**
@@ -38,7 +38,8 @@ export function reducer(state = initialState, action: TodoActions): State {
       return { ...state, loading: true };
     }
     case TodoActionTypes.LoadTodosSuccess: {
-      return adapter.addAll(action.payload.todos, { ...state, loading: false } );
+      const { todos } = action.payload;
+      return adapter.addAll(todos, { ...state, loading: false });
     }
     case TodoActionTypes.LoadTodosFail: {
       return { ...state, loading: false };
@@ -47,7 +48,8 @@ export function reducer(state = initialState, action: TodoActions): State {
       return { ...state, loading: true };
     }
     case TodoActionTypes.CreateTodoSuccess: {
-      return adapter.addOne(action.payload.todo, { ...state, loading: false });
+      const { todo } = action.payload;
+      return adapter.addOne(todo, { ...state, loading: false });
     }
     case TodoActionTypes.CreateTodoFail: {
       return { ...state, loading: false };
@@ -56,7 +58,11 @@ export function reducer(state = initialState, action: TodoActions): State {
       return { ...state, loading: true };
     }
     case TodoActionTypes.UpdateTodoSuccess: {
-      return adapter.updateOne(action.payload.todo, { ...state, loading: false });
+      const { todo } = action.payload;
+      return adapter.updateOne(todo, {
+        ...state,
+        loading: false
+      });
     }
     case TodoActionTypes.UpdateTodoFail: {
       return { ...state, loading: false };
@@ -65,7 +71,8 @@ export function reducer(state = initialState, action: TodoActions): State {
       return { ...state, loading: true };
     }
     case TodoActionTypes.DeleteTodoSuccess: {
-      return adapter.removeOne(action.payload.id, { ...state, loading: false });
+      const { id } = action.payload;
+      return adapter.removeOne(id, { ...state, loading: false });
     }
     case TodoActionTypes.DeleteTodoFail: {
       return { ...state, loading: false };
@@ -75,4 +82,3 @@ export function reducer(state = initialState, action: TodoActions): State {
     }
   }
 }
-

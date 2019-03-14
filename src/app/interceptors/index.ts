@@ -1,1 +1,1 @@
-export * from './request/request.interceptor';
+export * from './request';

@@ -36,9 +36,14 @@ describe('TodoEffects', () => {
         provideMockActions(() => actions$),
         {
           provide: TodoService,
-          useValue: jasmine.createSpyObj('TodoService', ['findAll', 'create', 'update', 'delete']),
+          useValue: jasmine.createSpyObj('TodoService', [
+            'findAll',
+            'create',
+            'update',
+            'delete'
+          ])
         }
-      ],
+      ]
     });
     effects = TestBed.get(TodoEffects);
     service = TestBed.get(TodoService);
@@ -53,7 +58,7 @@ describe('TodoEffects', () => {
       const todos = [
         new Todo('1', 'test1'),
         new Todo('2', 'test2'),
-        new Todo('3', 'test3'),
+        new Todo('3', 'test3')
       ];
       const action = new LoadTodos();
       const completion = new LoadTodosSuccess({ todos });
@@ -111,8 +116,10 @@ describe('TodoEffects', () => {
   describe('updateTodo$', () => {
     it('should return UpdateTodoSuccess', () => {
       const todo = new Todo('1', 'todo1');
-      const action = new UpdateTodo({ todo: {id: '1', changes: todo } });
-      const completion = new UpdateTodoSuccess({ todo: {id: '1', changes: todo } });
+      const action = new UpdateTodo({ todo: { id: '1', changes: todo } });
+      const completion = new UpdateTodoSuccess({
+        todo: { id: '1', changes: todo }
+      });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-b', { b: todo });
@@ -124,11 +131,13 @@ describe('TodoEffects', () => {
 
     it('should return UpdateTodoFail', () => {
       const error = 'error';
-      const action = new UpdateTodo({ todo: { id: 1, changes: new Todo('1', 'todo1') } });
+      const action = new UpdateTodo({
+        todo: { id: 1, changes: new Todo('1', 'todo1') }
+      });
       const completion = new UpdateTodoFail({ error });
 
       actions$ = hot('-a', { a: action });
-      const response = cold('-#', { }, error);
+      const response = cold('-#', {}, error);
       const expected = cold('--c', { c: completion });
       service.update = () => response;
 
@@ -156,12 +165,11 @@ describe('TodoEffects', () => {
       const completion = new DeleteTodoFail({ error });
 
       actions$ = hot('-a', { a: action });
-      const response = cold('-#', { }, error);
+      const response = cold('-#', {}, error);
       const expected = cold('--c', { c: completion });
       service.delete = () => response;
 
       expect(effects.deleteTodo$).toBeObservable(expected);
     });
   });
-
 });

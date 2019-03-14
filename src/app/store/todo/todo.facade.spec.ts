@@ -4,12 +4,7 @@ import { StoreModule, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { Todo } from '@app/models';
-import {
-  LoadTodos,
-  CreateTodo,
-  UpdateTodo,
-  DeleteTodo,
-} from './actions';
+import { LoadTodos, CreateTodo, UpdateTodo, DeleteTodo } from './actions';
 import { State } from './reducers';
 import { TodoStoreModule } from './todo-store.module';
 import { TodoFacade } from './todo.facade';
@@ -24,8 +19,8 @@ describe('TodoFacade', () => {
         HttpClientTestingModule,
         StoreModule.forRoot({}),
         EffectsModule.forRoot([]),
-        TodoStoreModule,
-      ],
+        TodoStoreModule
+      ]
     });
 
     store = TestBed.get(Store);
@@ -65,5 +60,4 @@ describe('TodoFacade', () => {
     const action = new DeleteTodo({ id });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
-
 });

@@ -1,4 +1,10 @@
-import { Component, Input, Output, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+  EventEmitter
+} from '@angular/core';
 
 import { Todo } from '@app/models';
 

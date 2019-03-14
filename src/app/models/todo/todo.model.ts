@@ -7,6 +7,6 @@ export class Todo {
     public text?: string,
     public checked?: boolean,
     public createdAt?: number,
-    public updatedAt?: number,
+    public updatedAt?: number
   ) {}
 }

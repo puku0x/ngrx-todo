@@ -16,21 +16,29 @@ import {
 
 @Injectable()
 export class TodoFacade {
-  loading$           = this.store.pipe(select(todoQuery.getLoading));
-  todos$             = this.store.pipe(select(todoQuery.getTodos));
-  loadTodosSuccess$  = this.actions$.pipe(ofType(TodoActionTypes.LoadTodosSuccess));
-  loadTodosFail$     = this.actions$.pipe(ofType(TodoActionTypes.LoadTodosFail));
-  createTodoSuccess$ = this.actions$.pipe(ofType(TodoActionTypes.CreateTodoSuccess));
-  createTodoFail$    = this.actions$.pipe(ofType(TodoActionTypes.CreateTodoFail));
-  updateTodoSuccess$ = this.actions$.pipe(ofType(TodoActionTypes.UpdateTodoSuccess));
-  updateTodoFail$    = this.actions$.pipe(ofType(TodoActionTypes.UpdateTodoFail));
-  deleteTodoSuccess$ = this.actions$.pipe(ofType(TodoActionTypes.DeleteTodoSuccess));
-  deleteTodoFail$    = this.actions$.pipe(ofType(TodoActionTypes.DeleteTodoFail));
+  loading$ = this.store.pipe(select(todoQuery.getLoading));
+  todos$ = this.store.pipe(select(todoQuery.getTodos));
+  loadTodosSuccess$ = this.actions$.pipe(
+    ofType(TodoActionTypes.LoadTodosSuccess)
+  );
+  loadTodosFail$ = this.actions$.pipe(ofType(TodoActionTypes.LoadTodosFail));
+  createTodoSuccess$ = this.actions$.pipe(
+    ofType(TodoActionTypes.CreateTodoSuccess)
+  );
+  createTodoFail$ = this.actions$.pipe(ofType(TodoActionTypes.CreateTodoFail));
+  updateTodoSuccess$ = this.actions$.pipe(
+    ofType(TodoActionTypes.UpdateTodoSuccess)
+  );
+  updateTodoFail$ = this.actions$.pipe(ofType(TodoActionTypes.UpdateTodoFail));
+  deleteTodoSuccess$ = this.actions$.pipe(
+    ofType(TodoActionTypes.DeleteTodoSuccess)
+  );
+  deleteTodoFail$ = this.actions$.pipe(ofType(TodoActionTypes.DeleteTodoFail));
 
   constructor(
     private store: Store<State>,
-    private actions$: Actions<TodoActions>,
-  ) { }
+    private actions$: Actions<TodoActions>
+  ) {}
 
   /**
    * Find all
@@ -54,12 +62,14 @@ export class TodoFacade {
    * @param todo Todo
    */
   update(todo: Todo) {
-    this.store.dispatch(new UpdateTodo({
-      todo: {
-        id: todo.id,
-        changes: todo
-      }
-    }));
+    this.store.dispatch(
+      new UpdateTodo({
+        todo: {
+          id: todo.id,
+          changes: todo
+        }
+      })
+    );
   }
 
   /**
@@ -69,5 +79,4 @@ export class TodoFacade {
   delete(id: string) {
     this.store.dispatch(new DeleteTodo({ id }));
   }
-
 }

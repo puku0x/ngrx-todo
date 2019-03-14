@@ -13,11 +13,7 @@ import {
   DeleteTodoSuccess,
   DeleteTodoFail
 } from '../actions';
-import {
-  reducer,
-  initialState,
-  State,
-} from './todo.reducer';
+import { reducer, initialState, State } from './todo.reducer';
 
 describe('TodoReducer', () => {
   describe('unknown action', () => {
@@ -48,7 +44,7 @@ describe('TodoReducer', () => {
       const todos = [
         new Todo('1', 'todo1'),
         new Todo('2', 'todo2'),
-        new Todo('3', 'todo3'),
+        new Todo('3', 'todo3')
       ];
       const initial: State = {
         loading: true,
@@ -61,7 +57,7 @@ describe('TodoReducer', () => {
         entities: {
           '1': todos[0],
           '2': todos[1],
-          '3': todos[2],
+          '3': todos[2]
         }
       };
       const action = new LoadTodosSuccess({ todos });
@@ -137,7 +133,7 @@ describe('TodoReducer', () => {
         loading: false,
         ids: ['1'],
         entities: {
-          '1': new Todo('1', 'todo1'),
+          '1': new Todo('1', 'todo1')
         }
       };
       const expected: State = {
@@ -213,7 +209,7 @@ describe('TodoReducer', () => {
         loading: false,
         ids: [1],
         entities: {
-          1: new Todo('1', 'todo1'),
+          1: new Todo('1', 'todo1')
         }
       };
       const expected: State = {
@@ -230,7 +226,7 @@ describe('TodoReducer', () => {
         loading: true,
         ids: [1],
         entities: {
-          1: new Todo('1', 'todo1'),
+          1: new Todo('1', 'todo1')
         }
       };
       const expected: State = {
@@ -259,5 +255,4 @@ describe('TodoReducer', () => {
       expect(reducer(initial, action)).toEqual(expected);
     });
   });
-
 });

@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController
+} from '@angular/common/http/testing';
 
 import { Todo } from '@app/models';
 import { TodoService } from './todo.service';
@@ -10,12 +13,8 @@ describe('TodoService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-      ],
-      providers: [
-        TodoService
-      ]
+      imports: [HttpClientTestingModule],
+      providers: [TodoService]
     });
     service = TestBed.get(TodoService);
     httpMock = TestBed.get(HttpTestingController);
@@ -54,18 +53,19 @@ describe('TodoService', () => {
   });
 
   it('should successfully mock create request', () => {
-    const todo = new Todo('1', 'test');
-    service.create(new Todo(null, 'test')).subscribe(data => {
-      expect(data).toEqual(todo);
+    const todo1 = new Todo(null, 'test');
+    const todo2 = new Todo('1', 'test');
+    service.create(todo1).subscribe(data => {
+      expect(data).toEqual(todo2);
     });
     const req = httpMock.expectOne(`/api/v1/todos`);
     expect(req.request.method).toEqual('POST');
-    req.flush(todo);
+    req.flush(todo2);
   });
 
   it('should successfully mock update request', () => {
-    const todo = new Todo('1', 'test');
-    const todo2 = new Todo(todo.id, 'test2');
+    const todo1 = new Todo('1', 'test');
+    const todo2 = new Todo(todo1.id, 'test2');
     service.update(todo2).subscribe(data => {
       expect(data).toEqual(todo2);
     });
@@ -82,5 +82,4 @@ describe('TodoService', () => {
     const req = httpMock.expectOne(`/api/v1/todos/1`);
     expect(req.request.method).toEqual('DELETE');
   });
-
 });
