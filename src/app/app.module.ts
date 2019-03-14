@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material';
 
 import { RequestInterceptor } from '@app/interceptors';
-import { MaterialModule } from '@app/material';
 import { AppStoreModule } from '@app/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MaterialModule,
+    MatToolbarModule,
     AppStoreModule,
     AppRoutingModule
   ],
