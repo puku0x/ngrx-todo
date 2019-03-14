@@ -3,33 +3,32 @@ import { Update } from '@ngrx/entity';
 
 import { Todo } from '@app/models';
 
+// prettier-ignore
 export enum TodoActionTypes {
-  LoadTodos         = '[Todo] Load',
-  LoadTodosSuccess  = '[Todo] Load Success',
-  LoadTodosFail     = '[Todo] Load Fail',
-  CreateTodo        = '[Todo] Create',
-  CreateTodoSuccess = '[Todo] Create Success',
-  CreateTodoFail    = '[Todo] Create Fail',
-  UpdateTodo        = '[Todo] Update',
-  UpdateTodoSuccess = '[Todo] Update Success',
-  UpdateTodoFail    = '[Todo] Update Fail',
-  DeleteTodo        = '[Todo] Delete',
-  DeleteTodoSuccess = '[Todo] Delete Success',
-  DeleteTodoFail    = '[Todo] Delete Fail',
+  LoadTodos         = '[Todo/Page] Load',
+  LoadTodosSuccess  = '[Todo/API] Load Success',
+  LoadTodosFail     = '[Todo/API] Load Fail',
+  CreateTodo        = '[Todo/Page] Create',
+  CreateTodoSuccess = '[Todo/API] Create Success',
+  CreateTodoFail    = '[Todo/API] Create Fail',
+  UpdateTodo        = '[Todo/Page] Update',
+  UpdateTodoSuccess = '[Todo/API] Update Success',
+  UpdateTodoFail    = '[Todo/API] Update Fail',
+  DeleteTodo        = '[Todo/Page] Delete',
+  DeleteTodoSuccess = '[Todo/API] Delete Success',
+  DeleteTodoFail    = '[Todo/API] Delete Fail'
 }
 
 /**
- * Load todos
+ * Load
  */
 export class LoadTodos implements Action {
   readonly type = TodoActionTypes.LoadTodos;
-  constructor(public payload?: { offset?: number, limit?: number }) {
-    this.payload = payload || { };
-  }
+  constructor(public payload: { offset?: number; limit?: number } = {}) {}
 }
 
 /**
- * Load todos success
+ * Load success
  */
 export class LoadTodosSuccess implements Action {
   readonly type = TodoActionTypes.LoadTodosSuccess;
@@ -37,7 +36,7 @@ export class LoadTodosSuccess implements Action {
 }
 
 /**
- * Load todos fail
+ * Load fail
  */
 export class LoadTodosFail implements Action {
   readonly type = TodoActionTypes.LoadTodosFail;
@@ -45,15 +44,15 @@ export class LoadTodosFail implements Action {
 }
 
 /**
- * Create todo
+ * Create
  */
 export class CreateTodo implements Action {
   readonly type = TodoActionTypes.CreateTodo;
-  constructor(public payload: { todo: Todo } ) {}
+  constructor(public payload: { todo: Todo }) {}
 }
 
 /**
- * Create todo success
+ * Create success
  */
 export class CreateTodoSuccess implements Action {
   readonly type = TodoActionTypes.CreateTodoSuccess;
@@ -61,7 +60,7 @@ export class CreateTodoSuccess implements Action {
 }
 
 /**
- * Create todo fail
+ * Create fail
  */
 export class CreateTodoFail implements Action {
   readonly type = TodoActionTypes.CreateTodoFail;
@@ -69,7 +68,7 @@ export class CreateTodoFail implements Action {
 }
 
 /**
- * Update todo
+ * Update
  */
 export class UpdateTodo implements Action {
   readonly type = TodoActionTypes.UpdateTodo;
@@ -77,7 +76,7 @@ export class UpdateTodo implements Action {
 }
 
 /**
- * Update todo success
+ * Update success
  */
 export class UpdateTodoSuccess implements Action {
   readonly type = TodoActionTypes.UpdateTodoSuccess;
@@ -85,7 +84,7 @@ export class UpdateTodoSuccess implements Action {
 }
 
 /**
- * Update todo fail
+ * Update fail
  */
 export class UpdateTodoFail implements Action {
   readonly type = TodoActionTypes.UpdateTodoFail;
@@ -93,7 +92,7 @@ export class UpdateTodoFail implements Action {
 }
 
 /**
- * Delete todo
+ * Delete
  */
 export class DeleteTodo implements Action {
   readonly type = TodoActionTypes.DeleteTodo;
@@ -101,7 +100,7 @@ export class DeleteTodo implements Action {
 }
 
 /**
- * Delete todo success
+ * Delete success
  */
 export class DeleteTodoSuccess implements Action {
   readonly type = TodoActionTypes.DeleteTodoSuccess;
@@ -109,7 +108,7 @@ export class DeleteTodoSuccess implements Action {
 }
 
 /**
- * Delete todo fail
+ * Delete fail
  */
 export class DeleteTodoFail implements Action {
   readonly type = TodoActionTypes.DeleteTodoFail;
