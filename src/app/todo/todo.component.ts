@@ -1,7 +1,7 @@
 import { Component, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable, merge } from 'rxjs';
-import { tap, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { Todo } from '@app/models';
 import { TodoFacade } from '@app/store/todo';
