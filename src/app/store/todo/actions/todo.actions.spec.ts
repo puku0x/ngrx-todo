@@ -1,34 +1,32 @@
 import { Todo } from '@app/models';
 import {
-  TodoActionTypes,
-  LoadTodos,
-  LoadTodosSuccess,
-  LoadTodosFail,
-  CreateTodo,
-  CreateTodoSuccess,
-  CreateTodoFail,
-  UpdateTodo,
-  UpdateTodoSuccess,
-  UpdateTodoFail,
-  DeleteTodo,
-  DeleteTodoSuccess,
-  DeleteTodoFail
+  loadTodos,
+  loadTodosSuccess,
+  loadTodosFailure,
+  createTodo,
+  createTodoSuccess,
+  createTodoFailure,
+  updateTodo,
+  updateTodoSuccess,
+  updateTodoFailure,
+  deleteTodo,
+  deleteTodoSuccess,
+  deleteTodoFailure
 } from '../actions';
 
 describe('TodoActions', () => {
-  it('should create LoadTodos', () => {
+  it('should create loadTodos', () => {
     const expectedAction = {
-      type: TodoActionTypes.LoadTodos,
+      type: loadTodos.type,
       payload: { offset: 0, limit: 100 }
     };
-    const action = new LoadTodos(expectedAction.payload);
+    const action = loadTodos(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create LoadTodosSuccess', () => {
+  it('should create loadTodosSuccess', () => {
     const expectedAction = {
-      type: TodoActionTypes.LoadTodosSuccess,
+      type: loadTodosSuccess.type,
       payload: {
         todos: [
           new Todo('1', 'test1'),
@@ -37,62 +35,57 @@ describe('TodoActions', () => {
         ]
       }
     };
-    const action = new LoadTodosSuccess(expectedAction.payload);
+    const action = loadTodosSuccess(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create LoadTodosFail', () => {
+  it('should create loadTodosFailure', () => {
     const expectedAction = {
-      type: TodoActionTypes.LoadTodosFail,
+      type: loadTodosFailure.type,
       payload: {
         error: 'error'
       }
     };
-    const action = new LoadTodosFail(expectedAction.payload);
+    const action = loadTodosFailure(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create CreateTodo', () => {
+  it('should create createTodo', () => {
     const expectedAction = {
-      type: TodoActionTypes.CreateTodo,
+      type: createTodo.type,
       payload: {
         todo: new Todo(null, 'test')
       }
     };
-    const action = new CreateTodo(expectedAction.payload);
+    const action = createTodo(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create CreateTodoSuccess', () => {
+  it('should create createTodoSuccess', () => {
     const expectedAction = {
-      type: TodoActionTypes.CreateTodoSuccess,
+      type: createTodoSuccess.type,
       payload: {
         todo: new Todo('1', 'test')
       }
     };
-    const action = new CreateTodoSuccess(expectedAction.payload);
+    const action = createTodoSuccess(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create CreateTodoFail', () => {
+  it('should create createTodoFailure', () => {
     const expectedAction = {
-      type: TodoActionTypes.CreateTodoFail,
+      type: createTodoFailure.type,
       payload: {
         error: 'error'
       }
     };
-    const action = new CreateTodoFail(expectedAction.payload);
+    const action = createTodoFailure(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create UpdateTodo', () => {
+  it('should create updateTodo', () => {
     const expectedAction = {
-      type: TodoActionTypes.UpdateTodo,
+      type: updateTodo.type,
       payload: {
         todo: {
           id: '1',
@@ -100,14 +93,13 @@ describe('TodoActions', () => {
         }
       }
     };
-    const action = new UpdateTodo(expectedAction.payload);
+    const action = updateTodo(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create UpdateTodoSuccess', () => {
+  it('should create updateTodoSuccess', () => {
     const expectedAction = {
-      type: TodoActionTypes.UpdateTodoSuccess,
+      type: updateTodoSuccess.type,
       payload: {
         todo: {
           id: '1',
@@ -115,52 +107,49 @@ describe('TodoActions', () => {
         }
       }
     };
-    const action = new UpdateTodoSuccess(expectedAction.payload);
+    const action = updateTodoSuccess(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create UpdateTodoFail', () => {
+  it('should create updateTodoFailure', () => {
     const expectedAction = {
-      type: TodoActionTypes.UpdateTodoFail,
+      type: updateTodoFailure.type,
       payload: {
         error: 'error'
       }
     };
-    const action = new UpdateTodoFail(expectedAction.payload);
+    const action = updateTodoFailure(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create DeleteTodo', () => {
+  it('should create deleteTodo', () => {
     const expectedAction = {
-      type: TodoActionTypes.DeleteTodo,
+      type: deleteTodo.type,
       payload: { id: '1' }
     };
-    const action = new DeleteTodo(expectedAction.payload);
+    const action = deleteTodo(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-  it('should create DeleteTodoSuccess', () => {
+  it('should create deleteTodoSuccess', () => {
     const expectedAction = {
-      type: TodoActionTypes.DeleteTodoSuccess,
+      type: deleteTodoSuccess.type,
       payload: {
         id: '1'
       }
     };
-    const action = new DeleteTodoSuccess(expectedAction.payload);
+    const action = deleteTodoSuccess(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });
-
-  it('should create DeleteTodoFail', () => {
+  it('should create deleteTodoFailure', () => {
     const expectedAction = {
-      type: TodoActionTypes.DeleteTodoFail,
+      type: deleteTodoFailure.type,
       payload: {
         error: 'error'
       }
     };
-    const action = new DeleteTodoFail(expectedAction.payload);
+    const action = deleteTodoFailure(expectedAction.payload);
     expect(action.type).toEqual(expectedAction.type);
     expect(action.payload).toEqual(expectedAction.payload);
   });

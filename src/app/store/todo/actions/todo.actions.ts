@@ -1,130 +1,81 @@
-import { Action } from '@ngrx/store';
+import { createAction, union } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
 
 import { Todo } from '@app/models';
 
-// prettier-ignore
-export enum TodoActionTypes {
-  LoadTodos         = '[Todo/Page] Load',
-  LoadTodosSuccess  = '[Todo/API] Load Success',
-  LoadTodosFail     = '[Todo/API] Load Fail',
-  CreateTodo        = '[Todo/Page] Create',
-  CreateTodoSuccess = '[Todo/API] Create Success',
-  CreateTodoFail    = '[Todo/API] Create Fail',
-  UpdateTodo        = '[Todo/Page] Update',
-  UpdateTodoSuccess = '[Todo/API] Update Success',
-  UpdateTodoFail    = '[Todo/API] Update Fail',
-  DeleteTodo        = '[Todo/Page] Delete',
-  DeleteTodoSuccess = '[Todo/API] Delete Success',
-  DeleteTodoFail    = '[Todo/API] Delete Fail'
-}
+export const loadTodos = createAction(
+  '[Todo/Page] Load',
+  (payload: { offset?: number; limit?: number } = {}) => ({ payload })
+);
 
-/**
- * Load
- */
-export class LoadTodos implements Action {
-  readonly type = TodoActionTypes.LoadTodos;
-  constructor(public payload: { offset?: number; limit?: number } = {}) {}
-}
+export const loadTodosSuccess = createAction(
+  '[Todo/API] Load Success',
+  (payload: { todos: Todo[] }) => ({ payload })
+);
 
-/**
- * Load success
- */
-export class LoadTodosSuccess implements Action {
-  readonly type = TodoActionTypes.LoadTodosSuccess;
-  constructor(public payload: { todos: Todo[] }) {}
-}
+export const loadTodosFailure = createAction(
+  '[Todo/API] Load Failure',
+  (payload: { error: any }) => ({ payload })
+);
 
-/**
- * Load fail
- */
-export class LoadTodosFail implements Action {
-  readonly type = TodoActionTypes.LoadTodosFail;
-  constructor(public payload?: { error: any }) {}
-}
+export const createTodo = createAction(
+  '[Todo/Page] Create',
+  (payload: { todo: Partial<Todo> }) => ({ payload })
+);
 
-/**
- * Create
- */
-export class CreateTodo implements Action {
-  readonly type = TodoActionTypes.CreateTodo;
-  constructor(public payload: { todo: Todo }) {}
-}
+export const createTodoSuccess = createAction(
+  '[Todo/API] Create Success',
+  (payload: { todo: Todo }) => ({ payload })
+);
 
-/**
- * Create success
- */
-export class CreateTodoSuccess implements Action {
-  readonly type = TodoActionTypes.CreateTodoSuccess;
-  constructor(public payload: { todo: Todo }) {}
-}
+export const createTodoFailure = createAction(
+  '[Todo/API] Create Failure',
+  (payload: { error: any }) => ({ payload })
+);
 
-/**
- * Create fail
- */
-export class CreateTodoFail implements Action {
-  readonly type = TodoActionTypes.CreateTodoFail;
-  constructor(public payload?: { error: any }) {}
-}
+export const updateTodo = createAction(
+  '[Todo/Page] Update',
+  (payload: { todo: Update<Todo> }) => ({ payload })
+);
 
-/**
- * Update
- */
-export class UpdateTodo implements Action {
-  readonly type = TodoActionTypes.UpdateTodo;
-  constructor(public payload: { todo: Update<Todo> }) {}
-}
+export const updateTodoSuccess = createAction(
+  '[Todo/API] Update Success',
+  (payload: { todo: Update<Todo> }) => ({ payload })
+);
 
-/**
- * Update success
- */
-export class UpdateTodoSuccess implements Action {
-  readonly type = TodoActionTypes.UpdateTodoSuccess;
-  constructor(public payload: { todo: Update<Todo> }) {}
-}
+export const updateTodoFailure = createAction(
+  '[Todo/API] Update Failure',
+  (payload: { error: any }) => ({ payload })
+);
 
-/**
- * Update fail
- */
-export class UpdateTodoFail implements Action {
-  readonly type = TodoActionTypes.UpdateTodoFail;
-  constructor(public payload?: { error: any }) {}
-}
+export const deleteTodo = createAction(
+  '[Todo/Page] Delete',
+  (payload: { id: string }) => ({ payload })
+);
 
-/**
- * Delete
- */
-export class DeleteTodo implements Action {
-  readonly type = TodoActionTypes.DeleteTodo;
-  constructor(public payload: { id: string }) {}
-}
+export const deleteTodoSuccess = createAction(
+  '[Todo/API] Delete Success',
+  (payload: { id: string }) => ({ payload })
+);
 
-/**
- * Delete success
- */
-export class DeleteTodoSuccess implements Action {
-  readonly type = TodoActionTypes.DeleteTodoSuccess;
-  constructor(public payload?: { id: string }) {}
-}
+export const deleteTodoFailure = createAction(
+  '[Todo/API] Delete Failure',
+  (payload: { error: any }) => ({ payload })
+);
 
-/**
- * Delete fail
- */
-export class DeleteTodoFail implements Action {
-  readonly type = TodoActionTypes.DeleteTodoFail;
-  constructor(public payload?: { error: any }) {}
-}
+const all = union({
+  loadTodos,
+  loadTodosSuccess,
+  loadTodosFailure,
+  createTodo,
+  createTodoSuccess,
+  createTodoFailure,
+  updateTodo,
+  updateTodoSuccess,
+  updateTodoFailure,
+  deleteTodo,
+  deleteTodoSuccess,
+  deleteTodoFailure
+});
 
-export type TodoActions =
-  | LoadTodos
-  | LoadTodosSuccess
-  | LoadTodosFail
-  | CreateTodo
-  | CreateTodoSuccess
-  | CreateTodoFail
-  | UpdateTodo
-  | UpdateTodoSuccess
-  | UpdateTodoFail
-  | DeleteTodo
-  | DeleteTodoSuccess
-  | DeleteTodoFail;
+export type TodoActions = typeof all;

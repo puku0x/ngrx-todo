@@ -1,17 +1,17 @@
 import { Todo } from '@app/models';
 import {
-  LoadTodos,
-  LoadTodosSuccess,
-  LoadTodosFail,
-  CreateTodo,
-  CreateTodoSuccess,
-  CreateTodoFail,
-  UpdateTodo,
-  UpdateTodoSuccess,
-  UpdateTodoFail,
-  DeleteTodo,
-  DeleteTodoSuccess,
-  DeleteTodoFail
+  loadTodos,
+  loadTodosSuccess,
+  loadTodosFailure,
+  createTodo,
+  createTodoSuccess,
+  createTodoFailure,
+  updateTodo,
+  updateTodoSuccess,
+  updateTodoFailure,
+  deleteTodo,
+  deleteTodoSuccess,
+  deleteTodoFailure
 } from '../actions';
 import { reducer, initialState, State } from './todo.reducer';
 
@@ -25,123 +25,109 @@ describe('TodoReducer', () => {
   });
 
   describe('TodoAction', () => {
-    it('should handle LoadTodos', () => {
-      const initial: State = {
-        loading: false,
-        ids: [],
-        entities: {}
+    it('should handle loadTodos', () => {
+      const state: State = {
+        ...initialState
       };
       const expected: State = {
-        loading: true,
-        ids: initial.ids,
-        entities: initial.entities
+        ...state,
+        loading: true
       };
-      const action = new LoadTodos();
-      expect(reducer(initial, action)).toEqual(expected);
+      const action = loadTodos();
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle LoadTodosSuccess', () => {
+    it('should handle loadTodosSuccess', () => {
       const todos = [
         new Todo('1', 'todo1'),
         new Todo('2', 'todo2'),
         new Todo('3', 'todo3')
       ];
-      const initial: State = {
-        loading: true,
-        ids: [],
-        entities: {}
+      const state: State = {
+        ...initialState,
+        loading: true
       };
       const expected: State = {
+        ...state,
         loading: false,
         ids: ['1', '2', '3'],
         entities: {
-          '1': todos[0],
-          '2': todos[1],
-          '3': todos[2]
+          1: todos[0],
+          2: todos[1],
+          3: todos[2]
         }
       };
-      const action = new LoadTodosSuccess({ todos });
-      expect(reducer(initial, action)).toEqual(expected);
+      const action = loadTodosSuccess({ todos });
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle LoadTodosFail', () => {
-      const initial: State = {
-        loading: true,
-        ids: [],
-        entities: {}
+    it('should handle loadTodosFailure', () => {
+      const error = 'error';
+      const state: State = {
+        ...initialState,
+        loading: true
       };
       const expected: State = {
-        loading: false,
-        ids: initial.ids,
-        entities: initial.entities
+        ...state,
+        loading: false
       };
-      const action = new LoadTodosFail({ error: 'error' });
-      expect(reducer(initial, action)).toEqual(expected);
+      const action = loadTodosFailure({ error });
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle CreateTodo', () => {
+    it('should handle createTodo', () => {
       const todo = new Todo('1', 'todo1');
-      const initial: State = {
-        loading: false,
-        ids: [],
-        entities: {}
+      const state: State = {
+        ...initialState,
+        loading: false
       };
       const expected: State = {
-        loading: true,
-        ids: initial.ids,
-        entities: initial.entities
+        ...state,
+        loading: true
       };
-      const action = new CreateTodo({ todo });
-      expect(reducer(initial, action)).toEqual(expected);
+      const action = createTodo({ todo });
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle CreateTodoSuccess', () => {
+    it('should handle createTodoSuccess', () => {
       const todo = new Todo('1', 'todo1');
-      const initial: State = {
-        loading: true,
-        ids: [],
-        entities: {}
+      const state: State = {
+        ...initialState,
+        loading: true
       };
       const expected: State = {
+        ...state,
         loading: false,
         ids: ['1'],
         entities: {
-          '1': todo
+          1: todo
         }
       };
-      const action = new CreateTodoSuccess({ todo });
-      expect(reducer(initial, action)).toEqual(expected);
+      const action = createTodoSuccess({ todo });
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle CreateTodoFail', () => {
-      const initial: State = {
-        loading: true,
-        ids: [],
-        entities: {}
+    it('should handle createTodoFailure', () => {
+      const error = 'error';
+      const state: State = {
+        ...initialState,
+        loading: true
       };
       const expected: State = {
-        loading: false,
-        ids: initial.ids,
-        entities: initial.entities
+        ...state,
+        loading: false
       };
-      const action = new CreateTodoFail({ error: 'error' });
-      expect(reducer(initial, action)).toEqual(expected);
+      const action = createTodoFailure({ error });
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle UpdateTodo', () => {
-      const initial: State = {
-        loading: false,
+    it('should handle updateTodo', () => {
+      const state: State = {
+        ...initialState,
         ids: ['1'],
         entities: {
-          '1': new Todo('1', 'todo1')
+          1: new Todo('1', 'todo1')
         }
       };
       const expected: State = {
-        loading: true,
-        ids: initial.ids,
-        entities: initial.entities
+        ...state,
+        loading: true
       };
-      const action = new UpdateTodo({
+      const action = updateTodo({
         todo: {
           id: '1',
           changes: {
@@ -150,17 +136,17 @@ describe('TodoReducer', () => {
           }
         }
       });
-      expect(reducer(initial, action)).toEqual(expected);
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle UpdateTodoSuccess', () => {
-      const initial: State = {
+    it('should handle updateTodoSuccess', () => {
+      const state: State = {
+        ...initialState,
         loading: true,
         ids: ['1'],
         entities: {
-          '1': {
+          1: {
             id: '1',
-            text: 'todo1',
+            text: 'todo',
             checked: false,
             createdAt: 1000,
             updatedAt: 2000
@@ -168,61 +154,77 @@ describe('TodoReducer', () => {
         }
       };
       const expected: State = {
+        ...state,
         loading: false,
         ids: ['1'],
         entities: {
-          '1': {
+          1: {
             id: '1',
-            text: 'todo2',
+            text: 'todo1_update',
             checked: false,
             createdAt: 1000,
-            updatedAt: 2000
+            updatedAt: 3000
           }
         }
       };
-      const action = new UpdateTodoSuccess({
+      const action = updateTodoSuccess({
         todo: {
           id: '1',
-          changes: new Todo('1', 'todo2', false, 1000, 2000)
+          changes: new Todo('1', 'todo1_update', false, 1000, 3000)
         }
       });
-      expect(reducer(initial, action)).toEqual(expected);
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle UpdateTodoFail', () => {
-      const initial: State = {
+    it('should handle updateTodoFailure', () => {
+      const error = 'error';
+      const state: State = {
+        ...initialState,
+        loading: true
+      };
+      const expected: State = {
+        ...state,
+        loading: false
+      };
+      const action = updateTodoFailure({ error });
+      expect(reducer(state, action)).toEqual(expected);
+    });
+    it('should handle deleteTodo', () => {
+      const state: State = {
+        ...initialState,
+        ids: [1],
+        entities: {
+          1: new Todo('1', 'todo1')
+        }
+      };
+      const expected: State = {
+        ...state,
+        loading: true
+      };
+      const action = deleteTodo({ id: '1' });
+      expect(reducer(state, action)).toEqual(expected);
+    });
+    it('should handle deleteTodoSuccess', () => {
+      const state: State = {
+        ...initialState,
         loading: true,
+        ids: [1],
+        entities: {
+          1: new Todo('1', 'todo1')
+        }
+      };
+      const expected: State = {
+        ...state,
+        loading: false,
         ids: [],
         entities: {}
       };
-      const expected: State = {
-        loading: false,
-        ids: initial.ids,
-        entities: initial.entities
-      };
-      const action = new UpdateTodoFail({ error: 'error' });
-      expect(reducer(initial, action)).toEqual(expected);
+      const action = deleteTodoSuccess({ id: '1' });
+      expect(reducer(state, action)).toEqual(expected);
     });
-
-    it('should handle DeleteTodo', () => {
-      const initial: State = {
-        loading: false,
-        ids: [1],
-        entities: {
-          1: new Todo('1', 'todo1')
-        }
-      };
-      const expected: State = {
-        loading: true,
-        ids: initial.ids,
-        entities: initial.entities
-      };
-      const action = new DeleteTodo({ id: '1' });
-      expect(reducer(initial, action)).toEqual(expected);
-    });
-
-    it('should handle DeleteTodoSuccess', () => {
-      const initial: State = {
+    it('should handle deleteTodoFailure', () => {
+      const error = 'error';
+      const state: State = {
+        ...initialState,
         loading: true,
         ids: [1],
         entities: {
@@ -230,29 +232,11 @@ describe('TodoReducer', () => {
         }
       };
       const expected: State = {
-        loading: false,
-        ids: [],
-        entities: {}
+        ...state,
+        loading: false
       };
-      const action = new DeleteTodoSuccess({ id: '1' });
-      expect(reducer(initial, action)).toEqual(expected);
-    });
-
-    it('should handle DeleteTodoFail', () => {
-      const initial: State = {
-        loading: true,
-        ids: [1],
-        entities: {
-          1: new Todo('1', 'todo1')
-        }
-      };
-      const expected: State = {
-        loading: false,
-        ids: initial.ids,
-        entities: initial.entities
-      };
-      const action = new DeleteTodoFail({ error: 'error' });
-      expect(reducer(initial, action)).toEqual(expected);
+      const action = deleteTodoFailure({ error });
+      expect(reducer(state, action)).toEqual(expected);
     });
   });
 });

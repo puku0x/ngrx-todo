@@ -6,12 +6,7 @@ import { adapter } from '../reducers/todo.reducer';
 /**
  * Selectors
  */
-const {
-  selectIds,
-  selectEntities,
-  selectAll,
-  selectTotal
-} = adapter.getSelectors();
+const { selectAll } = adapter.getSelectors();
 const getTodoState = createFeatureSelector<State>(STATE_ID);
 const getLoading = createSelector(
   getTodoState,

@@ -1,6 +1,5 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
-import { Actions } from '@ngrx/effects';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
@@ -8,20 +7,19 @@ import { Todo } from '@app/models';
 import { TodoService } from '@app/services';
 import { TodoEffects } from './todo.effect';
 import {
-  TodoActionTypes,
-  LoadTodos,
-  LoadTodosSuccess,
-  LoadTodosFail,
-  CreateTodo,
-  CreateTodoSuccess,
-  CreateTodoFail,
-  UpdateTodo,
-  UpdateTodoSuccess,
-  UpdateTodoFail,
-  DeleteTodo,
-  DeleteTodoSuccess,
-  DeleteTodoFail,
-  TodoActions
+  TodoActions,
+  loadTodos,
+  loadTodosSuccess,
+  loadTodosFailure,
+  createTodo,
+  createTodoSuccess,
+  createTodoFailure,
+  updateTodo,
+  updateTodoSuccess,
+  updateTodoFailure,
+  deleteTodo,
+  deleteTodoSuccess,
+  deleteTodoFailure
 } from '../actions';
 
 describe('TodoEffects', () => {
@@ -54,14 +52,14 @@ describe('TodoEffects', () => {
   });
 
   describe('loadTodos$', () => {
-    it('should return LoadTodosSuccess', () => {
+    it('should return loadTodosSuccess', () => {
       const todos = [
         new Todo('1', 'test1'),
         new Todo('2', 'test2'),
         new Todo('3', 'test3')
       ];
-      const action = new LoadTodos();
-      const completion = new LoadTodosSuccess({ todos });
+      const action = loadTodos();
+      const completion = loadTodosSuccess({ todos });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-b', { b: todos });
@@ -71,10 +69,10 @@ describe('TodoEffects', () => {
       expect(effects.loadTodos$).toBeObservable(expected);
     });
 
-    it('should return LoadTodosFail', () => {
+    it('should return loadTodosFailure', () => {
       const error = 'error';
-      const action = new LoadTodos();
-      const completion = new LoadTodosFail({ error });
+      const action = loadTodos();
+      const completion = loadTodosFailure({ error });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-#', {}, error);
@@ -86,10 +84,10 @@ describe('TodoEffects', () => {
   });
 
   describe('createTodo$', () => {
-    it('should return CreateTodoSuccess', () => {
+    it('should return createTodoSuccess', () => {
       const todo = new Todo('1', 'todo1');
-      const action = new CreateTodo({ todo });
-      const completion = new CreateTodoSuccess({ todo });
+      const action = createTodo({ todo });
+      const completion = createTodoSuccess({ todo });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-b', { b: todo });
@@ -99,10 +97,10 @@ describe('TodoEffects', () => {
       expect(effects.createTodo$).toBeObservable(expected);
     });
 
-    it('should return CreateTodoFail', () => {
+    it('should return createTodoFailure', () => {
       const error = 'error';
-      const action = new CreateTodo({ todo: new Todo('1', 'todo1') });
-      const completion = new CreateTodoFail({ error });
+      const action = createTodo({ todo: new Todo('1', 'todo1') });
+      const completion = createTodoFailure({ error });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-#', {}, error);
@@ -114,10 +112,10 @@ describe('TodoEffects', () => {
   });
 
   describe('updateTodo$', () => {
-    it('should return UpdateTodoSuccess', () => {
+    it('should return updateTodoSuccess', () => {
       const todo = new Todo('1', 'todo1');
-      const action = new UpdateTodo({ todo: { id: '1', changes: todo } });
-      const completion = new UpdateTodoSuccess({
+      const action = updateTodo({ todo: { id: '1', changes: todo } });
+      const completion = updateTodoSuccess({
         todo: { id: '1', changes: todo }
       });
 
@@ -129,12 +127,12 @@ describe('TodoEffects', () => {
       expect(effects.updateTodo$).toBeObservable(expected);
     });
 
-    it('should return UpdateTodoFail', () => {
+    it('should return updateTodoFailure', () => {
       const error = 'error';
-      const action = new UpdateTodo({
+      const action = updateTodo({
         todo: { id: 1, changes: new Todo('1', 'todo1') }
       });
-      const completion = new UpdateTodoFail({ error });
+      const completion = updateTodoFailure({ error });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-#', {}, error);
@@ -146,10 +144,10 @@ describe('TodoEffects', () => {
   });
 
   describe('deleteTodo$', () => {
-    it('should return DeleteTodoSuccess', () => {
+    it('should return deleteTodoSuccess', () => {
       const id = '1';
-      const action = new DeleteTodo({ id });
-      const completion = new DeleteTodoSuccess({ id });
+      const action = deleteTodo({ id });
+      const completion = deleteTodoSuccess({ id });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-b', { b: id });
@@ -159,10 +157,10 @@ describe('TodoEffects', () => {
       expect(effects.deleteTodo$).toBeObservable(expected);
     });
 
-    it('should return DeleteTodoFail', () => {
+    it('should return deleteTodoFailure', () => {
       const error = 'error';
-      const action = new DeleteTodo({ id: '1' });
-      const completion = new DeleteTodoFail({ error });
+      const action = deleteTodo({ id: '1' });
+      const completion = deleteTodoFailure({ error });
 
       actions$ = hot('-a', { a: action });
       const response = cold('-#', {}, error);

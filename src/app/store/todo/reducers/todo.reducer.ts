@@ -1,7 +1,21 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import { Todo } from '@app/models';
-import { TodoActionTypes, TodoActions } from '../actions';
+import {
+  TodoActions,
+  loadTodos,
+  loadTodosSuccess,
+  loadTodosFailure,
+  createTodo,
+  createTodoSuccess,
+  createTodoFailure,
+  updateTodo,
+  updateTodoSuccess,
+  updateTodoFailure,
+  deleteTodo,
+  deleteTodoSuccess,
+  deleteTodoFailure
+} from '../actions';
 
 /**
  * State ID
@@ -34,47 +48,44 @@ export const initialState: State = adapter.getInitialState({
  */
 export function reducer(state = initialState, action: TodoActions): State {
   switch (action.type) {
-    case TodoActionTypes.LoadTodos: {
+    case loadTodos.type: {
       return { ...state, loading: true };
     }
-    case TodoActionTypes.LoadTodosSuccess: {
+    case loadTodosSuccess.type: {
       const { todos } = action.payload;
       return adapter.addAll(todos, { ...state, loading: false });
     }
-    case TodoActionTypes.LoadTodosFail: {
+    case loadTodosFailure.type: {
       return { ...state, loading: false };
     }
-    case TodoActionTypes.CreateTodo: {
+    case createTodo.type: {
       return { ...state, loading: true };
     }
-    case TodoActionTypes.CreateTodoSuccess: {
+    case createTodoSuccess.type: {
       const { todo } = action.payload;
       return adapter.addOne(todo, { ...state, loading: false });
     }
-    case TodoActionTypes.CreateTodoFail: {
+    case createTodoFailure.type: {
       return { ...state, loading: false };
     }
-    case TodoActionTypes.UpdateTodo: {
+    case updateTodo.type: {
       return { ...state, loading: true };
     }
-    case TodoActionTypes.UpdateTodoSuccess: {
+    case updateTodoSuccess.type: {
       const { todo } = action.payload;
-      return adapter.updateOne(todo, {
-        ...state,
-        loading: false
-      });
+      return adapter.updateOne(todo, { ...state, loading: false });
     }
-    case TodoActionTypes.UpdateTodoFail: {
+    case updateTodoFailure.type: {
       return { ...state, loading: false };
     }
-    case TodoActionTypes.DeleteTodo: {
+    case deleteTodo.type: {
       return { ...state, loading: true };
     }
-    case TodoActionTypes.DeleteTodoSuccess: {
+    case deleteTodoSuccess.type: {
       const { id } = action.payload;
       return adapter.removeOne(id, { ...state, loading: false });
     }
-    case TodoActionTypes.DeleteTodoFail: {
+    case deleteTodoFailure.type: {
       return { ...state, loading: false };
     }
     default: {
