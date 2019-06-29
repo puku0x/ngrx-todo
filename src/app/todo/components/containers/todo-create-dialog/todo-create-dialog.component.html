@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Create</h2>
+
+<form
+  class="form"
+  [formGroup]="form"
+  (ngSubmit)="form.valid && save()"
+  novalidate
+>
+  <mat-dialog-content>
+    <mat-form-field>
+      <input matInput formControlName="text" placeholder="Todo" />
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button mat-dialog-close>
+      Cancel
+    </button>
+    <button
+      type="submit"
+      mat-button
+      color="primary"
+      [disabled]="form.invalid || (loading$ | async)"
+    >
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>

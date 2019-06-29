@@ -1,23 +1,20 @@
-<header class="header">
+<header>
   <mat-toolbar color="primary">
-    <h1>{{ title }}</h1>
-    <span class="spacer"></span>
+    <h1 class="title">{{ title }}</h1>
     <a
       class="icon"
       href="https://github.com/puku0x/ngrx-todo"
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       title="GitHub"
     >
       <img src="assets/github-icon.svg" alt="" />
     </a>
   </mat-toolbar>
 </header>
-<main class="main">
+
+<main>
   <router-outlet></router-outlet>
 </main>
-<footer class="footer">
-  <div class="footer-content">ngrx-todo</div>
-  <div class="footer-content">by puku0x ©2018.</div>
-  <div class="footer-content">Code licensed under an MIT-style License.</div>
-</footer>
+
+<footer>©2019 puku0x</footer>

@@ -7,4 +7,4 @@ config.capabilities = {
   }
 };
 
-exports.config = config
+exports.config = config;

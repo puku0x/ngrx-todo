@@ -1,0 +1,11 @@
+<mat-list-item (click)="update.emit(todo)">
+  <a matLine>{{ todo.text }}</a>
+  <button
+    mat-icon-button
+    color="warn"
+    aria-label="Remove"
+    (click)="remove.emit(todo.id); $event.stopPropagation()"
+  >
+    <mat-icon>delete_outlined</mat-icon>
+  </button>
+</mat-list-item>
