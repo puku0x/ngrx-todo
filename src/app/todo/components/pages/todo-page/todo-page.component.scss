@@ -1,0 +1,16 @@
+mat-card {
+  margin-bottom: 16px;
+}
+
+.fab-bottom-right {
+  position: fixed;
+  bottom: 36px;
+  right: 48px;
+}
+
+@media (max-width: 600px) {
+  .fab-bottom-right {
+    bottom: 24px;
+    right: 24px;
+  }
+}

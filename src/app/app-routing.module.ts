@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'todos', pathMatch: 'full' },
-  { path: 'todos', loadChildren: './todo/todo.module#TodoModule' }
+  {
+    path: 'todos',
+    loadChildren: () => import('./todo/todo.module').then(m => m.TodoModule)
+  }
 ];
 
 @NgModule({

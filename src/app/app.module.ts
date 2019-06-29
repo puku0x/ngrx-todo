@@ -1,11 +1,11 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MatToolbarModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { RequestInterceptor } from '@app/interceptors';
-import { AppStoreModule } from '@app/store';
+import { environment } from '../environments/environment';
+import { AppStoreModule } from './store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -16,12 +16,10 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MatToolbarModule,
-    AppStoreModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppStoreModule
   ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
-  ],
+  providers: [{ provide: 'BASE_URL', useValue: environment.baseUrl }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
