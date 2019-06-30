@@ -30,60 +30,60 @@ export class TodoEffects {
   loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.loadAll),
-      switchMap(({ offset, limit }) => {
-        return this.todoService.findAll(offset, limit).pipe(
+      switchMap(({ offset, limit }) =>
+        this.todoService.findAll(offset, limit).pipe(
           map(result => TodoActions.loadAllSuccess({ todos: result })),
           catchError(error => of(TodoActions.loadAllFailure({ error })))
-        );
-      })
+        )
+      )
     )
   );
 
   load$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.load),
-      concatMap(({ id }) => {
-        return this.todoService.find(id).pipe(
+      concatMap(({ id }) =>
+        this.todoService.find(id).pipe(
           map(result => TodoActions.loadSuccess({ todo: result })),
           catchError(error => of(TodoActions.loadFailure({ error })))
-        );
-      })
+        )
+      )
     )
   );
 
   create$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.create),
-      concatMap(({ todo }) => {
-        return this.todoService.create(todo).pipe(
+      concatMap(({ todo }) =>
+        this.todoService.create(todo).pipe(
           map(result => TodoActions.createSuccess({ todo: result })),
           catchError(error => of(TodoActions.createFailure({ error })))
-        );
-      })
+        )
+      )
     )
   );
 
   update$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.update),
-      concatMap(({ todo }) => {
-        return this.todoService.update(todo).pipe(
+      concatMap(({ todo }) =>
+        this.todoService.update(todo).pipe(
           map(result => TodoActions.updateSuccess({ todo: result })),
           catchError(error => of(TodoActions.updateFailure({ error })))
-        );
-      })
+        )
+      )
     )
   );
 
   remove$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.remove),
-      concatMap(({ id }) => {
-        return this.todoService.remove(id).pipe(
+      concatMap(({ id }) =>
+        this.todoService.remove(id).pipe(
           map(() => TodoActions.removeSuccess({ id })),
           catchError(error => of(TodoActions.removeFailure({ error })))
-        );
-      })
+        )
+      )
     )
   );
 
