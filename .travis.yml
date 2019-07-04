@@ -3,13 +3,13 @@ sudo: required
 language: node_js
 
 node_js:
-  - "10"
+  - '10'
 
 dist: trusty
 
 cache:
   directories:
-    - "$HOME/.npm"
+    - '$HOME/.npm'
 
 addons:
   chrome: stable
@@ -22,7 +22,7 @@ script:
 #  - npm run e2e:ci
 
 after_success:
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - cat ./coverage/ngrx-todo/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 before_deploy:
   - npm run build:ci
