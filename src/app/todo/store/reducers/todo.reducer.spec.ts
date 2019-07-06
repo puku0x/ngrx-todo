@@ -1,4 +1,4 @@
-import { Todo } from '../..//models';
+import { Todo } from '../../models';
 import * as TodoActions from '../actions';
 import { State, initialState, adapter } from '../states';
 import { reducer } from './todo.reducer';
