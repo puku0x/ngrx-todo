@@ -1,12 +1,11 @@
 import { async, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Store, StoreModule, combineReducers } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
 import { Todo } from '../../models';
 import * as TodoActions from '../actions';
-import { reducer } from '../reducers';
-import { State, featureName } from '../states';
+import { State } from '../states';
 import { TodoFacade } from './todo.facade';
 
 describe('TodoFacade', () => {
