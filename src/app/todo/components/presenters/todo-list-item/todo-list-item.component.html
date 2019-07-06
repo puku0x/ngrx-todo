@@ -1,5 +1,5 @@
-<mat-list-item (click)="update.emit(todo)">
-  <a matLine>{{ todo.text }}</a>
+<mat-list-item role="listitem" (click)="update.emit(todo)">
+  <p matLine>{{ todo.text }}</p>
   <button
     mat-icon-button
     color="warn"
