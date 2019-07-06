@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import {
+  StoreRouterConnectingModule,
+  MinimalRouterStateSerializer
+} from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 
@@ -16,7 +19,9 @@ import { reducers, metaReducers } from './reducers';
         strictStateImmutability: true
       }
     }),
-    StoreRouterConnectingModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({
+      serializer: MinimalRouterStateSerializer
+    }),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
       name: 'learn-ngrx'
