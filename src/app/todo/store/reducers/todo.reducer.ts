@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { State, initialState, adapter } from '../state';
+import { State, initialState, adapter } from '../states';
 import * as TodoActions from '../actions';
 
 const todoReducer = createReducer(

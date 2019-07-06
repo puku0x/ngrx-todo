@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
-import { State, featureName, adapter } from '../state';
+import { State, featureName, adapter } from '../states';
 
 /**
  * Selectors

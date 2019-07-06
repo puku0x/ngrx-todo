@@ -3,7 +3,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { TodoComponentsModule } from '../components';
-import { featureName } from './state';
+import { featureName } from './states';
 import { reducer } from './reducers';
 import { TodoEffects } from './effects';
 

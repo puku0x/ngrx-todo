@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { Todo } from '../../models';
-import { State } from '../state';
+import { State } from '../states';
 import * as TodoSelectors from '../selectors';
 import * as TodoActions from '../actions';
 

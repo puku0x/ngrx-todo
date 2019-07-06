@@ -6,7 +6,7 @@ import { provideMockStore } from '@ngrx/store/testing';
 import { Todo } from '../../models';
 import * as TodoActions from '../actions';
 import { reducer } from '../reducers';
-import { State, featureName } from '../state';
+import { State, featureName } from '../states';
 import { TodoFacade } from './todo.facade';
 
 describe('TodoFacade', () => {

@@ -23,8 +23,7 @@ import { reducers, metaReducers } from './reducers';
       serializer: MinimalRouterStateSerializer
     }),
     StoreDevtoolsModule.instrument({
-      logOnly: environment.production,
-      name: 'learn-ngrx'
+      logOnly: environment.production
     }),
     EffectsModule.forRoot([])
   ]

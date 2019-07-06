@@ -4,7 +4,7 @@ import {
   featureName,
   initialState,
   adapter
-} from '../state';
+} from '../states';
 import * as TodoSelectors from './todo.selector';
 
 interface State {
