@@ -1,15 +1,7 @@
-sudo: required
-
 language: node_js
 
 node_js:
   - '10'
-
-dist: trusty
-
-cache:
-  directories:
-    - '$HOME/.npm'
 
 addons:
   chrome: stable
@@ -19,7 +11,7 @@ before_install:
 
 script:
   - npm run test:ci
-#  - npm run e2e:ci
+  - npm run e2e:ci
 
 after_success:
   - cat ./coverage/ngrx-todo/lcov.info | ./node_modules/coveralls/bin/coveralls.js
