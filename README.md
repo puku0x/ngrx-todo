@@ -2,9 +2,10 @@
 [![Coverage Status][coveralls-image]][coveralls-url]
 [![Dependency status][david-dm-image]][david-dm-url]
 [![Dev Dependency status][david-dm-dev-image]][david-dm-dev-url]
+
 # ngrx-todo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.x.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.x.
 
 ## Development server
 
