@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://us-central1-todo-api-4119c.cloudfunctions.net/api'
+  apiUrl: 'https://us-central1-todo-api-4119c.cloudfunctions.net/api'
 };
 
 /*

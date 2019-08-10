@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     AppStoreModule
   ],
-  providers: [{ provide: 'BASE_URL', useValue: environment.baseUrl }],
+  providers: [{ provide: 'API_URL', useValue: environment.apiUrl }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

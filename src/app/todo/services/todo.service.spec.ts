@@ -14,7 +14,7 @@ describe('TodoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{ provide: 'BASE_URL', useValue: '' }]
+      providers: [{ provide: 'API_URL', useValue: '' }]
     });
     service = TestBed.get(TodoService);
     httpMock = TestBed.get(HttpTestingController);

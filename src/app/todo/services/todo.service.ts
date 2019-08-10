@@ -12,7 +12,7 @@ import { Todo } from '../models';
 export class TodoService {
   constructor(
     private http: HttpClient,
-    @Inject('BASE_URL') private baseUrl: string
+    @Inject('API_URL') private baseUrl: string
   ) {}
 
   /**
