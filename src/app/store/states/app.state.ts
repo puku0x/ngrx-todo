@@ -1,5 +1,5 @@
-import * as fromRouter from '@ngrx/router-store';
+import { RouterReducerState } from '@ngrx/router-store';
 
 export interface State {
-  router: fromRouter.RouterReducerState;
+  router: RouterReducerState;
 }
