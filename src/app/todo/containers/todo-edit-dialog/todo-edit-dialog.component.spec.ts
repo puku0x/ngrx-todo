@@ -3,8 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Todo } from '../../../models';
-import { TodoFacade } from '../../../store/facades';
+import { Todo } from '../../models';
+import { TodoFacade } from '../../store/facades';
 import { TodoEditDialogComponent } from './todo-edit-dialog.component';
 
 describe('TodoEditDialogComponent', () => {
@@ -34,7 +34,7 @@ describe('TodoEditDialogComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(TodoEditDialogComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(TodoFacade);
+    service = TestBed.inject(TodoFacade);
   }));
 
   it('should create', () => {

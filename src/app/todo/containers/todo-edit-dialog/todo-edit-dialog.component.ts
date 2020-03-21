@@ -11,8 +11,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { Todo } from '../../../models';
-import { TodoFacade } from '../../../store/facades';
+import { Todo } from '../../models';
+import { TodoFacade } from '../../store/facades';
 
 @Component({
   selector: 'app-todo-edit-dialog',
@@ -24,8 +24,11 @@ export class TodoEditDialogComponent implements OnInit, OnDestroy {
   private readonly onDestroy$ = new EventEmitter();
   loading$: Observable<boolean>;
   todo$: Observable<Todo>;
-  form: FormGroup;
   todo: Todo;
+
+  form = this.fb.group({
+    text: ['', Validators.required]
+  });
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: { todo: Todo },
@@ -35,9 +38,6 @@ export class TodoEditDialogComponent implements OnInit, OnDestroy {
     this.loading$ = this.todoService.loading$;
     // this.todo$ = this.todoService.todo$;
     this.todo = this.data.todo;
-    this.form = this.fb.group({
-      text: ['', Validators.required]
-    });
   }
 
   ngOnInit() {
@@ -51,7 +51,7 @@ export class TodoEditDialogComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    const text: string = this.form.get('text').value;
+    const text = this.form.get('text')?.value as string;
     const todo = { ...this.todo, text };
     this.todoService.update(todo);
   }

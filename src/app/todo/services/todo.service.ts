@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 import { Todo } from '../models';
 
@@ -61,6 +62,6 @@ export class TodoService {
    */
   remove(id: string) {
     const url = `${this.baseUrl}/todos/${id}`;
-    return this.http.delete<void>(url);
+    return this.http.delete<void>(url).pipe(map(() => id));
   }
 }

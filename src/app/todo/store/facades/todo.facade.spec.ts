@@ -17,10 +17,10 @@ describe('TodoFacade', () => {
       imports: [HttpClientTestingModule],
       providers: [provideMockStore()]
     });
-    store = TestBed.get(Store);
+    store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(store, 'pipe').and.callThrough();
-    facade = TestBed.get(TodoFacade);
+    facade = TestBed.inject(TodoFacade);
   }));
 
   it('should call loadAll', () => {

@@ -1,19 +1,19 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Todo } from '../../../models';
-import { TodoFacade } from '../../../store/facades';
-import { TodoPageComponent } from './todo-page.component';
+import { Todo } from './models';
+import { TodoFacade } from './store/facades';
+import { TodoComponent } from './todo.component';
 
-describe('TodoPageComponent', () => {
-  let component: TodoPageComponent;
-  let fixture: ComponentFixture<TodoPageComponent>;
+describe('TodoComponent', () => {
+  let component: TodoComponent;
+  let fixture: ComponentFixture<TodoComponent>;
   let service: TodoFacade;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [],
-      declarations: [TodoPageComponent],
+      declarations: [TodoComponent],
       providers: [
         {
           provide: TodoFacade,
@@ -27,9 +27,9 @@ describe('TodoPageComponent', () => {
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
-    fixture = TestBed.createComponent(TodoPageComponent);
+    fixture = TestBed.createComponent(TodoComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(TodoFacade);
+    service = TestBed.inject(TodoFacade);
   }));
 
   it('should create', () => {

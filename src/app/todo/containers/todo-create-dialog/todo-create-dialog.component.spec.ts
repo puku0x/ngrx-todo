@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { TodoFacade } from '../../../store/facades';
+import { TodoFacade } from '../../store/facades';
 import { TodoCreateDialogComponent } from './todo-create-dialog.component';
 
 describe('TodoCreateDialogComponent', () => {
@@ -24,7 +24,7 @@ describe('TodoCreateDialogComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(TodoCreateDialogComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(TodoFacade);
+    service = TestBed.inject(TodoFacade);
   }));
 
   it('should create', () => {

@@ -16,8 +16,8 @@ describe('TodoService', () => {
       imports: [HttpClientTestingModule],
       providers: [{ provide: 'API_URL', useValue: '' }]
     });
-    service = TestBed.get(TodoService);
-    httpMock = TestBed.get(HttpTestingController);
+    service = TestBed.inject(TodoService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
@@ -146,15 +146,9 @@ describe('TodoService', () => {
   });
 
   it('should successfully mock remove request', () => {
-    const todo: Todo = {
-      id: '1',
-      text: 'test1',
-      checked: true,
-      createdAt: 1000000,
-      updatedAt: 2000000
-    };
-    service.remove(todo.id).subscribe(data => {
-      expect(data).toEqual(null);
+    const id = '1';
+    service.remove(id).subscribe(data => {
+      expect(data).toEqual(id);
     });
     const req = httpMock.expectOne(`/todos/1`);
     expect(req.request.method).toEqual('DELETE');

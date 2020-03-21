@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { Todo } from '../../models';
-import { State } from '../states';
 import * as TodoSelectors from '../selectors';
 import * as TodoActions from '../actions';
 
@@ -14,7 +13,7 @@ export class TodoFacade {
   todos$ = this.store.pipe(select(TodoSelectors.getTodos));
   todo$ = this.store.pipe(select(TodoSelectors.getTodo));
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store) {}
 
   /**
    * Load all

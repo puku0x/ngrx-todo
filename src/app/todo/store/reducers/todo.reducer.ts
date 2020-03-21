@@ -1,15 +1,15 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import { createReducer, on } from '@ngrx/store';
 
-import { State, initialState, adapter } from '../states';
+import { initialState, adapter } from '../states';
 import * as TodoActions from '../actions';
 
-const todoReducer = createReducer(
+export const reducer = createReducer(
   initialState,
   on(TodoActions.loadAll, state => {
     return { ...state, loading: true };
   }),
   on(TodoActions.loadAllSuccess, (state, { todos }) => {
-    return adapter.addAll(todos, { ...state, loading: false });
+    return adapter.setAll(todos, { ...state, loading: false });
   }),
   on(TodoActions.loadAllFailure, (state, { error }) => {
     return { ...state, loading: false, error };
@@ -54,12 +54,3 @@ const todoReducer = createReducer(
     return { ...state, loading: false, error };
   })
 );
-
-/**
- * Reducer
- * @param state State
- * @param action Action
- */
-export function reducer(state: State, action: Action) {
-  return todoReducer(state, action);
-}

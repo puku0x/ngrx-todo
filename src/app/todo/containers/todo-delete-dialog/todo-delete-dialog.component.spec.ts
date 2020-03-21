@@ -2,7 +2,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { TodoFacade } from '../../../store/facades';
+import { TodoFacade } from '../../store/facades';
 import { TodoDeleteDialogComponent } from './todo-delete-dialog.component';
 
 describe('TodoDeleteDialogComponent', () => {
@@ -25,7 +25,7 @@ describe('TodoDeleteDialogComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(TodoDeleteDialogComponent);
     component = fixture.componentInstance;
-    service = TestBed.get(TodoFacade);
+    service = TestBed.inject(TodoFacade);
   }));
 
   it('should create', () => {
