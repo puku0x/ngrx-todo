@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Todo } from '../../../models';
-import { TodoFacade } from '../../../store/facades';
+import { Todo } from './models';
+import { TodoFacade } from './store/facades';
 
 @Component({
-  selector: 'app-todo-page',
-  templateUrl: './todo-page.component.html',
-  styleUrls: ['./todo-page.component.scss']
+  selector: 'app-todo',
+  templateUrl: './todo.component.html',
+  styleUrls: ['./todo.component.scss']
 })
-export class TodoPageComponent implements OnInit {
-  title = 'learn-ngrx';
+export class TodoComponent implements OnInit {
   loading$: Observable<boolean>;
   todos$: Observable<Todo[]>;
 

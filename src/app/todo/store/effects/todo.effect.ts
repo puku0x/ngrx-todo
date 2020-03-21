@@ -9,7 +9,7 @@ import {
   TodoCreateDialogComponent,
   TodoDeleteDialogComponent,
   TodoEditDialogComponent
-} from '../../components';
+} from '../../containers';
 import * as TodoActions from '../actions';
 
 /**
@@ -80,7 +80,7 @@ export class TodoEffects {
       ofType(TodoActions.remove),
       concatMap(({ id }) =>
         this.todoService.remove(id).pipe(
-          map(() => TodoActions.removeSuccess({ id })),
+          map(result => TodoActions.removeSuccess({ id: result })),
           catchError(error => of(TodoActions.removeFailure({ error })))
         )
       )
