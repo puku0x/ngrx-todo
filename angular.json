@@ -91,6 +91,13 @@
               "src/styles.scss"
             ],
             "scripts": []
+          },
+          "configurations": {
+            "ci": {
+              "watch": false,
+              "progress": false,
+              "browsers": "ChromeHeadlessCI"
+            }
           }
         },
         "lint": {
@@ -113,6 +120,9 @@
           "configurations": {
             "production": {
               "devServerTarget": "ngrx-todo:serve:production"
+            },
+            "ci": {
+              "protractorConfig": "e2e/protractor-ci.conf.js"
             }
           }
         }
