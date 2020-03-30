@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material';
-
 import { TodoListComponent, TodoListItemComponent } from './components';
 import {
   TodoCreateDialogComponent,

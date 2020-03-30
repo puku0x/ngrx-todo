@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Todo } from './models';
 import { TodoFacade } from './store/facades';
@@ -10,8 +11,10 @@ import { TodoFacade } from './store/facades';
   styleUrls: ['./todo.component.scss']
 })
 export class TodoComponent implements OnInit {
-  loading$: Observable<boolean>;
-  todos$: Observable<Todo[]>;
+  vm$ = combineLatest([
+    this.todoService.loading$,
+    this.todoService.todos$
+  ]).pipe(map(([loading, todos]) => ({ loading, todos })));
 
   /**
    * Constructor
@@ -22,8 +25,6 @@ export class TodoComponent implements OnInit {
    * Initialize
    */
   ngOnInit() {
-    this.loading$ = this.todoService.loading$;
-    this.todos$ = this.todoService.todos$;
     this.todoService.loadAll();
   }
 

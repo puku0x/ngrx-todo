@@ -1,15 +1,16 @@
 <mat-card>
-  <app-todo-list>
-    <app-todo-list-item
-      *ngFor="let todo of todos$ | async"
-      [todo]="todo"
-      [loading]="loading$ | async"
-      (update)="showEditDialog($event)"
-      (remove)="showRemoveDialog($event)"
-    ></app-todo-list-item>
-  </app-todo-list>
+  <ng-container *ngIf="vm$ | async as vm">
+    <app-todo-list>
+      <app-todo-list-item
+        *ngFor="let todo of vm.todos"
+        [todo]="todo"
+        [loading]="vm.loading"
+        (update)="showEditDialog($event)"
+        (remove)="showRemoveDialog($event)"
+      ></app-todo-list-item>
+    </app-todo-list>
+  </ng-container>
 </mat-card>
-
 <div class="fab-bottom-right">
   <button mat-fab color="accent" aria-label="Add" (click)="showCreateDialog()">
     <mat-icon>add</mat-icon>
