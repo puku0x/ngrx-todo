@@ -17,9 +17,9 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     MatToolbarModule,
     AppRoutingModule,
-    AppStoreModule
+    AppStoreModule,
   ],
   providers: [{ provide: 'API_URL', useValue: environment.apiUrl }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

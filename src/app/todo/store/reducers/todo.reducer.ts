@@ -5,7 +5,7 @@ import * as TodoActions from '../actions';
 
 export const reducer = createReducer(
   initialState,
-  on(TodoActions.loadAll, state => {
+  on(TodoActions.loadAll, (state) => {
     return { ...state, loading: true };
   }),
   on(TodoActions.loadAllSuccess, (state, { todos }) => {
@@ -23,7 +23,7 @@ export const reducer = createReducer(
   on(TodoActions.loadFailure, (state, { error }) => {
     return { ...state, loading: false, error };
   }),
-  on(TodoActions.create, state => {
+  on(TodoActions.create, (state) => {
     return { ...state, loading: true };
   }),
   on(TodoActions.createSuccess, (state, { todo }) => {
@@ -32,7 +32,7 @@ export const reducer = createReducer(
   on(TodoActions.createFailure, (state, { error }) => {
     return { ...state, loading: false, error };
   }),
-  on(TodoActions.update, state => {
+  on(TodoActions.update, (state) => {
     return { ...state, loading: true };
   }),
   on(TodoActions.updateSuccess, (state, { todo }) => {
@@ -44,7 +44,7 @@ export const reducer = createReducer(
   on(TodoActions.updateFailure, (state, { error }) => {
     return { ...state, loading: false, error };
   }),
-  on(TodoActions.remove, state => {
+  on(TodoActions.remove, (state) => {
     return { ...state, loading: true };
   }),
   on(TodoActions.removeSuccess, (state, { id }) => {

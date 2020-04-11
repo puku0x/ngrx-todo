@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import {
   MatDialogModule,
   MatDialog,
-  MatDialogRef
+  MatDialogRef,
 } from '@angular/material/dialog';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jasmine-marbles';
@@ -28,7 +28,7 @@ describe('TodoEffects', () => {
         provideMockActions(() => actions$),
         {
           provide: MatDialog,
-          useValue: jasmine.createSpyObj('MatDialog', ['open'])
+          useValue: jasmine.createSpyObj('MatDialog', ['open']),
         },
         {
           provide: TodoService,
@@ -37,10 +37,10 @@ describe('TodoEffects', () => {
             'find',
             'create',
             'update',
-            'remove'
-          ])
-        }
-      ]
+            'remove',
+          ]),
+        },
+      ],
     });
     effects = TestBed.get(TodoEffects);
     dialog = TestBed.get(MatDialog);
@@ -63,22 +63,22 @@ describe('TodoEffects', () => {
           text: 'test1',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '2',
           text: 'test2',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '3',
           text: 'test3',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
-        }
+          updatedAt: 2000000,
+        },
       ];
       const response = cold('-b', { b: todos });
       service.findAll = () => response;
@@ -116,7 +116,7 @@ describe('TodoEffects', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const response = cold('-b', { b: todo });
       service.find = () => response;
@@ -152,13 +152,13 @@ describe('TodoEffects', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const response = cold('-b', { b: todo });
       service.create = () => response;
 
       const newTodo: Partial<Todo> = {
-        text: 'test1'
+        text: 'test1',
       };
       const action = TodoActions.create({ todo: newTodo });
       const completion = TodoActions.createSuccess({ todo });
@@ -174,7 +174,7 @@ describe('TodoEffects', () => {
       service.create = () => response;
 
       const todo: Partial<Todo> = {
-        text: 'test1'
+        text: 'test1',
       };
       const action = TodoActions.create({ todo });
       const completion = TodoActions.createFailure({ error });
@@ -192,7 +192,7 @@ describe('TodoEffects', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const response = cold('-b', { b: todo });
       service.update = () => response;
@@ -215,7 +215,7 @@ describe('TodoEffects', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const action = TodoActions.update({ todo });
       const completion = TodoActions.updateFailure({ error });
@@ -256,7 +256,7 @@ describe('TodoEffects', () => {
   });
 
   describe('showCreateDialog$', () => {
-    it('should open dialog', done => {
+    it('should open dialog', (done) => {
       const action = TodoActions.showCreateDialog();
       actions$ = of(action);
       effects.showCreateDialog$.subscribe(() => {
@@ -267,13 +267,13 @@ describe('TodoEffects', () => {
   });
 
   describe('hideCreateDialog$', () => {
-    it('should close dialog', done => {
+    it('should close dialog', (done) => {
       const todo: Todo = {
         id: '1',
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const action = TodoActions.createSuccess({ todo });
       actions$ = of(action);
@@ -287,13 +287,13 @@ describe('TodoEffects', () => {
   });
 
   describe('showEditDialog$', () => {
-    it('should open dialog', done => {
+    it('should open dialog', (done) => {
       const todo: Todo = {
         id: '1',
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const action = TodoActions.showEditDialog({ todo });
       actions$ = of(action);
@@ -305,13 +305,13 @@ describe('TodoEffects', () => {
   });
 
   describe('hideEditDialog$', () => {
-    it('should close dialog', done => {
+    it('should close dialog', (done) => {
       const todo: Todo = {
         id: '1',
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const action = TodoActions.updateSuccess({ todo });
       actions$ = of(action);
@@ -325,7 +325,7 @@ describe('TodoEffects', () => {
   });
 
   describe('showRemoveDialog$', () => {
-    it('should open dialog', done => {
+    it('should open dialog', (done) => {
       const id = '1';
       const action = TodoActions.showRemoveDialog({ id });
       actions$ = of(action);
@@ -337,7 +337,7 @@ describe('TodoEffects', () => {
   });
 
   describe('hideRemoveDialog$', () => {
-    it('should close dialog', done => {
+    it('should close dialog', (done) => {
       const id = '1';
       const action = TodoActions.removeSuccess({ id });
       actions$ = of(action);

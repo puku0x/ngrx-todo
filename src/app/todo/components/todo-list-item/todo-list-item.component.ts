@@ -3,7 +3,7 @@ import {
   Input,
   Output,
   ChangeDetectionStrategy,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 
 import { Todo } from '../../models';
@@ -12,7 +12,7 @@ import { Todo } from '../../models';
   selector: 'app-todo-list-item',
   templateUrl: './todo-list-item.component.html',
   styleUrls: ['./todo-list-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListItemComponent {
   @Input() loading: boolean;

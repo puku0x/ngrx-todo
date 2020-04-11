@@ -11,7 +11,7 @@ describe('TodoListItemComponent', () => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [TodoListItemComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TodoListItemComponent);
     component = fixture.componentInstance;

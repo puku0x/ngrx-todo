@@ -15,11 +15,11 @@ describe('TodoReducer', () => {
   describe('TodoActions', () => {
     it('should handle loadAll', () => {
       const state: State = {
-        ...initialState
+        ...initialState,
       };
       const expected: State = {
         ...state,
-        loading: true
+        loading: true,
       };
       const action = TodoActions.loadAll({ offset: 0, limit: 100 });
       expect(reducer(state, action)).toEqual(expected);
@@ -32,30 +32,30 @@ describe('TodoReducer', () => {
           text: 'test1',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '2',
           text: 'test2',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '3',
           text: 'test3',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
-        }
+          updatedAt: 2000000,
+        },
       ];
       const state: State = {
         ...initialState,
-        loading: true
+        loading: true,
       };
-      const expected: State = adapter.addAll(todos, {
+      const expected: State = adapter.setAll(todos, {
         ...state,
-        loading: false
+        loading: false,
       });
       const action = TodoActions.loadAllSuccess({ todos });
       expect(reducer(state, action)).toEqual(expected);
@@ -65,12 +65,12 @@ describe('TodoReducer', () => {
       const error = 'error';
       const state: State = {
         ...initialState,
-        loading: true
+        loading: true,
       };
       const expected: State = {
         ...state,
         loading: false,
-        error
+        error,
       };
       const action = TodoActions.loadAllFailure({ error });
       expect(reducer(state, action)).toEqual(expected);
@@ -80,12 +80,12 @@ describe('TodoReducer', () => {
       const id = '1';
       const state: State = {
         ...initialState,
-        loading: false
+        loading: false,
       };
       const expected: State = {
         ...state,
         loading: true,
-        selectedId: id
+        selectedId: id,
       };
       const action = TodoActions.load({ id });
       expect(reducer(state, action)).toEqual(expected);
@@ -97,16 +97,16 @@ describe('TodoReducer', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const state: State = {
         ...initialState,
         loading: true,
-        selectedId: todo.id
+        selectedId: todo.id,
       };
       const expected: State = adapter.upsertOne(todo, {
         ...state,
-        loading: false
+        loading: false,
       });
       const action = TodoActions.loadSuccess({ todo });
       expect(reducer(state, action)).toEqual(expected);
@@ -116,12 +116,12 @@ describe('TodoReducer', () => {
       const error = 'error';
       const state: State = {
         ...initialState,
-        loading: true
+        loading: true,
       };
       const expected: State = {
         ...state,
         loading: false,
-        error
+        error,
       };
       const action = TodoActions.loadFailure({ error });
       expect(reducer(state, action)).toEqual(expected);
@@ -129,15 +129,15 @@ describe('TodoReducer', () => {
 
     it('should handle create', () => {
       const todo: Partial<Todo> = {
-        text: 'test1'
+        text: 'test1',
       };
       const state: State = {
         ...initialState,
-        loading: false
+        loading: false,
       };
       const expected: State = {
         ...state,
-        loading: true
+        loading: true,
       };
       const action = TodoActions.create({ todo });
       expect(reducer(state, action)).toEqual(expected);
@@ -149,15 +149,15 @@ describe('TodoReducer', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const state: State = {
         ...initialState,
-        loading: true
+        loading: true,
       };
       const expected: State = adapter.addOne(todo, {
         ...state,
-        loading: false
+        loading: false,
       });
       const action = TodoActions.createSuccess({ todo });
       expect(reducer(state, action)).toEqual(expected);
@@ -167,12 +167,12 @@ describe('TodoReducer', () => {
       const error = 'error';
       const state: State = {
         ...initialState,
-        loading: true
+        loading: true,
       };
       const expected: State = {
         ...state,
         loading: false,
-        error
+        error,
       };
       const action = TodoActions.createFailure({ error });
       expect(reducer(state, action)).toEqual(expected);
@@ -184,7 +184,7 @@ describe('TodoReducer', () => {
         text: 'test1a',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const state: State = adapter.addOne(
         {
@@ -192,13 +192,13 @@ describe('TodoReducer', () => {
           text: 'test1',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         { ...initialState }
       );
       const expected: State = {
         ...state,
-        loading: true
+        loading: true,
       };
       const action = TodoActions.update({ todo });
       expect(reducer(state, action)).toEqual(expected);
@@ -210,7 +210,7 @@ describe('TodoReducer', () => {
         text: 'test1a',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       };
       const state: State = adapter.addOne(
         {
@@ -218,7 +218,7 @@ describe('TodoReducer', () => {
           text: 'test1',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         { ...initialState, loading: true }
       );
@@ -234,12 +234,12 @@ describe('TodoReducer', () => {
       const error = 'error';
       const state: State = {
         ...initialState,
-        loading: true
+        loading: true,
       };
       const expected: State = {
         ...state,
         loading: false,
-        error
+        error,
       };
       const action = TodoActions.updateFailure({ error });
       expect(reducer(state, action)).toEqual(expected);
@@ -253,27 +253,27 @@ describe('TodoReducer', () => {
           text: 'test1',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '2',
           text: 'test2',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '3',
           text: 'test3',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
-        }
+          updatedAt: 2000000,
+        },
       ];
-      const state: State = adapter.addAll(todos, { ...initialState });
+      const state: State = adapter.setAll(todos, { ...initialState });
       const expected: State = {
         ...state,
-        loading: true
+        loading: true,
       };
       const action = TodoActions.remove({ id });
       expect(reducer(state, action)).toEqual(expected);
@@ -287,26 +287,26 @@ describe('TodoReducer', () => {
           text: 'test1',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '2',
           text: 'test2',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '3',
           text: 'test3',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
-        }
+          updatedAt: 2000000,
+        },
       ];
-      const state: State = adapter.addAll(todos, {
+      const state: State = adapter.setAll(todos, {
         ...initialState,
-        loading: false
+        loading: false,
       });
       const expected: State = adapter.removeOne(id, { ...state });
       const action = TodoActions.removeSuccess({ id });
@@ -320,32 +320,32 @@ describe('TodoReducer', () => {
           text: 'test1',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '2',
           text: 'test2',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
+          updatedAt: 2000000,
         },
         {
           id: '3',
           text: 'test3',
           checked: true,
           createdAt: 1000000,
-          updatedAt: 2000000
-        }
+          updatedAt: 2000000,
+        },
       ];
       const error = 'error';
-      const state: State = adapter.addAll(todos, {
+      const state: State = adapter.setAll(todos, {
         ...initialState,
-        loading: true
+        loading: true,
       });
       const expected: State = {
         ...state,
         loading: false,
-        error
+        error,
       };
       const action = TodoActions.removeFailure({ error });
       expect(reducer(state, action)).toEqual(expected);

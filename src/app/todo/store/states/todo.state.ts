@@ -25,5 +25,5 @@ export const adapter = createEntityAdapter<Todo>();
  * Initial state
  */
 export const initialState: State = adapter.getInitialState({
-  loading: false
+  loading: false,
 });

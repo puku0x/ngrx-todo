@@ -6,7 +6,7 @@ import * as TodoSelectors from '../selectors';
 import * as TodoActions from '../actions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoFacade {
   loading$ = this.store.pipe(select(TodoSelectors.getLoading));

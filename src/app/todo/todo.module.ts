@@ -7,7 +7,7 @@ import { TodoListComponent, TodoListItemComponent } from './components';
 import {
   TodoCreateDialogComponent,
   TodoDeleteDialogComponent,
-  TodoEditDialogComponent
+  TodoEditDialogComponent,
 } from './containers';
 import { TodoStoreModule } from './store';
 import { TodoRoutingModule } from './todo-routing.module';
@@ -20,7 +20,7 @@ import { TodoComponent } from './todo.component';
     ReactiveFormsModule,
     MaterialModule,
     TodoRoutingModule,
-    TodoStoreModule
+    TodoStoreModule,
   ],
   declarations: [
     TodoListComponent,
@@ -28,7 +28,7 @@ import { TodoComponent } from './todo.component';
     TodoCreateDialogComponent,
     TodoDeleteDialogComponent,
     TodoEditDialogComponent,
-    TodoComponent
-  ]
+    TodoComponent,
+  ],
 })
 export class TodoModule {}

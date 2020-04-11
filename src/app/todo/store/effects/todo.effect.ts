@@ -8,7 +8,7 @@ import { TodoService } from '../../services';
 import {
   TodoCreateDialogComponent,
   TodoDeleteDialogComponent,
-  TodoEditDialogComponent
+  TodoEditDialogComponent,
 } from '../../containers';
 import * as TodoActions from '../actions';
 
@@ -32,8 +32,8 @@ export class TodoEffects {
       ofType(TodoActions.loadAll),
       switchMap(({ offset, limit }) =>
         this.todoService.findAll(offset, limit).pipe(
-          map(result => TodoActions.loadAllSuccess({ todos: result })),
-          catchError(error => of(TodoActions.loadAllFailure({ error })))
+          map((result) => TodoActions.loadAllSuccess({ todos: result })),
+          catchError((error) => of(TodoActions.loadAllFailure({ error })))
         )
       )
     )
@@ -44,8 +44,8 @@ export class TodoEffects {
       ofType(TodoActions.load),
       concatMap(({ id }) =>
         this.todoService.find(id).pipe(
-          map(result => TodoActions.loadSuccess({ todo: result })),
-          catchError(error => of(TodoActions.loadFailure({ error })))
+          map((result) => TodoActions.loadSuccess({ todo: result })),
+          catchError((error) => of(TodoActions.loadFailure({ error })))
         )
       )
     )
@@ -56,8 +56,8 @@ export class TodoEffects {
       ofType(TodoActions.create),
       concatMap(({ todo }) =>
         this.todoService.create(todo).pipe(
-          map(result => TodoActions.createSuccess({ todo: result })),
-          catchError(error => of(TodoActions.createFailure({ error })))
+          map((result) => TodoActions.createSuccess({ todo: result })),
+          catchError((error) => of(TodoActions.createFailure({ error })))
         )
       )
     )
@@ -68,8 +68,8 @@ export class TodoEffects {
       ofType(TodoActions.update),
       concatMap(({ todo }) =>
         this.todoService.update(todo).pipe(
-          map(result => TodoActions.updateSuccess({ todo: result })),
-          catchError(error => of(TodoActions.updateFailure({ error })))
+          map((result) => TodoActions.updateSuccess({ todo: result })),
+          catchError((error) => of(TodoActions.updateFailure({ error })))
         )
       )
     )
@@ -80,8 +80,8 @@ export class TodoEffects {
       ofType(TodoActions.remove),
       concatMap(({ id }) =>
         this.todoService.remove(id).pipe(
-          map(result => TodoActions.removeSuccess({ id: result })),
-          catchError(error => of(TodoActions.removeFailure({ error })))
+          map((result) => TodoActions.removeSuccess({ id: result })),
+          catchError((error) => of(TodoActions.removeFailure({ error })))
         )
       )
     )
@@ -93,7 +93,7 @@ export class TodoEffects {
         ofType(TodoActions.showCreateDialog),
         tap(() => {
           this.createDialogRef = this.dialog.open(TodoCreateDialogComponent, {
-            width: '400px'
+            width: '400px',
           });
         })
       ),
@@ -118,7 +118,7 @@ export class TodoEffects {
         tap(({ todo }) => {
           this.editDialogRef = this.dialog.open(TodoEditDialogComponent, {
             width: '400px',
-            data: { todo }
+            data: { todo },
           });
         })
       ),
@@ -142,7 +142,7 @@ export class TodoEffects {
         ofType(TodoActions.showRemoveDialog),
         tap(({ id }) => {
           this.removeDialogRef = this.dialog.open(TodoDeleteDialogComponent, {
-            data: { id }
+            data: { id },
           });
         })
       ),

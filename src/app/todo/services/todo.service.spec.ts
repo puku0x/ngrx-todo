@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 
 import { Todo } from '../models';
@@ -14,7 +14,7 @@ describe('TodoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [{ provide: 'API_URL', useValue: '' }]
+      providers: [{ provide: 'API_URL', useValue: '' }],
     });
     service = TestBed.inject(TodoService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -35,24 +35,24 @@ describe('TodoService', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       },
       {
         id: '2',
         text: 'test2',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       },
       {
         id: '3',
         text: 'test3',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
-      }
+        updatedAt: 2000000,
+      },
     ];
-    service.findAll().subscribe(data => {
+    service.findAll().subscribe((data) => {
       expect(data).toBe(response);
     });
     const req = httpMock.expectOne(`/todos`);
@@ -67,26 +67,26 @@ describe('TodoService', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       },
       {
         id: '2',
         text: 'test2',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       },
       {
         id: '3',
         text: 'test3',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
-      }
+        updatedAt: 2000000,
+      },
     ];
     const offset = 1;
     const limit = 100;
-    service.findAll(offset, limit).subscribe(data => {
+    service.findAll(offset, limit).subscribe((data) => {
       expect(data).toBe(response);
     });
     const req = httpMock.expectOne(`/todos?offset=${offset}&limit=${limit}`);
@@ -100,9 +100,9 @@ describe('TodoService', () => {
       text: 'test1',
       checked: true,
       createdAt: 1000000,
-      updatedAt: 2000000
+      updatedAt: 2000000,
     };
-    service.find(todo.id).subscribe(data => {
+    service.find(todo.id).subscribe((data) => {
       expect(data).toBe(todo);
     });
     const req = httpMock.expectOne(`/todos/1`);
@@ -112,16 +112,16 @@ describe('TodoService', () => {
 
   it('should successfully mock create request', () => {
     const todo1: Partial<Todo> = {
-      text: 'test1'
+      text: 'test1',
     };
     const todo2: Todo = {
       id: '1',
       text: 'test1',
       checked: true,
       createdAt: 1000000,
-      updatedAt: 2000000
+      updatedAt: 2000000,
     };
-    service.create(todo1).subscribe(data => {
+    service.create(todo1).subscribe((data) => {
       expect(data).toEqual(todo2);
     });
     const req = httpMock.expectOne(`/todos`);
@@ -135,9 +135,9 @@ describe('TodoService', () => {
       text: 'test1',
       checked: true,
       createdAt: 1000000,
-      updatedAt: 2000000
+      updatedAt: 2000000,
     };
-    service.update(todo).subscribe(data => {
+    service.update(todo).subscribe((data) => {
       expect(data).toEqual(todo);
     });
     const req = httpMock.expectOne(`/todos/1`);
@@ -147,7 +147,7 @@ describe('TodoService', () => {
 
   it('should successfully mock remove request', () => {
     const id = '1';
-    service.remove(id).subscribe(data => {
+    service.remove(id).subscribe((data) => {
       expect(data).toEqual(id);
     });
     const req = httpMock.expectOne(`/todos/1`);

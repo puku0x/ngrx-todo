@@ -12,9 +12,9 @@ import { reducers, metaReducers } from './reducers';
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
-      logOnly: environment.production
+      logOnly: environment.production,
     }),
-    EffectsModule.forRoot([])
-  ]
+    EffectsModule.forRoot([]),
+  ],
 })
 export class AppStoreModule {}

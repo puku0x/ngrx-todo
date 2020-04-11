@@ -8,13 +8,16 @@ import { State, featureName, adapter } from '../states';
 const getTodoState = createFeatureSelector<State>(featureName);
 const { selectAll, selectEntities } = adapter.getSelectors();
 
-export const getLoading = createSelector(getTodoState, state => state.loading);
+export const getLoading = createSelector(
+  getTodoState,
+  (state) => state.loading
+);
 
-export const getError = createSelector(getTodoState, state => state.error);
+export const getError = createSelector(getTodoState, (state) => state.error);
 
 export const getSelectedId = createSelector(
   getTodoState,
-  state => state.selectedId
+  (state) => state.selectedId
 );
 
 export const getTodos = createSelector(getTodoState, selectAll);

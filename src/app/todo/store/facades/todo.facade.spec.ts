@@ -15,7 +15,7 @@ describe('TodoFacade', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [provideMockStore()]
+      providers: [provideMockStore()],
     });
     store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
@@ -42,7 +42,7 @@ describe('TodoFacade', () => {
       text: 'test1',
       checked: true,
       createdAt: 1000000,
-      updatedAt: 2000000
+      updatedAt: 2000000,
     };
     facade.create(todo);
     const action = TodoActions.create({ todo });
@@ -55,7 +55,7 @@ describe('TodoFacade', () => {
       text: 'test1',
       checked: true,
       createdAt: 1000000,
-      updatedAt: 2000000
+      updatedAt: 2000000,
     };
     facade.update(todo);
     const action = TodoActions.update({ todo });
@@ -81,7 +81,7 @@ describe('TodoFacade', () => {
       text: 'test1',
       checked: true,
       createdAt: 1000000,
-      updatedAt: 2000000
+      updatedAt: 2000000,
     };
     facade.showEditDialog(todo);
     const action = TodoActions.showEditDialog({ todo });

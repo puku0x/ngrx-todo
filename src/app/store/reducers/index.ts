@@ -6,7 +6,7 @@ import { State } from '../states';
 import { logger } from './logger.reducer';
 
 export const reducers: ActionReducerMap<State> = {
-  router: fromRouter.routerReducer
+  router: fromRouter.routerReducer,
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production

@@ -8,7 +8,7 @@ import { Todo } from '../models';
  * Service
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TodoService {
   constructor(

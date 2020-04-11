@@ -6,12 +6,12 @@ import { TodoComponent } from './todo.component';
 const routes: Routes = [
   {
     path: '',
-    component: TodoComponent
-  }
+    component: TodoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TodoRoutingModule {}

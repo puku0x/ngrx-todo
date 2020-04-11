@@ -3,7 +3,7 @@ import {
   State as TodoState,
   featureName,
   initialState,
-  adapter
+  adapter,
 } from '../states';
 import * as TodoSelectors from './todo.selector';
 
@@ -19,29 +19,29 @@ describe('TodoSelector', () => {
         text: 'test1',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       },
       {
         id: '2',
         text: 'test2',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
+        updatedAt: 2000000,
       },
       {
         id: '3',
         text: 'test3',
         checked: true,
         createdAt: 1000000,
-        updatedAt: 2000000
-      }
+        updatedAt: 2000000,
+      },
     ];
     const state: State = {
-      [featureName]: adapter.addAll(todos, {
+      [featureName]: adapter.setAll(todos, {
         ...initialState,
         loading: true,
-        selectedId: '1'
-      })
+        selectedId: '1',
+      }),
     };
     expect(TodoSelectors.getLoading(state)).toEqual(state.todo.loading);
     expect(TodoSelectors.getError(state)).toEqual(state.todo.error);

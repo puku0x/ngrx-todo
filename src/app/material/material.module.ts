@@ -13,10 +13,10 @@ const modules = [
   MatDialogModule,
   MatIconModule,
   MatInputModule,
-  MatListModule
+  MatListModule,
 ];
 
 @NgModule({
-  exports: [...modules]
+  exports: [...modules],
 })
 export class MaterialModule {}
