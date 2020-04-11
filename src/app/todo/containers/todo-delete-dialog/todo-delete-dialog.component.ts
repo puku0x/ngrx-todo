@@ -1,28 +1,28 @@
 import { Component, ChangeDetectionStrategy, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 
-import { TodoFacade } from '../../store/facades';
+import * as TodoSelectors from '../../store/selectors';
+import * as TodoActions from '../../store/actions';
 
 @Component({
   selector: 'app-todo-delete-dialog',
   templateUrl: './todo-delete-dialog.component.html',
   styleUrls: ['./todo-delete-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoDeleteDialogComponent {
-  loading$: Observable<boolean>;
+  loading$ = this.store.pipe(select(TodoSelectors.getLoading));
   id: string;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: { id: string },
-    private todoService: TodoFacade
+    private store: Store,
+    @Inject(MAT_DIALOG_DATA) private data: { id: string }
   ) {
-    this.loading$ = this.todoService.loading$;
     this.id = this.data.id;
   }
 
   remove() {
-    this.todoService.remove(this.id);
+    this.store.dispatch(TodoActions.remove({ id: this.id }));
   }
 }

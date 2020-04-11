@@ -2,57 +2,49 @@ import {
   Component,
   ChangeDetectionStrategy,
   Inject,
-  EventEmitter,
   OnInit,
-  OnDestroy
 } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
 
 import { Todo } from '../../models';
-import { TodoFacade } from '../../store/facades';
+import * as TodoSelectors from '../../store/selectors';
+import * as TodoActions from '../../store/actions';
 
 @Component({
   selector: 'app-todo-edit-dialog',
   templateUrl: './todo-edit-dialog.component.html',
   styleUrls: ['./todo-edit-dialog.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoEditDialogComponent implements OnInit, OnDestroy {
-  private readonly onDestroy$ = new EventEmitter();
-  loading$: Observable<boolean>;
-  todo$: Observable<Todo>;
+export class TodoEditDialogComponent implements OnInit {
+  form = this.fb.group({
+    text: ['', Validators.required],
+  });
+  loading$ = this.store.pipe(select(TodoSelectors.getLoading));
   todo: Todo;
 
-  form = this.fb.group({
-    text: ['', Validators.required]
-  });
-
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: { todo: Todo },
     private fb: FormBuilder,
-    private todoService: TodoFacade
+    private store: Store,
+    @Inject(MAT_DIALOG_DATA) private data: { todo: Todo }
   ) {
-    this.loading$ = this.todoService.loading$;
-    // this.todo$ = this.todoService.todo$;
     this.todo = this.data.todo;
   }
 
   ngOnInit() {
     this.form.setValue({
-      text: this.todo.text
+      text: this.todo.text,
     });
-  }
-
-  ngOnDestroy() {
-    this.onDestroy$.emit();
   }
 
   save() {
     const text = this.form.get('text')?.value as string;
-    const todo = { ...this.todo, text };
-    this.todoService.update(todo);
+    const todo = {
+      ...this.todo,
+      text,
+    };
+    this.store.dispatch(TodoActions.update({ todo }));
   }
 }

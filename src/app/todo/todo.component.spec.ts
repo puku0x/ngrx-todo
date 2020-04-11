@@ -1,35 +1,29 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { Todo } from './models';
-import { TodoFacade } from './store/facades';
+import * as TodoActions from './store/actions';
 import { TodoComponent } from './todo.component';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;
   let fixture: ComponentFixture<TodoComponent>;
-  let service: TodoFacade;
+  let store: Store;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [],
       declarations: [TodoComponent],
-      providers: [
-        {
-          provide: TodoFacade,
-          useValue: jasmine.createSpyObj('TodoFacade', [
-            'loadAll',
-            'showCreateDialog',
-            'showEditDialog',
-            'showRemoveDialog'
-          ])
-        }
-      ],
-      schemas: [NO_ERRORS_SCHEMA]
+      providers: [provideMockStore()],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TodoComponent);
     component = fixture.componentInstance;
-    service = TestBed.inject(TodoFacade);
+    store = TestBed.inject(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'pipe').and.callThrough();
   }));
 
   it('should create', () => {
@@ -38,12 +32,14 @@ describe('TodoComponent', () => {
 
   it('should call loadAll', () => {
     component.ngOnInit();
-    expect(service.loadAll).toHaveBeenCalled();
+    const action = TodoActions.loadAll({ offset: 0, limit: 100 });
+    expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
   it('should call showCreateDialog', () => {
     component.showCreateDialog();
-    expect(service.showCreateDialog).toHaveBeenCalled();
+    const action = TodoActions.showCreateDialog();
+    expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
   it('should call showEditDialog', () => {
@@ -52,15 +48,17 @@ describe('TodoComponent', () => {
       text: 'test1',
       checked: true,
       createdAt: 1000000,
-      updatedAt: 2000000
+      updatedAt: 2000000,
     };
     component.showEditDialog(todo);
-    expect(service.showEditDialog).toHaveBeenCalled();
+    const action = TodoActions.showEditDialog({ todo });
+    expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
   it('should call showRemoveDialog', () => {
     const id = '1';
     component.showRemoveDialog(id);
-    expect(service.showRemoveDialog).toHaveBeenCalled();
+    const action = TodoActions.showRemoveDialog({ id });
+    expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });

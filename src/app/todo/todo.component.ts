@@ -1,51 +1,53 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Todo } from './models';
-import { TodoFacade } from './store/facades';
+import * as TodoSelectors from './store/selectors';
+import * as TodoActions from './store/actions';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+  styleUrls: ['./todo.component.scss'],
 })
 export class TodoComponent implements OnInit {
   vm$ = combineLatest([
-    this.todoService.loading$,
-    this.todoService.todos$
+    this.store.pipe(select(TodoSelectors.getLoading)),
+    this.store.pipe(select(TodoSelectors.getTodos)),
   ]).pipe(map(([loading, todos]) => ({ loading, todos })));
 
   /**
    * Constructor
    */
-  constructor(private todoService: TodoFacade) {}
+  constructor(private store: Store) {}
 
   /**
    * Initialize
    */
   ngOnInit() {
-    this.todoService.loadAll();
+    this.store.dispatch(TodoActions.loadAll({ offset: 0, limit: 100 }));
   }
 
   /**
    * Show create dialog
    */
   showCreateDialog() {
-    this.todoService.showCreateDialog();
+    this.store.dispatch(TodoActions.showCreateDialog());
   }
 
   /**
    * Show edit dialog
    */
   showEditDialog(todo: Todo) {
-    this.todoService.showEditDialog(todo);
+    this.store.dispatch(TodoActions.showEditDialog({ todo }));
   }
 
   /**
    * Show remove dialog
    */
   showRemoveDialog(id: string) {
-    this.todoService.showRemoveDialog(id);
+    this.store.dispatch(TodoActions.showRemoveDialog({ id }));
   }
 }

@@ -1,39 +1,42 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 
-import { TodoFacade } from '../../store/facades';
+import * as TodoActions from '../../store/actions';
 import { TodoDeleteDialogComponent } from './todo-delete-dialog.component';
 
 describe('TodoDeleteDialogComponent', () => {
-  let service: TodoFacade;
   let component: TodoDeleteDialogComponent;
   let fixture: ComponentFixture<TodoDeleteDialogComponent>;
+  let store: Store;
+  const id = '1';
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
-        { provide: MAT_DIALOG_DATA, useValue: { id: '1' } },
-        {
-          provide: TodoFacade,
-          useValue: jasmine.createSpyObj('TodoFacade', ['remove'])
-        }
+        provideMockStore(),
+        { provide: MAT_DIALOG_DATA, useValue: { id } },
       ],
       declarations: [TodoDeleteDialogComponent],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     fixture = TestBed.createComponent(TodoDeleteDialogComponent);
     component = fixture.componentInstance;
-    service = TestBed.inject(TodoFacade);
+    store = TestBed.inject(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'pipe').and.callThrough();
   }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call update', () => {
+  it('should call remove', () => {
     component.remove();
-    expect(service.remove).toHaveBeenCalled();
+    const action = TodoActions.remove({ id });
+    expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });
