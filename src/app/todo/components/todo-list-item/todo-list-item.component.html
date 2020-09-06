@@ -1,4 +1,4 @@
-<mat-list-item role="listitem" (click)="update.emit(todo)">
+<mat-list-item role="listitem" (click)="update.emit(todo)" *ngIf="todo">
   <p matLine>{{ todo.text }}</p>
   <button
     mat-icon-button

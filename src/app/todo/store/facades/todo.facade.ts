@@ -20,7 +20,7 @@ export class TodoFacade {
    * @param offset Offset
    * @param limit Limit
    */
-  loadAll(offset?: number, limit?: number) {
+  loadAll(offset?: number, limit?: number): void {
     this.store.dispatch(TodoActions.loadAll({ offset, limit }));
   }
 
@@ -28,7 +28,7 @@ export class TodoFacade {
    * Load
    * @param id ID
    */
-  load(id: string) {
+  load(id: string): void {
     this.store.dispatch(TodoActions.load({ id }));
   }
 
@@ -36,7 +36,7 @@ export class TodoFacade {
    * Create
    * @param todo Todo
    */
-  create(todo: Partial<Todo>) {
+  create(todo: Partial<Todo>): void {
     this.store.dispatch(TodoActions.create({ todo }));
   }
 
@@ -44,7 +44,7 @@ export class TodoFacade {
    * Update
    * @param todo Todo
    */
-  update(todo: Todo) {
+  update(todo: Todo): void {
     this.store.dispatch(TodoActions.update({ todo }));
   }
 
@@ -52,14 +52,14 @@ export class TodoFacade {
    * Remove
    * @param id ID
    */
-  remove(id: string) {
+  remove(id: string): void {
     this.store.dispatch(TodoActions.remove({ id }));
   }
 
   /**
    * Show create dialog
    */
-  showCreateDialog() {
+  showCreateDialog(): void {
     this.store.dispatch(TodoActions.showCreateDialog());
   }
 
@@ -67,7 +67,7 @@ export class TodoFacade {
    * Show edit dialog
    * @param todo Todo
    */
-  showEditDialog(todo: Todo) {
+  showEditDialog(todo: Todo): void {
     this.store.dispatch(TodoActions.showEditDialog({ todo }));
   }
 
@@ -75,7 +75,7 @@ export class TodoFacade {
    * Show delete dialog
    * @param id ID
    */
-  showRemoveDialog(id: string) {
+  showRemoveDialog(id: string): void {
     this.store.dispatch(TodoActions.showRemoveDialog({ id }));
   }
 }

@@ -26,28 +26,28 @@ export class TodoComponent implements OnInit {
   /**
    * Initialize
    */
-  ngOnInit() {
+  ngOnInit(): void {
     this.store.dispatch(TodoActions.loadAll({ offset: 0, limit: 100 }));
   }
 
   /**
    * Show create dialog
    */
-  showCreateDialog() {
+  showCreateDialog(): void {
     this.store.dispatch(TodoActions.showCreateDialog());
   }
 
   /**
    * Show edit dialog
    */
-  showEditDialog(todo: Todo) {
+  showEditDialog(todo: Todo): void {
     this.store.dispatch(TodoActions.showEditDialog({ todo }));
   }
 
   /**
    * Show remove dialog
    */
-  showRemoveDialog(id: string) {
+  showRemoveDialog(id: string): void {
     this.store.dispatch(TodoActions.showRemoveDialog({ id }));
   }
 }

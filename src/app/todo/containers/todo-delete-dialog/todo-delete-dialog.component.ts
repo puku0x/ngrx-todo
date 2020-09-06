@@ -22,7 +22,7 @@ export class TodoDeleteDialogComponent {
     this.id = this.data.id;
   }
 
-  remove() {
+  remove(): void {
     this.store.dispatch(TodoActions.remove({ id: this.id }));
   }
 }

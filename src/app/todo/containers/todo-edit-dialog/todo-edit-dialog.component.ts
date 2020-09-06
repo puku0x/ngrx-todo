@@ -33,13 +33,13 @@ export class TodoEditDialogComponent implements OnInit {
     this.todo = this.data.todo;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.form.setValue({
       text: this.todo.text,
     });
   }
 
-  save() {
+  save(): void {
     const text = this.form.get('text')?.value as string;
     const todo = {
       ...this.todo,

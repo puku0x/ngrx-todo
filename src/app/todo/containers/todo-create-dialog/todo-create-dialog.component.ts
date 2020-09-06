@@ -20,7 +20,7 @@ export class TodoCreateDialogComponent {
 
   constructor(private fb: FormBuilder, private store: Store) {}
 
-  save() {
+  save(): void {
     const text: string = this.form.get('text')?.value;
     const todo: Partial<Todo> = {
       text,

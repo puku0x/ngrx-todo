@@ -42,9 +42,9 @@ describe('TodoEffects', () => {
         },
       ],
     });
-    effects = TestBed.get(TodoEffects);
-    dialog = TestBed.get(MatDialog);
-    service = TestBed.get(TodoService);
+    effects = TestBed.inject(TodoEffects);
+    dialog = TestBed.inject(MatDialog);
+    service = TestBed.inject(TodoService);
 
     // jasmine.createSpy()
     // effects.createDialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);

@@ -17,9 +17,9 @@ import * as TodoActions from '../actions';
  */
 @Injectable()
 export class TodoEffects {
-  createDialogRef: MatDialogRef<TodoCreateDialogComponent>;
-  editDialogRef: MatDialogRef<TodoEditDialogComponent>;
-  removeDialogRef: MatDialogRef<TodoDeleteDialogComponent>;
+  createDialogRef?: MatDialogRef<TodoCreateDialogComponent>;
+  editDialogRef?: MatDialogRef<TodoEditDialogComponent>;
+  removeDialogRef?: MatDialogRef<TodoDeleteDialogComponent>;
 
   constructor(
     private actions$: Actions,
@@ -105,7 +105,7 @@ export class TodoEffects {
       this.actions$.pipe(
         ofType(TodoActions.createSuccess),
         tap(() => {
-          this.createDialogRef.close();
+          this.createDialogRef?.close();
         })
       ),
     { dispatch: false }
@@ -130,7 +130,7 @@ export class TodoEffects {
       this.actions$.pipe(
         ofType(TodoActions.updateSuccess),
         tap(() => {
-          this.editDialogRef.close();
+          this.editDialogRef?.close();
         })
       ),
     { dispatch: false }
@@ -154,7 +154,7 @@ export class TodoEffects {
       this.actions$.pipe(
         ofType(TodoActions.removeSuccess),
         tap(() => {
-          this.removeDialogRef.close();
+          this.removeDialogRef?.close();
         })
       ),
     { dispatch: false }

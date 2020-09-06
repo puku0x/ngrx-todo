@@ -15,8 +15,8 @@ import { Todo } from '../../models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoListItemComponent {
-  @Input() loading: boolean;
-  @Input() todo: Todo;
+  @Input() loading?: boolean;
+  @Input() todo?: Todo;
   @Output() update = new EventEmitter<Todo>();
   @Output() remove = new EventEmitter<string>();
 }
