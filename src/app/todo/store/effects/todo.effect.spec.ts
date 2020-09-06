@@ -280,7 +280,7 @@ describe('TodoEffects', () => {
       effects.createDialogRef = { close: () => {} } as MatDialogRef<any>;
       spyOn(effects.createDialogRef, 'close').and.callThrough();
       effects.hideCreateDialog$.subscribe(() => {
-        expect(effects.createDialogRef.close).toHaveBeenCalled();
+        expect(effects.createDialogRef?.close).toHaveBeenCalled();
         done();
       });
     });
@@ -318,7 +318,7 @@ describe('TodoEffects', () => {
       effects.editDialogRef = { close: () => {} } as MatDialogRef<any>;
       spyOn(effects.editDialogRef, 'close').and.callThrough();
       effects.hideEditDialog$.subscribe(() => {
-        expect(effects.editDialogRef.close).toHaveBeenCalled();
+        expect(effects.editDialogRef?.close).toHaveBeenCalled();
         done();
       });
     });
@@ -344,7 +344,7 @@ describe('TodoEffects', () => {
       effects.removeDialogRef = { close: () => {} } as MatDialogRef<any>;
       spyOn(effects.removeDialogRef, 'close').and.callThrough();
       effects.hideRemoveDialog$.subscribe(() => {
-        expect(effects.removeDialogRef.close).toHaveBeenCalled();
+        expect(effects.removeDialogRef?.close).toHaveBeenCalled();
         done();
       });
     });
