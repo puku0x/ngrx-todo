@@ -8,9 +8,9 @@ describe('workspace-project App', () => {
     page = new AppPage();
   });
 
-  it('should display title', () => {
-    page.navigateTo();
-    expect(page.getTitleText()).toEqual('ngrx-todo');
+  it('should display title', async () => {
+    await page.navigateTo();
+    expect(await page.getTitleText()).toEqual('ngrx-todo');
   });
 
   afterEach(async () => {
