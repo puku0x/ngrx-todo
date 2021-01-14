@@ -17,6 +17,7 @@ export class TodoFacade {
 
   /**
    * Load all
+   *
    * @param offset Offset
    * @param limit Limit
    */
@@ -26,6 +27,7 @@ export class TodoFacade {
 
   /**
    * Load
+   *
    * @param id ID
    */
   load(id: string): void {
@@ -34,6 +36,7 @@ export class TodoFacade {
 
   /**
    * Create
+   *
    * @param todo Todo
    */
   create(todo: Partial<Todo>): void {
@@ -42,6 +45,7 @@ export class TodoFacade {
 
   /**
    * Update
+   *
    * @param todo Todo
    */
   update(todo: Todo): void {
@@ -50,6 +54,7 @@ export class TodoFacade {
 
   /**
    * Remove
+   *
    * @param id ID
    */
   remove(id: string): void {
@@ -65,6 +70,7 @@ export class TodoFacade {
 
   /**
    * Show edit dialog
+   *
    * @param todo Todo
    */
   showEditDialog(todo: Todo): void {
@@ -73,6 +79,7 @@ export class TodoFacade {
 
   /**
    * Show delete dialog
+   *
    * @param id ID
    */
   showRemoveDialog(id: string): void {

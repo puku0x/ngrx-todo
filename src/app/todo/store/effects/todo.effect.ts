@@ -21,12 +21,6 @@ export class TodoEffects {
   editDialogRef?: MatDialogRef<TodoEditDialogComponent>;
   removeDialogRef?: MatDialogRef<TodoDeleteDialogComponent>;
 
-  constructor(
-    private actions$: Actions,
-    private dialog: MatDialog,
-    private todoService: TodoService
-  ) {}
-
   loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.loadAll),
@@ -159,4 +153,10 @@ export class TodoEffects {
       ),
     { dispatch: false }
   );
+
+  constructor(
+    private actions$: Actions,
+    private dialog: MatDialog,
+    private todoService: TodoService
+  ) {}
 }

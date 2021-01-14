@@ -19,6 +19,7 @@ export class TodoService {
 
   /**
    * Find all
+   *
    * @param offset Offset
    * @param limit Limit
    */
@@ -32,6 +33,7 @@ export class TodoService {
 
   /**
    * Find
+   *
    * @param id ID
    */
   find(id: string): Observable<Todo> {
@@ -41,6 +43,7 @@ export class TodoService {
 
   /**
    * Create
+   *
    * @param todo Todo
    */
   create(todo: Partial<Todo>): Observable<Todo> {
@@ -50,6 +53,7 @@ export class TodoService {
 
   /**
    * Update
+   *
    * @param todo Todo
    */
   update(todo: Partial<Todo>): Observable<Todo> {
@@ -59,6 +63,7 @@ export class TodoService {
 
   /**
    * Remove
+   *
    * @param id ID
    */
   remove(id: string): Observable<string> {
