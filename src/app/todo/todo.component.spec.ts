@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
@@ -12,21 +12,19 @@ describe('TodoComponent', () => {
   let fixture: ComponentFixture<TodoComponent>;
   let store: Store;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [],
-        declarations: [TodoComponent],
-        providers: [provideMockStore()],
-        schemas: [NO_ERRORS_SCHEMA],
-      }).compileComponents();
-      fixture = TestBed.createComponent(TodoComponent);
-      component = fixture.componentInstance;
-      store = TestBed.inject(Store);
-      spyOn(store, 'dispatch').and.callThrough();
-      spyOn(store, 'pipe').and.callThrough();
-    })
-  );
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [],
+      declarations: [TodoComponent],
+      providers: [provideMockStore()],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+    fixture = TestBed.createComponent(TodoComponent);
+    component = fixture.componentInstance;
+    store = TestBed.inject(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'pipe').and.callThrough();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

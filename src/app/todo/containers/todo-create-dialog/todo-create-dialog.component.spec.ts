@@ -1,5 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -13,21 +13,19 @@ describe('TodoCreateDialogComponent', () => {
   let fixture: ComponentFixture<TodoCreateDialogComponent>;
   let store: Store;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [ReactiveFormsModule],
-        declarations: [TodoCreateDialogComponent],
-        providers: [provideMockStore()],
-        schemas: [NO_ERRORS_SCHEMA],
-      }).compileComponents();
-      fixture = TestBed.createComponent(TodoCreateDialogComponent);
-      component = fixture.componentInstance;
-      store = TestBed.inject(Store);
-      spyOn(store, 'dispatch').and.callThrough();
-      spyOn(store, 'pipe').and.callThrough();
-    })
-  );
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ReactiveFormsModule],
+      declarations: [TodoCreateDialogComponent],
+      providers: [provideMockStore()],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+    fixture = TestBed.createComponent(TodoCreateDialogComponent);
+    component = fixture.componentInstance;
+    store = TestBed.inject(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'pipe').and.callThrough();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -1,4 +1,4 @@
-import { waitForAsync, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -12,18 +12,16 @@ describe('TodoFacade', () => {
   let store: Store<State>;
   let facade: TodoFacade;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
-        providers: [provideMockStore()],
-      });
-      store = TestBed.inject(Store);
-      spyOn(store, 'dispatch').and.callThrough();
-      spyOn(store, 'pipe').and.callThrough();
-      facade = TestBed.inject(TodoFacade);
-    })
-  );
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [provideMockStore()],
+    });
+    store = TestBed.inject(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+    spyOn(store, 'pipe').and.callThrough();
+    facade = TestBed.inject(TodoFacade);
+  });
 
   it('should call loadAll', () => {
     facade.loadAll(0, 100);
