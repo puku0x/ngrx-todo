@@ -17,4 +17,4 @@ import { reducers, metaReducers } from './reducers';
     EffectsModule.forRoot([]),
   ],
 })
-export class AppStoreModule {}
+export class CoreModule {}

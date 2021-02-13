@@ -5,9 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { environment } from '../environments/environment';
-import { AppStoreModule } from './store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CoreModule } from './core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +17,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     MatToolbarModule,
     AppRoutingModule,
-    AppStoreModule,
+    CoreModule,
   ],
   providers: [{ provide: 'API_URL', useValue: environment.apiUrl }],
   bootstrap: [AppComponent],
