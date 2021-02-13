@@ -4,12 +4,12 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, tap, concatMap, switchMap, catchError } from 'rxjs/operators';
 
-import { TodoService } from '../../services';
 import {
   TodoCreateDialogComponent,
   TodoDeleteDialogComponent,
   TodoEditDialogComponent,
 } from '../../containers';
+import { TodoService } from '../../services';
 import * as TodoActions from '../actions';
 
 /**

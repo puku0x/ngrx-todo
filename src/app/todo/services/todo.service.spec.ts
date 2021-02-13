@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { Todo, TodoCreateDto, TodoUpdateDto } from '../models';
 import { TodoService } from './todo.service';
