@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
-import * as TodoActions from './actions';
-import { Todo } from './models';
+import * as TodoActions from '../../actions';
+import { Todo } from '../../models';
 import { TodoComponent } from './todo.component';
 
 describe('TodoComponent', () => {

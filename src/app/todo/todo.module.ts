@@ -10,13 +10,13 @@ import { MatListModule } from '@angular/material/list';
 
 import { TodoListComponent, TodoListItemComponent } from './components';
 import {
+  TodoComponent,
   TodoCreateDialogComponent,
   TodoDeleteDialogComponent,
   TodoEditDialogComponent,
 } from './containers';
 import { TodoRoutingModule } from './todo-routing.module';
 import { TodoStoreModule } from './todo-store.module';
-import { TodoComponent } from './todo.component';
 
 @NgModule({
   imports: [
@@ -35,10 +35,10 @@ import { TodoComponent } from './todo.component';
   declarations: [
     TodoListComponent,
     TodoListItemComponent,
+    TodoComponent,
     TodoCreateDialogComponent,
     TodoDeleteDialogComponent,
     TodoEditDialogComponent,
-    TodoComponent,
   ],
 })
 export class TodoModule {}
