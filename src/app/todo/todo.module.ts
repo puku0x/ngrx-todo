@@ -14,8 +14,8 @@ import {
   TodoDeleteDialogComponent,
   TodoEditDialogComponent,
 } from './containers';
-import { TodoStoreModule } from './store';
 import { TodoRoutingModule } from './todo-routing.module';
+import { TodoStoreModule } from './todo-store.module';
 import { TodoComponent } from './todo.component';
 
 @NgModule({

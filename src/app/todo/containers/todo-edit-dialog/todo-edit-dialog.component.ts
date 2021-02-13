@@ -8,9 +8,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 
+import * as TodoActions from '../../actions';
 import { Todo, TodoUpdateDto } from '../../models';
-import * as TodoActions from '../../store/actions';
-import * as TodoSelectors from '../../store/selectors';
+import * as TodoSelectors from '../../selectors';
 
 @Component({
   selector: 'app-todo-edit-dialog',

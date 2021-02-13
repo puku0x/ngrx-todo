@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
-import { Todo, TodoCreateDto, TodoUpdateDto } from '../../models';
 import * as TodoActions from '../actions';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../models';
 import * as TodoSelectors from '../selectors';
 
 @Injectable({

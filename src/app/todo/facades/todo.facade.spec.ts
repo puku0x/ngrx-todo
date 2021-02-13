@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { Todo, TodoCreateDto, TodoUpdateDto } from '../../models';
 import * as TodoActions from '../actions';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../models';
 import { State } from '../states';
 import { TodoFacade } from './todo.facade';
 

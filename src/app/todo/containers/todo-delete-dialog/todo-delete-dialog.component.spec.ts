@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
-import * as TodoActions from '../../store/actions';
+import * as TodoActions from '../../actions';
 import { TodoDeleteDialogComponent } from './todo-delete-dialog.component';
 
 describe('TodoDeleteDialogComponent', () => {

@@ -1,4 +1,4 @@
-import { Todo } from '../../models';
+import { Todo } from '../models';
 import {
   State as TodoState,
   featureName,

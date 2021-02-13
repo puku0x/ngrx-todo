@@ -5,8 +5,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
+import * as TodoActions from '../../actions';
 import { Todo, TodoUpdateDto } from '../../models';
-import * as TodoActions from '../../store/actions';
 import { TodoEditDialogComponent } from './todo-edit-dialog.component';
 
 describe('TodoEditDialogComponent', () => {

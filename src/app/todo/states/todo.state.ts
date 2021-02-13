@@ -1,6 +1,6 @@
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
 
-import { Todo } from '../../models';
+import { Todo } from '../models';
 
 /**
  * Feature name

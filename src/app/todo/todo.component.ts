@@ -3,9 +3,9 @@ import { Store, select } from '@ngrx/store';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+import * as TodoActions from './actions';
 import { Todo } from './models';
-import * as TodoActions from './store/actions';
-import * as TodoSelectors from './store/selectors';
+import * as TodoSelectors from './selectors';
 
 @Component({
   selector: 'app-todo',

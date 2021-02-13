@@ -8,9 +8,9 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 
-import { Todo, TodoCreateDto, TodoUpdateDto } from '../../models';
-import { TodoService } from '../../services';
 import * as TodoActions from '../actions';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../models';
+import { TodoService } from '../services';
 import { TodoEffects } from './todo.effect';
 
 describe('TodoEffects', () => {

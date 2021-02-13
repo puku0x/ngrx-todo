@@ -4,8 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
+import * as TodoActions from '../../actions';
 import { Todo, TodoCreateDto } from '../../models';
-import * as TodoActions from '../../store/actions';
 import { TodoCreateDialogComponent } from './todo-create-dialog.component';
 
 describe('TodoCreateDialogComponent', () => {
