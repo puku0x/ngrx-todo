@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 
-import { Todo } from '../models';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../models';
 import { TodoService } from './todo.service';
 
 describe('TodoService', () => {
@@ -32,22 +32,22 @@ describe('TodoService', () => {
     const response: Todo[] = [
       {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },
       {
         id: '2',
-        text: 'test2',
-        checked: true,
+        title: 'test2',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },
       {
         id: '3',
-        text: 'test3',
-        checked: true,
+        title: 'test3',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },
@@ -64,22 +64,22 @@ describe('TodoService', () => {
     const response: Todo[] = [
       {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },
       {
         id: '2',
-        text: 'test2',
-        checked: true,
+        title: 'test2',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },
       {
         id: '3',
-        text: 'test3',
-        checked: true,
+        title: 'test3',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },
@@ -97,8 +97,8 @@ describe('TodoService', () => {
   it('should successfully mock find request', () => {
     const todo: Todo = {
       id: '1',
-      text: 'test1',
-      checked: true,
+      title: 'test1',
+      completed: true,
       createdAt: 1000000,
       updatedAt: 2000000,
     };
@@ -111,33 +111,38 @@ describe('TodoService', () => {
   });
 
   it('should successfully mock create request', () => {
-    const todo1: Partial<Todo> = {
-      text: 'test1',
+    const dto: TodoCreateDto = {
+      title: 'test1',
     };
-    const todo2: Todo = {
+    const todo: Todo = {
       id: '1',
-      text: 'test1',
-      checked: true,
+      title: 'test1',
+      completed: true,
       createdAt: 1000000,
       updatedAt: 2000000,
     };
-    service.create(todo1).subscribe((data) => {
-      expect(data).toEqual(todo2);
+    service.create(dto).subscribe((data) => {
+      expect(data).toEqual(todo);
     });
     const req = httpMock.expectOne(`/todos`);
     expect(req.request.method).toEqual('POST');
-    req.flush(todo2);
+    req.flush(todo);
   });
 
   it('should successfully mock update request', () => {
+    const dto: TodoUpdateDto = {
+      id: '1',
+      title: 'test1',
+      completed: true,
+    };
     const todo: Todo = {
       id: '1',
-      text: 'test1',
-      checked: true,
+      title: 'test1',
+      completed: true,
       createdAt: 1000000,
       updatedAt: 2000000,
     };
-    service.update(todo).subscribe((data) => {
+    service.update(dto).subscribe((data) => {
       expect(data).toEqual(todo);
     });
     const req = httpMock.expectOne(`/todos/1`);

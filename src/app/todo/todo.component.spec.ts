@@ -45,8 +45,8 @@ describe('TodoComponent', () => {
   it('should call showEditDialog', () => {
     const todo: Todo = {
       id: '1',
-      text: 'test1',
-      checked: true,
+      title: 'test1',
+      completed: true,
       createdAt: 1000000,
       updatedAt: 2000000,
     };

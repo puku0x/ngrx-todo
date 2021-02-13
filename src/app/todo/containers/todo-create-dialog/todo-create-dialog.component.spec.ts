@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { Todo } from '../../models';
+import { Todo, TodoCreateDto } from '../../models';
 import * as TodoActions from '../../store/actions';
 import { TodoCreateDialogComponent } from './todo-create-dialog.component';
 
@@ -33,8 +33,8 @@ describe('TodoCreateDialogComponent', () => {
 
   it('should call create', () => {
     component.save();
-    const todo: Partial<Todo> = {
-      text: '',
+    const todo: TodoCreateDto = {
+      title: '',
     };
     const action = TodoActions.create({ todo });
     expect(store.dispatch).toHaveBeenCalledWith(action);

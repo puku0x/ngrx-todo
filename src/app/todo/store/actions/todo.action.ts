@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Todo } from '../../models';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../../models';
 
 export const loadAll = createAction(
   '[Todo Page] Load All',
@@ -31,7 +31,7 @@ export const loadFailure = createAction(
 
 export const create = createAction(
   '[Todo Page] Create',
-  props<{ todo: Partial<Todo> }>()
+  props<{ todo: TodoCreateDto }>()
 );
 
 export const createSuccess = createAction(
@@ -46,7 +46,7 @@ export const createFailure = createAction(
 
 export const update = createAction(
   '[Todo Page] Update',
-  props<{ todo: Todo }>()
+  props<{ todo: TodoUpdateDto }>()
 );
 
 export const updateSuccess = createAction(

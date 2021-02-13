@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 
-import { Todo } from '../../models';
+import { Todo, TodoCreateDto } from '../../models';
 import * as TodoSelectors from '../../store/selectors';
 import * as TodoActions from '../../store/actions';
 
@@ -21,9 +21,9 @@ export class TodoCreateDialogComponent {
   constructor(private fb: FormBuilder, private store: Store) {}
 
   save(): void {
-    const text: string = this.form.get('text')?.value;
-    const todo: Partial<Todo> = {
-      text,
+    const title: string = this.form.get('text')?.value;
+    const todo: TodoCreateDto = {
+      title,
     };
     this.store.dispatch(TodoActions.create({ todo }));
   }

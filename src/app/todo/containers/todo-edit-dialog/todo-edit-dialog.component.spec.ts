@@ -5,7 +5,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { Todo } from '../../models';
+import { Todo, TodoUpdateDto } from '../../models';
 import * as TodoActions from '../../store/actions';
 import { TodoEditDialogComponent } from './todo-edit-dialog.component';
 
@@ -14,15 +14,14 @@ describe('TodoEditDialogComponent', () => {
   let fixture: ComponentFixture<TodoEditDialogComponent>;
   let store: Store;
 
-  const todo: Todo = {
-    id: '1',
-    text: 'test1',
-    checked: true,
-    createdAt: 1000000,
-    updatedAt: 2000000,
-  };
-
   beforeEach(async () => {
+    const todo: Todo = {
+      id: '1',
+      title: 'test1',
+      completed: true,
+      createdAt: 1000000,
+      updatedAt: 2000000,
+    };
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [TodoEditDialogComponent],
@@ -46,7 +45,13 @@ describe('TodoEditDialogComponent', () => {
   it('should call update', () => {
     component.ngOnInit();
     component.save();
-    const action = TodoActions.update({ todo });
+    const dto: TodoUpdateDto = {
+      id: '1',
+      title: 'test1',
+      completed: true,
+    };
+    const action = TodoActions.update({ todo: dto });
+
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 });

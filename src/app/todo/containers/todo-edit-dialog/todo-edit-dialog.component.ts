@@ -8,7 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 
-import { Todo } from '../../models';
+import { Todo, TodoUpdateDto } from '../../models';
 import * as TodoSelectors from '../../store/selectors';
 import * as TodoActions from '../../store/actions';
 
@@ -35,15 +35,16 @@ export class TodoEditDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.setValue({
-      text: this.todo.text,
+      text: this.todo.title,
     });
   }
 
   save(): void {
-    const text = this.form.get('text')?.value as string;
-    const todo = {
-      ...this.todo,
-      text,
+    const title = this.form.get('text')?.value as string;
+    const todo: TodoUpdateDto = {
+      id: this.todo.id,
+      completed: this.todo.completed,
+      title,
     };
     this.store.dispatch(TodoActions.update({ todo }));
   }

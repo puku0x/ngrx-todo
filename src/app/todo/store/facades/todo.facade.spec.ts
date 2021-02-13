@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Store } from '@ngrx/store';
 import { provideMockStore } from '@ngrx/store/testing';
 
-import { Todo } from '../../models';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../../models';
 import * as TodoActions from '../actions';
 import { State } from '../states';
 import { TodoFacade } from './todo.facade';
@@ -37,12 +37,8 @@ describe('TodoFacade', () => {
   });
 
   it('should call create', () => {
-    const todo: Todo = {
-      id: '1',
-      text: 'test1',
-      checked: true,
-      createdAt: 1000000,
-      updatedAt: 2000000,
+    const todo: TodoCreateDto = {
+      title: 'test1',
     };
     facade.create(todo);
     const action = TodoActions.create({ todo });
@@ -50,12 +46,10 @@ describe('TodoFacade', () => {
   });
 
   it('should call update', () => {
-    const todo: Todo = {
+    const todo: TodoUpdateDto = {
       id: '1',
-      text: 'test1',
-      checked: true,
-      createdAt: 1000000,
-      updatedAt: 2000000,
+      title: 'test1',
+      completed: true,
     };
     facade.update(todo);
     const action = TodoActions.update({ todo });
@@ -78,8 +72,8 @@ describe('TodoFacade', () => {
   it('should call showEditDialog', () => {
     const todo: Todo = {
       id: '1',
-      text: 'test1',
-      checked: true,
+      title: 'test1',
+      completed: true,
       createdAt: 1000000,
       updatedAt: 2000000,
     };

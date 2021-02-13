@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Todo } from '../models';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../models';
 
 /**
  * Service
@@ -46,7 +46,7 @@ export class TodoService {
    *
    * @param todo Todo
    */
-  create(todo: Partial<Todo>): Observable<Todo> {
+  create(todo: TodoCreateDto): Observable<Todo> {
     const url = `${this.baseUrl}/todos`;
     return this.http.post<Todo>(url, todo);
   }
@@ -56,7 +56,7 @@ export class TodoService {
    *
    * @param todo Todo
    */
-  update(todo: Partial<Todo>): Observable<Todo> {
+  update(todo: TodoUpdateDto): Observable<Todo> {
     const url = `${this.baseUrl}/todos/${todo.id}`;
     return this.http.put<Todo>(url, todo);
   }

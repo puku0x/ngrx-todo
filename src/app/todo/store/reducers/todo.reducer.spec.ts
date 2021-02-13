@@ -1,4 +1,4 @@
-import { Todo } from '../../models';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../../models';
 import * as TodoActions from '../actions';
 import { State, initialState, adapter } from '../states';
 import { reducer } from './todo.reducer';
@@ -29,22 +29,22 @@ describe('TodoReducer', () => {
       const todos: Todo[] = [
         {
           id: '1',
-          text: 'test1',
-          checked: true,
+          title: 'test1',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '2',
-          text: 'test2',
-          checked: true,
+          title: 'test2',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '3',
-          text: 'test3',
-          checked: true,
+          title: 'test3',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
@@ -94,8 +94,8 @@ describe('TodoReducer', () => {
     it('should handle loadSuccess', () => {
       const todo: Todo = {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
@@ -128,8 +128,8 @@ describe('TodoReducer', () => {
     });
 
     it('should handle create', () => {
-      const todo: Partial<Todo> = {
-        text: 'test1',
+      const todo: TodoCreateDto = {
+        title: 'test1',
       };
       const state: State = {
         ...initialState,
@@ -146,8 +146,8 @@ describe('TodoReducer', () => {
     it('should handle createSuccess', () => {
       const todo: Todo = {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
@@ -179,18 +179,16 @@ describe('TodoReducer', () => {
     });
 
     it('should handle update', () => {
-      const todo: Todo = {
+      const todo: TodoUpdateDto = {
         id: '1',
-        text: 'test1a',
-        checked: true,
-        createdAt: 1000000,
-        updatedAt: 2000000,
+        title: 'test1',
+        completed: true,
       };
       const state: State = adapter.addOne(
         {
           id: '1',
-          text: 'test1',
-          checked: true,
+          title: 'test1',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
@@ -207,16 +205,16 @@ describe('TodoReducer', () => {
     it('should handle updateSuccess', () => {
       const todo: Todo = {
         id: '1',
-        text: 'test1a',
-        checked: true,
+        title: 'test1a',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
       const state: State = adapter.addOne(
         {
           id: '1',
-          text: 'test1',
-          checked: true,
+          title: 'test1',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
@@ -250,22 +248,22 @@ describe('TodoReducer', () => {
       const todos: Todo[] = [
         {
           id: '1',
-          text: 'test1',
-          checked: true,
+          title: 'test1',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '2',
-          text: 'test2',
-          checked: true,
+          title: 'test2',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '3',
-          text: 'test3',
-          checked: true,
+          title: 'test3',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
@@ -284,22 +282,22 @@ describe('TodoReducer', () => {
       const todos: Todo[] = [
         {
           id: '1',
-          text: 'test1',
-          checked: true,
+          title: 'test1',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '2',
-          text: 'test2',
-          checked: true,
+          title: 'test2',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '3',
-          text: 'test3',
-          checked: true,
+          title: 'test3',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
@@ -317,22 +315,22 @@ describe('TodoReducer', () => {
       const todos: Todo[] = [
         {
           id: '1',
-          text: 'test1',
-          checked: true,
+          title: 'test1',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '2',
-          text: 'test2',
-          checked: true,
+          title: 'test2',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '3',
-          text: 'test3',
-          checked: true,
+          title: 'test3',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },

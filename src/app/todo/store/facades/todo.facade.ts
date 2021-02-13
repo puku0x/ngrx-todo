@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
-import { Todo } from '../../models';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../../models';
 import * as TodoSelectors from '../selectors';
 import * as TodoActions from '../actions';
 
@@ -37,18 +37,18 @@ export class TodoFacade {
   /**
    * Create
    *
-   * @param todo Todo
+   * @param todo TodoCreateDto
    */
-  create(todo: Partial<Todo>): void {
+  create(todo: TodoCreateDto): void {
     this.store.dispatch(TodoActions.create({ todo }));
   }
 
   /**
    * Update
    *
-   * @param todo Todo
+   * @param todo TodoUpdateDto
    */
-  update(todo: Todo): void {
+  update(todo: TodoUpdateDto): void {
     this.store.dispatch(TodoActions.update({ todo }));
   }
 

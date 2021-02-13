@@ -16,22 +16,22 @@ describe('TodoSelector', () => {
     const todos: Todo[] = [
       {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },
       {
         id: '2',
-        text: 'test2',
-        checked: true,
+        title: 'test2',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },
       {
         id: '3',
-        text: 'test3',
-        checked: true,
+        title: 'test3',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       },

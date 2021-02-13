@@ -8,7 +8,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 
-import { Todo } from '../../models';
+import { Todo, TodoCreateDto, TodoUpdateDto } from '../../models';
 import { TodoService } from '../../services';
 import * as TodoActions from '../actions';
 import { TodoEffects } from './todo.effect';
@@ -60,22 +60,22 @@ describe('TodoEffects', () => {
       const todos: Todo[] = [
         {
           id: '1',
-          text: 'test1',
-          checked: true,
+          title: 'test1',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '2',
-          text: 'test2',
-          checked: true,
+          title: 'test2',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
         {
           id: '3',
-          text: 'test3',
-          checked: true,
+          title: 'test3',
+          completed: true,
           createdAt: 1000000,
           updatedAt: 2000000,
         },
@@ -113,8 +113,8 @@ describe('TodoEffects', () => {
     it('should return loadSuccess', () => {
       const todo: Todo = {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
@@ -149,18 +149,18 @@ describe('TodoEffects', () => {
     it('should return createSuccess', () => {
       const todo: Todo = {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
       const response = cold('-b', { b: todo });
       service.create = () => response;
 
-      const newTodo: Partial<Todo> = {
-        text: 'test1',
+      const dto: TodoCreateDto = {
+        title: 'test1',
       };
-      const action = TodoActions.create({ todo: newTodo });
+      const action = TodoActions.create({ todo: dto });
       const completion = TodoActions.createSuccess({ todo });
       const expected = cold('--c', { c: completion });
       actions$ = hot('-a', { a: action });
@@ -173,10 +173,10 @@ describe('TodoEffects', () => {
       const response = cold('-#', {}, error);
       service.create = () => response;
 
-      const todo: Partial<Todo> = {
-        text: 'test1',
+      const dto: TodoCreateDto = {
+        title: 'test1',
       };
-      const action = TodoActions.create({ todo });
+      const action = TodoActions.create({ todo: dto });
       const completion = TodoActions.createFailure({ error });
       const expected = cold('--c', { c: completion });
       actions$ = hot('-a', { a: action });
@@ -189,15 +189,20 @@ describe('TodoEffects', () => {
     it('should return updateSuccess', () => {
       const todo: Todo = {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
       const response = cold('-b', { b: todo });
       service.update = () => response;
 
-      const action = TodoActions.update({ todo });
+      const dto: TodoUpdateDto = {
+        id: '1',
+        title: 'test1',
+        completed: true,
+      };
+      const action = TodoActions.update({ todo: dto });
       const completion = TodoActions.updateSuccess({ todo });
       const expected = cold('--c', { c: completion });
       actions$ = hot('-a', { a: action });
@@ -210,14 +215,12 @@ describe('TodoEffects', () => {
       const response = cold('-#', {}, error);
       service.update = () => response;
 
-      const todo: Todo = {
+      const dto: TodoUpdateDto = {
         id: '1',
-        text: 'test1',
-        checked: true,
-        createdAt: 1000000,
-        updatedAt: 2000000,
+        title: 'test1',
+        completed: true,
       };
-      const action = TodoActions.update({ todo });
+      const action = TodoActions.update({ todo: dto });
       const completion = TodoActions.updateFailure({ error });
       const expected = cold('--c', { c: completion });
       actions$ = hot('-a', { a: action });
@@ -270,8 +273,8 @@ describe('TodoEffects', () => {
     it('should close dialog', (done) => {
       const todo: Todo = {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
@@ -290,8 +293,8 @@ describe('TodoEffects', () => {
     it('should open dialog', (done) => {
       const todo: Todo = {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
@@ -308,8 +311,8 @@ describe('TodoEffects', () => {
     it('should close dialog', (done) => {
       const todo: Todo = {
         id: '1',
-        text: 'test1',
-        checked: true,
+        title: 'test1',
+        completed: true,
         createdAt: 1000000,
         updatedAt: 2000000,
       };
