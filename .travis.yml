@@ -1,7 +1,6 @@
 language: node_js
 
 node_js:
-  - '12'
   - '14'
 
 addons:
@@ -11,14 +10,14 @@ before_install:
   - npm install -D coveralls
 
 script:
-  - npm run test -- --code-coverage --configuration=ci
-  - npm run e2e -- --configuration=ci
+  - npm test -- --code-coverage --configuration=ci
+  # - npm run e2e -- --configuration=ci
 
 after_success:
   - cat ./coverage/ngrx-todo/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 before_deploy:
-  - npm run build -- --prod
+  - npm run build
 
 deploy:
   provider: firebase
