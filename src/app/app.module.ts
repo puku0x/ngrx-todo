@@ -6,8 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
+import { AppStoreModule } from './app-store.module';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +17,7 @@ import { CoreModule } from './core';
     HttpClientModule,
     MatToolbarModule,
     AppRoutingModule,
-    CoreModule,
+    AppStoreModule,
   ],
   providers: [{ provide: 'API_URL', useValue: environment.apiUrl }],
   bootstrap: [AppComponent],

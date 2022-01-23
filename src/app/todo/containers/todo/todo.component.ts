@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, map } from 'rxjs';
 
 import * as TodoActions from '../../actions';
 import { Todo } from '../../models';
-import * as TodoSelectors from '../../selectors';
+import { selectTodos, selectLoading } from '../../reducers';
 
 @Component({
   selector: 'app-todo',
@@ -14,8 +13,8 @@ import * as TodoSelectors from '../../selectors';
 })
 export class TodoComponent implements OnInit {
   vm$ = combineLatest([
-    this.store.pipe(select(TodoSelectors.getLoading)),
-    this.store.pipe(select(TodoSelectors.getTodos)),
+    this.store.pipe(select(selectLoading)),
+    this.store.pipe(select(selectTodos)),
   ]).pipe(map(([loading, todos]) => ({ loading, todos })));
 
   /**
@@ -26,7 +25,7 @@ export class TodoComponent implements OnInit {
   /**
    * Initialize
    */
-  ngOnInit(): void {
+  ngOnInit() {
     this.store.dispatch(TodoActions.loadAll({ offset: 0, limit: 100 }));
   }
 

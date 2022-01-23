@@ -1,7 +1,6 @@
 import * as TodoActions from '../actions';
 import { Todo, TodoCreateDto, TodoUpdateDto } from '../models';
-import { State, initialState, adapter } from '../states';
-import { reducer } from './todo.reducer';
+import { State, initialState, adapter ,reducer } from './todo.reducer';
 
 describe('TodoReducer', () => {
   describe('unknown action', () => {

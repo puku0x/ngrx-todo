@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 
 import * as TodoActions from '../../actions';
 import { TodoCreateDto } from '../../models';
-import * as TodoSelectors from '../../selectors';
+import { selectLoading } from '../../reducers';
 
 @Component({
   selector: 'app-todo-create-dialog',
@@ -16,7 +16,7 @@ export class TodoCreateDialogComponent {
   form = this.fb.group({
     text: ['', Validators.required],
   });
-  loading$ = this.store.pipe(select(TodoSelectors.getLoading));
+  loading$ = this.store.pipe(select(selectLoading));
 
   constructor(private fb: FormBuilder, private store: Store) {}
 

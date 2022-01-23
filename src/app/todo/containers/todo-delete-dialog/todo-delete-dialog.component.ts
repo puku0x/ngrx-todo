@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 
 import * as TodoActions from '../../actions';
-import * as TodoSelectors from '../../selectors';
+import { selectLoading } from '../../reducers';
 
 @Component({
   selector: 'app-todo-delete-dialog',
@@ -12,7 +12,7 @@ import * as TodoSelectors from '../../selectors';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoDeleteDialogComponent {
-  loading$ = this.store.pipe(select(TodoSelectors.getLoading));
+  loading$ = this.store.pipe(select(selectLoading));
   id: string;
 
   constructor(

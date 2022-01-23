@@ -9,19 +9,10 @@
         "createDefaultProgram": true
       },
       "extends": [
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
-        "@angular-eslint/component-selector": [
-          "error",
-          {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
-          }
-        ],
         "@angular-eslint/directive-selector": [
           "error",
           {
@@ -30,20 +21,12 @@
             "style": "camelCase"
           }
         ],
-        "import/order": [
+        "@angular-eslint/component-selector": [
           "error",
           {
-            "alphabetize": {
-              "order": "asc",
-              "caseInsensitive": true
-            },
-            "groups": [
-              "builtin",
-              "external",
-              "internal",
-              ["parent", "sibling", "index"]
-            ],
-            "newlines-between": "always"
+            "type": "element",
+            "prefix": "app",
+            "style": "kebab-case"
           }
         ]
       }
