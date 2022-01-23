@@ -14,7 +14,7 @@ export const loadAllSuccess = createAction(
 
 export const loadAllFailure = createAction(
   '[Todo API] Load All Failure',
-  props<{ error: any }>()
+  props<{ error: unknown }>()
 );
 
 export const load = createAction('[Todo Page] Load', props<{ id: string }>());
@@ -26,7 +26,7 @@ export const loadSuccess = createAction(
 
 export const loadFailure = createAction(
   '[Todo API] Load Failure',
-  props<{ error: any }>()
+  props<{ error: unknown }>()
 );
 
 export const create = createAction(
@@ -41,7 +41,7 @@ export const createSuccess = createAction(
 
 export const createFailure = createAction(
   '[Todo API] Create Failure',
-  props<{ error: any }>()
+  props<{ error: unknown }>()
 );
 
 export const update = createAction(
@@ -56,7 +56,7 @@ export const updateSuccess = createAction(
 
 export const updateFailure = createAction(
   '[Todo API] Update Failure',
-  props<{ error: any }>()
+  props<{ error: unknown }>()
 );
 
 export const remove = createAction(
@@ -71,7 +71,7 @@ export const removeSuccess = createAction(
 
 export const removeFailure = createAction(
   '[Todo API] Remove Failure',
-  props<{ error: any }>()
+  props<{ error: unknown }>()
 );
 
 export const showCreateDialog = createAction('[Todo Page] Show Create Dialog');

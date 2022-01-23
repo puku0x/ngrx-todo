@@ -3,12 +3,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { TodoEffects } from './effects';
-import { reducer } from './reducers';
-import { featureName } from './states';
+import { name, reducer } from './reducers';
 
 @NgModule({
   imports: [
-    StoreModule.forFeature(featureName, reducer),
+    StoreModule.forFeature(name, reducer),
     EffectsModule.forFeature([TodoEffects]),
   ],
 })

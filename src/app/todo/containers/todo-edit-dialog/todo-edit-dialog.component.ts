@@ -10,7 +10,7 @@ import { Store, select } from '@ngrx/store';
 
 import * as TodoActions from '../../actions';
 import { Todo, TodoUpdateDto } from '../../models';
-import * as TodoSelectors from '../../selectors';
+import { selectLoading } from '../../reducers';
 
 @Component({
   selector: 'app-todo-edit-dialog',
@@ -22,7 +22,7 @@ export class TodoEditDialogComponent implements OnInit {
   form = this.fb.group({
     text: ['', Validators.required],
   });
-  loading$ = this.store.pipe(select(TodoSelectors.getLoading));
+  loading$ = this.store.pipe(select(selectLoading));
   todo: Todo;
 
   constructor(

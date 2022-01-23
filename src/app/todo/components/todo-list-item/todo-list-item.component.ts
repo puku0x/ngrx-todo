@@ -16,7 +16,7 @@ import { Todo } from '../../models';
 })
 export class TodoListItemComponent {
   @Input() loading?: boolean;
-  @Input() todo?: Todo;
+  @Input() todo!: Todo;
   @Output() update = new EventEmitter<Todo>();
   @Output() remove = new EventEmitter<string>();
 }
