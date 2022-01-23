@@ -3,6 +3,5 @@
     "source.fixAll.eslint": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "angular.experimental-ivy": true
+  "editor.formatOnSave": true
 }
